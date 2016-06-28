@@ -1,1 +1,1 @@
-# systembolaget-api
+# bolaget.io
