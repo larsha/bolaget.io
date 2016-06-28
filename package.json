@@ -1,0 +1,40 @@
+{
+  "name": "bolaget.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/web.js",
+  "engines": {
+    "node": "6.2.1"
+  },
+  "scripts": {
+    "build": "rm -rf .build && cp -rf app .build && babel app -d .build",
+    "heroku-postbuild": "npm run build",
+    "start": "node .build/web.js",
+    "worker": "node .build/worker.js",
+    "dev": "DEBUG_MONGO=true DEBUG=koa* nodemon app/web.js --exec babel-node",
+    "dev:worker": "DEBUG_MONGO=true nodemon app/worker.js --exec babel-node"
+  },
+  "author": "Fredrik Lack <fredrik@nody.se>",
+  "license": "ISC",
+  "standard": {
+    "parser": "babel-eslint"
+  },
+  "devDependencies": {
+    "babel-eslint": "6.0.5",
+    "nodemon": "1.9.2",
+    "standard": "7.1.2"
+  },
+  "dependencies": {
+    "babel-cli": "6.10.1",
+    "babel-plugin-transform-async-to-generator": "6.8.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.8.0",
+    "jackrabbit": "4.3.0",
+    "koa": "2.0.0",
+    "koa-bodyparser": "3.1.0",
+    "koa-logger": "2.0.0",
+    "koa-simple-router": "0.2.0",
+    "mongoose": "4.5.1",
+    "winston": "2.2.0",
+    "xml2js": "0.4.16"
+  }
+}
