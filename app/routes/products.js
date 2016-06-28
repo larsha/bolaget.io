@@ -66,7 +66,7 @@ export default async (ctx, next) => {
   const products = await Product.find(filter, { _id: 0 })
     .skip(skip)
     .limit(limit)
-    .sort({ [sort_by]: [sort_order] })
+    .sort({ [sort_by]: sort_order })
     .exec()
 
   ctx.body = products
