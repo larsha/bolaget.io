@@ -5,14 +5,34 @@ function filter (data) {
   return data['BUTIKEROMBUD']['BUTIKOMBUD']
 }
 
+function transformOpeningHours (str) {
+  let list = str ? str.split(/;;;0?\-?;/g) : []
+
+  list = list.filter(str => {
+    return str.length > 0
+  })
+
+  list = list.map(str => {
+    let opening = str.replace('_*', '').split(';')
+    const day = opening[0]
+    const hours = `${opening[1]}-${opening[2]}`
+
+    return `${day} ${hours}`
+  })
+
+  return list
+}
+
 function model (data) {
   return data.map(obj => {
     const labels = obj.labels ? obj.labels.split(';') : []
     const phone = obj.phone ? obj.phone.replace(/[\/\-]|\s/g, '') : ''
+    let openingHours = transformOpeningHours(obj.opening_hours)
 
     Object.assign(obj, {
       phone,
-      labels
+      labels,
+      opening_hours: openingHours
     })
 
     return obj
@@ -50,7 +70,7 @@ let productSchema = new Schema({
   shop_type: { type: String, index: true, default: '' },
   services: { type: String, default: '' },
   labels: { type: Array, default: [] },
-  opening_hours: { type: String, default: '' },
+  opening_hours: { type: Array, default: [] },
   RT90x: { type: Number, default: null },
   RT90y: { type: Number, default: null }
 })
