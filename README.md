@@ -1,6 +1,6 @@
 # bolaget.io (https://bolaget.io)
 
-This API has nothing to do with Systembolaget, this app consumes a large XML file from Systembolaget and transforms it into a JSON API. More info can be found here: http://www.systembolaget.se/api
+This API has nothing to do with Systembolaget, this app consumes a large XML API from Systembolaget and transforms it into a REST JSON API. More info can be found here: http://www.systembolaget.se/api
 
 **Products**
 ----
@@ -32,7 +32,11 @@ This API has nothing to do with Systembolaget, this app consumes a large XML fil
 
    `ethical=[bool]`
 
-   `name=[alphanumeric]` - Fuzzy name search
+   `price_from=[number]`
+
+   `price_to=[number]`
+
+   `name=[alphanumeric]` - Simple fuzzy name search
 
 
 * **Success Response:**

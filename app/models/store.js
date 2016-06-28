@@ -39,20 +39,20 @@ const mapping = {
 
 let productSchema = new Schema({
   nr: { type: String, required: true },
-  name: { type: String, index: true },
-  type: { type: String, index: true },
-  address_1: { type: String, index: true },
-  address_2: { type: String, index: true },
-  address_3: { type: String, index: true },
-  address_4: { type: String, index: true },
-  address_5: { type: String, index: true },
-  phone: { type: String },
-  shop_type: { type: String, index: true },
-  services: { type: String },
+  name: { type: String, index: true, default: '' },
+  type: { type: String, index: true, default: '' },
+  address_1: { type: String, index: true, default: '' },
+  address_2: { type: String, index: true, default: '' },
+  address_3: { type: String, index: true, default: '' },
+  address_4: { type: String, index: true, default: '' },
+  address_5: { type: String, index: true, default: '' },
+  phone: { type: String, default: '' },
+  shop_type: { type: String, index: true, default: '' },
+  services: { type: String, default: '' },
   labels: { type: Array, default: [] },
-  opening_hours: { type: String },
-  RT90x: { type: Number },
-  RT90y: { type: Number }
+  opening_hours: { type: String, default: '' },
+  RT90x: { type: Number, default: null },
+  RT90y: { type: Number, default: null }
 })
 
 mongoose.model('Store', productSchema)
