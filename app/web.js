@@ -19,7 +19,7 @@ app.use(async (ctx, next) => {
     await next()
   } catch (err) {
     ctx.status = err.status || 500
-    ctx.body = { message: err.message }
+    ctx.body = { error: err.message }
   }
 })
 

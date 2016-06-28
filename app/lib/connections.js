@@ -21,7 +21,7 @@ const options = {
 import '../models/product'
 import '../models/store'
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/systembolaget_api', options)
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/bolaget', options)
 mongoose.Promise = global.Promise
 
 if (process.env.DEBUG_MONGO) {
