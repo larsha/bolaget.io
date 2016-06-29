@@ -15,7 +15,7 @@
     "dev:worker": "DEBUG_MONGO=true nodemon app/worker.js --exec babel-node"
   },
   "author": "Fredrik Lack <fredrik@nody.se>",
-  "license": "ISC",
+  "license": "MIT",
   "standard": {
     "parser": "babel-eslint"
   },
