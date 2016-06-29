@@ -15,4 +15,7 @@ mongooseConnection.on('connected', () => {
       logger.info('Inserted products and stores!')
     })
     .catch(err => logger.error(err))
+    .then(() => {
+      process.exit()
+    })
 })
