@@ -4,7 +4,7 @@
   "description": "RESTful JSON API for Swedish alcohol monopoly, Systembolaget",
   "main": "app/web.js",
   "engines": {
-    "node": "6.2.1"
+    "node": "6.2.2"
   },
   "scripts": {
     "build": "rm -rf .build && cp -rf app .build && babel app -d .build",
@@ -15,6 +15,7 @@
     "dev:worker": "DEBUG_MONGO=true nodemon app/worker.js --exec babel-node"
   },
   "author": "Fredrik Lack <fredrik@nody.se>",
+  "url": "https://github.com/larsha/bolaget.io",
   "license": "MIT",
   "standard": {
     "parser": "babel-eslint"

@@ -1,14 +1,14 @@
+import { name, url, version, description, engines, author, license } from '../../package.json'
+
 export default async (ctx, next) => {
   ctx.body = {
-    "name": "bolaget.io",
-    "url": 'https://github.com/larsha/bolaget.io',
-    "version": "0.1.0",
-    "description": "RESTful JSON API for Swedish alcohol monopoly, Systembolaget",
-    "engines": {
-      "node": "6.2.1"
-    },
-    "author": "Fredrik Lack <fredrik@nody.se>",
-    "license": "MIT",
+    name,
+    url,
+    version,
+    description,
+    engines,
+    author,
+    license,
     "endpoints": {
       "products/:nr": "https://bolaget.io/products/3083303",
       "products": "https://bolaget.io/products",

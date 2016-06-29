@@ -14,10 +14,9 @@ function transformOpeningHours (str) {
 
   list = list.map(str => {
     let opening = str.replace('_*', '').split(';')
-    const day = opening[0]
-    const hours = `${opening[1]}-${opening[2]}`
+    const [day, openingHours, closingHours] = opening
 
-    return `${day} ${hours}`
+    return `${day} ${openingHours}-${closingHours}`
   })
 
   return list
@@ -27,11 +26,9 @@ function model (data) {
   return data.map(obj => {
     const labels = obj.labels ? obj.labels.split(';') : []
     const phone = obj.phone ? obj.phone.replace(/[\/\-]|\s/g, '') : ''
-    let openingHours = transformOpeningHours(obj.opening_hours)
+    const openingHours = transformOpeningHours(obj.opening_hours)
 
-    Object.assign(obj, {
-      phone,
-      labels,
+    Object.assign(obj, { phone, labels,
       opening_hours: openingHours
     })
 
