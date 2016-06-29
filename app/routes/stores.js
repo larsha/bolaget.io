@@ -24,5 +24,11 @@ export default async (ctx, next) => {
     .sort({ [sort_by]: sort_order })
     .exec()
 
+  if (stores.length <= 0) {
+    let e = new Error(`Stores doesn't exists`)
+    e.status = 404
+    throw e
+  }
+
   ctx.body = stores
 }

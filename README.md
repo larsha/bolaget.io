@@ -63,12 +63,12 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 * **Error Response:**
 
   * **Code:** 500 INTERNAL SERVER ERROR <br />
-    **Content:** `{ error : err }`
+    **Content:** `{ error : e }`
 
   OR
 
-  * **Code:** 400 Bad Request <br />
-    **Content:** `{ error : err }`
+  * **Code:** 404 NOT FOUND <br />
+    **Content:** `{ error : "Products doesn't exists" }`
 
 
 
@@ -107,7 +107,7 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 * **Error Response:**
 
   * **Code:** 500 INTERNAL SERVER ERROR <br />
-    **Content:** `{ error : err }`
+    **Content:** `{ error : e }`
 
   OR
 
@@ -153,9 +153,9 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 * **Error Response:**
 
   * **Code:** 500 Internal Server Error <br />
-    **Content:** `{ error : err }`
+    **Content:** `{ error : e }`
 
   OR
 
-  * **Code:** 400 Bad Request <br />
-    **Content:** `{ error : err }`
+  * **Code:** 404 NOT FOUND <br />
+    **Content:** `{ error : "Stores doesn't exist" }`
