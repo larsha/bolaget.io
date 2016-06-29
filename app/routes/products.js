@@ -10,11 +10,12 @@ export default async (ctx, next) => {
 
   const limit = parseInt(ctx.query.limit, 10) || 10
   const skip = parseInt(ctx.query.skip, 10) || 0
-  const year = parseInt(ctx.query.year, 10) || 0
   const ecological = stringToBool(ctx.query.ecologial)
   const ethical = stringToBool(ctx.query.ethical)
   const koscher = stringToBool(ctx.query.koscher)
   const name = ctx.query.name
+  const year_from = parseInt(ctx.query.year_from, 10) || 0
+  const year_to = parseInt(ctx.query.year_to, 10) || 0
   const price_from = parseInt(ctx.query.price_from, 10) || 0
   const price_to = parseInt(ctx.query.price_to, 10) || 0
   const volume_from = parseInt(ctx.query.volume_from, 10) || 0
@@ -24,10 +25,6 @@ export default async (ctx, next) => {
   const product_group = ctx.query.product_group
 
   let filter = {}
-  if (year > 0) {
-    Object.assign(filter, { year })
-  }
-
   if (ecological) {
     Object.assign(filter, { ecological: true })
   }
@@ -72,6 +69,18 @@ export default async (ctx, next) => {
 
   if (volume_from && volume_to) {
     Object.assign(filter, { volume_in_milliliter: { $gte: volume_from, $lte: volume_to } })
+  }
+
+  if (year_from) {
+    Object.assign(filter, { year: { $gte: year_from } })
+  }
+
+  if (year_to) {
+    Object.assign(filter, { year: { $lte: year_to } })
+  }
+
+  if (year_from && year_to) {
+    Object.assign(filter, { year: { $gte: year_from, $lte: year_to } })
   }
 
   if (sort_by) {

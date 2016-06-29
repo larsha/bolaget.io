@@ -26,13 +26,15 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
    `skip=[number]`
 
-   `year=[number]`
-
    `ecologial=[bool]`
 
    `koscher=[bool]`
 
    `ethical=[bool]`
+
+   `year_from=[number]`
+
+   `year_to=[number]`
 
    `price_from=[number]`
 
