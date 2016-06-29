@@ -9,5 +9,9 @@ export default async (ctx, next) => {
     },
     "author": "Fredrik Lack <fredrik@nody.se>",
     "license": "MIT",
+    "endpoints": {
+      "products": "https://bolaget.io/products",
+      "stores": "https://bolaget.io/stores",
+    }
   }
 }
