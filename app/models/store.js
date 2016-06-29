@@ -12,14 +12,14 @@ function transformOpeningHours (str) {
     return str.length > 0
   })
 
-  list = list.map(str => {
+  const formattedStr = list.map(str => {
     let opening = str.replace('_*', '').split(';')
     const [day, openingHours, closingHours] = opening
 
     return `${day} ${openingHours}-${closingHours}`
   })
 
-  return list
+  return formattedStr
 }
 
 function model (data) {
