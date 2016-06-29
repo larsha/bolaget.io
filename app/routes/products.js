@@ -21,6 +21,7 @@ export default async (ctx, next) => {
   const volume_to = parseInt(ctx.query.volume_to, 10) || 0
   const sort_by = ctx.query.sort_by || 'name'
   const sort_order = ctx.query.sort_order || 1
+  const product_group = ctx.query.product_group
 
   let filter = {}
   if (year > 0) {
@@ -39,9 +40,14 @@ export default async (ctx, next) => {
     Object.assign(filter, { koscher: true })
   }
 
+  if (product_group) {
+    const regexp = new RegExp(`^${escape(product_group)}$`, 'i');
+    Object.assign(filter, { product_group: regexp })
+  }
+
   if (name) {
     const regexp = new RegExp(`.*${escape(name)}.*`, 'i');
-    Object.assign(filter, { name: { $regex: regexp } })
+    Object.assign(filter, { name: regexp })
   }
 
   if (price_from) {
