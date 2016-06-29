@@ -38,9 +38,9 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
    `price_from=[number]`
 
-   `price_to=[number]`
+   `price_to=[integer]`
 
-   `volume_from=[number]`
+   `volume_from=[integer]`
 
    `volume_to=[number]`
 
@@ -62,13 +62,57 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
 * **Error Response:**
 
-  * **Code:** 500 Internal Server Error <br />
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
     **Content:** `{ error : err }`
 
   OR
 
   * **Code:** 400 Bad Request <br />
     **Content:** `{ error : err }`
+
+
+
+**Show Product**
+----
+  Returns json data about a single product.
+
+* **URL**
+
+  /products/:nr
+
+
+* **Method:**
+
+  `GET`
+
+
+*  **URL Params**
+
+   ***Required:***
+
+   `nr=[number]`
+
+
+* **Data Params**
+
+  None
+
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `{ nr: 12, name: "117 Grythyttan" ... }`
+
+
+* **Error Response:**
+
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** `{ error : err }`
+
+  OR
+
+  * **Code:** 404 NOT FOUND <br />
+    **Content:** `{ error : "Product doesn't exist" }`
 
 
 

@@ -13,7 +13,7 @@ app.use(logger())
 // Parses json body requests
 app.use(parser())
 
-// 500
+// Handle errors
 app.use(async (ctx, next) => {
   try {
     await next()
