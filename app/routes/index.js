@@ -10,6 +10,7 @@ export default async (ctx, next) => {
     "author": "Fredrik Lack <fredrik@nody.se>",
     "license": "MIT",
     "endpoints": {
+      "products/:nr": "https://bolaget.io/products/3083303",
       "products": "https://bolaget.io/products",
       "stores": "https://bolaget.io/stores",
     }
