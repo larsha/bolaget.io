@@ -6,16 +6,15 @@ import logger from 'winston'
 const productsTask = new ProductsTask()
 const storeTask = new StoresTask()
 
-mongooseConnection.on('connected', () => {
-  const products = productsTask.run()
-  const stores = storeTask.run()
+mongooseConnection.on('connected', run)
 
-  Promise.all([products, stores])
-    .then(() => {
-      logger.info('Inserted products and stores!')
-    })
-    .catch(err => logger.error(err))
-    .then(() => {
-      process.exit()
-    })
-})
+async function run () {
+  try {
+    await Promise.all([productsTask.run(), storeTask.run()])
+    logger.info('Inserted products and stores!')
+  } catch (e) {
+    logger.error(e)
+  }
+
+  process.exit()
+}
