@@ -41,12 +41,12 @@ export default async (ctx, next) => {
   }
 
   if (product_group) {
-    const regexp = new RegExp(`^${escape(product_group)}$`, 'i');
+    let regexp = new RegExp(`^${escape(product_group)}$`, 'i');
     Object.assign(filter, { product_group: regexp })
   }
 
   if (name) {
-    const regexp = new RegExp(`.*${escape(name)}.*`, 'i');
+    let regexp = new RegExp(`.*${escape(name)}.*`, 'i');
     Object.assign(filter, { name: regexp })
   }
 
