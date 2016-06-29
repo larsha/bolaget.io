@@ -2,6 +2,8 @@
 
 This API has nothing to do with Systembolaget, this app consumes a large XML API from Systembolaget and transforms it into a REST JSON API. More info can be found here: http://www.systembolaget.se/api
 
+*Work in progress, feel free to add issues and make PR's.*
+
 **Products**
 ----
   Returns json data for products.
