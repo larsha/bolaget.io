@@ -17,6 +17,8 @@ export default async (ctx, next) => {
   const name = ctx.query.name
   const price_from = parseInt(ctx.query.price_from, 10) || 0
   const price_to = parseInt(ctx.query.price_to, 10) || 0
+  const volume_from = parseInt(ctx.query.volume_from, 10) || 0
+  const volume_to = parseInt(ctx.query.volume_to, 10) || 0
   const sort_by = ctx.query.sort_by || 'name'
   const sort_order = ctx.query.sort_order || 1
 
@@ -38,7 +40,7 @@ export default async (ctx, next) => {
   }
 
   if (name) {
-    const regexp = new RegExp(`.*${escape(name)}.*`);
+    const regexp = new RegExp(`.*${escape(name)}.*`, 'i');
     Object.assign(filter, { name: { $regex: regexp } })
   }
 
@@ -52,6 +54,18 @@ export default async (ctx, next) => {
 
   if (price_from && price_to) {
     Object.assign(filter, { price: { $gte: price_from, $lte: price_to } })
+  }
+
+  if (volume_from) {
+    Object.assign(filter, { volume_in_milliliter: { $gte: volume_from } })
+  }
+
+  if (volume_to) {
+    Object.assign(filter, { volume_in_milliliter: { $lte: volume_to } })
+  }
+
+  if (volume_from && volume_to) {
+    Object.assign(filter, { volume_in_milliliter: { $gte: volume_from, $lte: volume_to } })
   }
 
   if (sort_by) {
