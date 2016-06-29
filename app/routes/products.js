@@ -5,6 +5,10 @@ function stringToBool (str) {
   return str == 'true'
 }
 
+function fuzzySearch (str) {
+  return new RegExp(`.*${escape(str)}.*`, 'i');
+}
+
 export default async (ctx, next) => {
   const Product = mongoose.model('Product')
 
@@ -14,6 +18,8 @@ export default async (ctx, next) => {
   const ethical = stringToBool(ctx.query.ethical)
   const koscher = stringToBool(ctx.query.koscher)
   const name = ctx.query.name
+  const type = ctx.query.type
+  const style = ctx.query.style
   const year_from = parseInt(ctx.query.year_from, 10) || 0
   const year_to = parseInt(ctx.query.year_to, 10) || 0
   const price_from = parseInt(ctx.query.price_from, 10) || 0
@@ -43,8 +49,15 @@ export default async (ctx, next) => {
   }
 
   if (name) {
-    let regexp = new RegExp(`.*${escape(name)}.*`, 'i');
-    Object.assign(filter, { name: regexp })
+    Object.assign(filter, { name: fuzzySearch(name) })
+  }
+
+  if (type) {
+    Object.assign(filter, { type: fuzzySearch(type) })
+  }
+
+  if (style) {
+    Object.assign(filter, { style: fuzzySearch(style) })
   }
 
   if (price_from) {

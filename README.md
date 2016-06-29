@@ -48,7 +48,7 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
    `sort_order=[alphanumeric]` - Specify sort order, 1/asc or -1/desc
 
-   `name=[alphanumeric]` - Simple fuzzy name search (case insensitive)
+   `name|type|style=[alphanumeric]` - Simple fuzzy search (case insensitive)
 
    `product_group=[alphanumeric]` - Product group search (case insensitive)
 
