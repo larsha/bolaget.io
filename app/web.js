@@ -30,7 +30,7 @@ app.use(routes())
 app.use(async ctx => {
   ctx.status = 404
   ctx.body = {
-    message: 'Move Along, Nothing to See Here!'
+    error: 'Move Along, Nothing to See Here!'
   }
 })
 
