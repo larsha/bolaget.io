@@ -11,8 +11,9 @@ function fuzzySearch (str) {
 
 export default async (ctx, next) => {
   const Product = mongoose.model('Product')
+  const maxLimit = 100
 
-  const limit = parseInt(ctx.query.limit, 10) || 10
+  const limit = parseInt(ctx.query.limit, 10) || maxLimit
   const skip = parseInt(ctx.query.skip, 10) || 0
   const ecological = stringToBool(ctx.query.ecologial)
   const ethical = stringToBool(ctx.query.ethical)
@@ -29,6 +30,10 @@ export default async (ctx, next) => {
   const type = ctx.query.type
   const style = ctx.query.style
   const product_group = ctx.query.product_group
+
+  if (limit > maxLimit) {
+    limit = maxLimit
+  }
 
   let filter = {}
   if (ecological) {
