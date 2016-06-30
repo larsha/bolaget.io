@@ -148,9 +148,9 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
    `sort_order=[alphanumeric]` - Specify sort order, 1/asc or -1/desc
 
 
- * **Response headers:**
+* **Response headers:**
 
-     `X-Total-Count=[number]` // Total count of stores based on filtering used for pagination
+   `X-Total-Count=[number]` // Total count of stores based on filtering used for pagination
 
 
 * **Success Response:**
