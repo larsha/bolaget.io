@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "rm -rf .build && cp -rf app .build && babel app -d .build",
-    "heroku-postbuild": "npm run build",
+    "heroku-postbuild": "npm run build && ./purge",
     "start": "node .build/web.js",
     "worker": "node .build/worker.js",
     "dev": "DEBUG_MONGO=true DEBUG=koa* nodemon app/web.js --exec babel-node",
