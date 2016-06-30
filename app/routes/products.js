@@ -24,8 +24,7 @@ export default async (ctx, next) => {
   const price_to = parseInt(ctx.query.price_to, 10) || 0
   const volume_from = parseInt(ctx.query.volume_from, 10) || 0
   const volume_to = parseInt(ctx.query.volume_to, 10) || 0
-  const sort_by = ctx.query.sort_by || 'name'
-  const sort_order = ctx.query.sort_order || 1
+  const sort = ctx.query.sort || 'name'
   const name = ctx.query.name
   const type = ctx.query.type
   const style = ctx.query.style
@@ -101,19 +100,10 @@ export default async (ctx, next) => {
     Object.assign(filter, { year: { $gte: year_from, $lte: year_to } })
   }
 
-  if (sort_by) {
-    const exists = { $exists: true, $nin: ['', null] }
-    if (filter.hasOwnProperty(sort_by)) {
-      Object.assign(filter[sort_by], exists)
-    } else {
-      Object.assign(filter, { [sort_by]: exists })
-    }
-  }
-
   const getProducts = Product.find(filter, { _id: 0 })
     .skip(skip)
     .limit(limit)
-    .sort({ [sort_by]: sort_order })
+    .sort(sort)
     .exec()
 
   const getCount = Product.count(filter).exec()

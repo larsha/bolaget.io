@@ -44,9 +44,7 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
    `volume_to=[number]`
 
-   `sort_by=[alphanumeric]` - Property to sort by
-
-   `sort_order=[alphanumeric]` - Specify sort order, 1/asc or -1/desc
+   `sort=[alphanumeric]` - Property to sort by, e.g. '-name' for descending sort and 'name' for ascending sort
 
    `name|type|style=[alphanumeric]` - Simple fuzzy search (case insensitive)
 
@@ -143,9 +141,7 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
    `skip=[number]`
 
-   `sort_by=[alphanumeric]` - Property to sort by
-
-   `sort_order=[alphanumeric]` - Specify sort order, 1/asc or -1/desc
+   `sort=[alphanumeric]` - Property to sort by, e.g. '-type' for descending sort and 'type' for ascending sort
 
 
 * **Response headers:**
