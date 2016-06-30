@@ -53,6 +53,10 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
    `product_group=[alphanumeric]` - Product group search (case insensitive)
 
 
+* **Response headers:**
+
+    `X-Total-Count=[number]` // Total count of products based on filtering used for pagination
+
 
 * **Success Response:**
 
@@ -142,6 +146,11 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
    `sort_by=[alphanumeric]` - Property to sort by
 
    `sort_order=[alphanumeric]` - Specify sort order, 1/asc or -1/desc
+
+
+ * **Response headers:**
+
+     `X-Total-Count=[number]` // Total count of stores based on filtering used for pagination
 
 
 * **Success Response:**

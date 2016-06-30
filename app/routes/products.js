@@ -110,11 +110,15 @@ export default async (ctx, next) => {
     }
   }
 
-  const products = await Product.find(filter, { _id: 0 })
+  const getProducts = Product.find(filter, { _id: 0 })
     .skip(skip)
     .limit(limit)
     .sort({ [sort_by]: sort_order })
     .exec()
+
+  const getCount = Product.count(filter).exec()
+
+  const [products, count] = await Promise.all([getProducts, getCount])
 
   if (products.length <= 0) {
     let e = new Error(`Products doesn't exists`)
@@ -122,5 +126,6 @@ export default async (ctx, next) => {
     throw e
   }
 
+  ctx.set('X-Total-Count', count)
   ctx.body = products
 }
