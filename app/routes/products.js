@@ -1,19 +1,12 @@
 import escape from 'escape-string-regexp'
 import { mongoose } from '../lib/connections'
-
-function stringToBool (str) {
-  return str == 'true'
-}
-
-function fuzzySearch (str) {
-  return new RegExp(`.*${escape(str)}.*`, 'i');
-}
+import { fuzzySearch, stringToBool } from '../lib/utils'
 
 export default async (ctx, next) => {
   const Product = mongoose.model('Product')
   const maxLimit = 100
 
-  const limit = parseInt(ctx.query.limit, 10) || maxLimit
+  const limit = parseInt(ctx.query.limit, 10) || 10
   const skip = parseInt(ctx.query.skip, 10) || 0
   const ecological = stringToBool(ctx.query.ecologial)
   const ethical = stringToBool(ctx.query.ethical)

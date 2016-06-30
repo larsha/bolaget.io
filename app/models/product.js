@@ -34,7 +34,7 @@ const mapping = {
   KOSCHER: 'koscher'
 }
 
-let productSchema = new Schema({
+const Product = new Schema({
   nr: { type: Number, required: true },
   article_id: { type: Number, required: true },
   article_nr: { type: Number, required: true },
@@ -63,8 +63,8 @@ let productSchema = new Schema({
   koscher: { type: Boolean, index: true, default: null }
 })
 
-productSchema.index({ name: 'text' })
+Product.index({ name: 'text' })
 
-mongoose.model('Product', productSchema)
+mongoose.model('Product', Product)
 
 export { mapping, filter }

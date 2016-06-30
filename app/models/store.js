@@ -54,7 +54,7 @@ const mapping = {
   RT90Y: 'RT90y'
 }
 
-let productSchema = new Schema({
+const Store = new Schema({
   nr: { type: String, required: true },
   name: { type: String, index: true, default: '' },
   type: { type: String, index: true, default: '' },
@@ -72,6 +72,6 @@ let productSchema = new Schema({
   RT90y: { type: Number, default: null }
 })
 
-mongoose.model('Store', productSchema)
+mongoose.model('Store', Store)
 
 export { mapping, model, filter }

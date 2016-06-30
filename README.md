@@ -22,7 +22,7 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
    ***Optional:***
 
-   `limit=[number]` // Default/max limit 100
+   `limit=[number]` // Default limit is 10, max limit is 100
 
    `skip=[number]`
 
@@ -137,7 +137,7 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
    ***Optional:***
 
-   `limit=[number]`
+   `limit=[number]` // Default limit is 10, max limit is 100
 
    `skip=[number]`
 
