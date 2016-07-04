@@ -53,6 +53,7 @@ class Request {
         parseNumbers: true,
         parseBooleans: true,
         explicitArray: false,
+        emptyTag: null,
         trim: true
       }, (err, data) => {
         if (err) {

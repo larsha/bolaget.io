@@ -8,7 +8,7 @@ function reduce (data) {
 }
 
 function transformOpeningHours (str) {
-  const list = str.split(/;;;0?\-?;/g)
+  const list = str ? str.split(/;;;0?\-?;/g) : []
 
   return list
     .filter(empty)
@@ -26,7 +26,7 @@ function transformOpeningHours (str) {
 }
 
 function transformLabels (str) {
-  const labels = str.split(';')
+  const labels = str ? str.split(';') : []
 
   return labels
     .filter(empty)
@@ -57,16 +57,16 @@ const mapping = {
 
 const Store = new Schema({
   nr: { type: String, index: true, required: true },
-  name: { type: String, index: true, default: '' },
-  type: { type: String, index: true, default: '' },
-  address: { type: String, index: true, default: '' },
-  additional_address: { type: String, index: true, default: '' },
-  zip_code: { type: String, index: true, default: '' },
-  city: { type: String, index: true, default: '', set: capitalize },
-  county: { type: String, index: true, default: '' },
-  phone: { type: String, index: true, default: '', set: transformPhone },
-  shop_type: { type: String, index: true, default: '' },
-  services: { type: String, index: true, default: '' },
+  name: { type: String, index: true, default: null },
+  type: { type: String, index: true, default: null },
+  address: { type: String, index: true, default: null },
+  additional_address: { type: String, index: true, default: null },
+  zip_code: { type: String, index: true, default: null },
+  city: { type: String, index: true, default: null, set: capitalize },
+  county: { type: String, index: true, default: null },
+  phone: { type: String, index: true, default: null, set: transformPhone },
+  shop_type: { type: String, index: true, default: null },
+  services: { type: String, index: true, default: null },
   labels: { type: Array, index: true, default: [], set: transformLabels },
   opening_hours: { type: Array, index: true, default: [], set: transformOpeningHours },
   RT90x: { type: Number, index: true, default: null },
