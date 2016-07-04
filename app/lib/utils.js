@@ -18,4 +18,8 @@ function caseInsensitive (str) {
   return new RegExp(`^${escape(str)}$`, 'i')
 }
 
-export { stringToBool, fuzzySearch, capitalize, caseInsensitive }
+function empty (str) {
+  return Boolean(str)
+}
+
+export { stringToBool, fuzzySearch, capitalize, caseInsensitive, empty }

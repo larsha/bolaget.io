@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { capitalize } from '../lib/utils'
+import { capitalize, empty } from '../lib/utils'
 
 const Schema = mongoose.Schema
 
@@ -8,27 +8,28 @@ function reduce (data) {
 }
 
 function transformOpeningHours (str) {
-  let list = str ? str.split(/;;;0?\-?;/g) : []
+  const list = str.split(/;;;0?\-?;/g)
 
-  list = list.filter(str => {
-    return str.length > 0
-  })
+  return list
+    .filter(empty)
+    .map(str => {
+      let opening = str.replace('_*', '').split(';')
+      const [day, openingHours, closingHours] = opening
 
-  const formattedStr = list.map(str => {
-    let opening = str.replace('_*', '').split(';')
-    const [day, openingHours, closingHours] = opening
+      if ((parseInt(closingHours) - parseInt(openingHours)) <= 0) {
+        return null
+      }
 
-    return `${day} ${openingHours}-${closingHours}`
-  })
-
-  return formattedStr
+      return `${day} ${openingHours}-${closingHours}`
+    })
+    .filter(empty)
 }
 
 function transformLabels (str) {
   const labels = str.split(';')
 
   return labels
-    .filter(Boolean)
+    .filter(empty)
     .map(capitalize)
 }
 
