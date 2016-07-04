@@ -22,7 +22,7 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
    ***Optional:***
 
-   `limit=[number]` // Default limit is 10, max limit is 100
+   `limit=[number]` - Default limit is 10, max limit is 100
 
    `skip=[number]`
 
@@ -53,7 +53,7 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
 * **Response headers:**
 
-    `X-Total-Count=[number]` // Total count of products based on filtering used for pagination
+    `X-Total-Count=[number]` - Total count of products based on filtering used for pagination
 
 
 * **Success Response:**
@@ -137,16 +137,24 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
    ***Optional:***
 
-   `limit=[number]` // Default limit is 10, max limit is 100
+   `limit=[number]` - Default limit is 10, max limit is 100
 
    `skip=[number]`
+
+   `type=[alphanumeric]` - 'ombud' or 'butik'
+
+   `city=[alphanumeric]` - city filter (case insensitive)
+
+   `name=[alphanumeric]` - Simple fuzzy name search (case insensitive)
+
+   `labels=[alphanumeric]` - Takes a comma separated list, eg. norrbotten,jämtland, returns documents containing all labels matched
 
    `sort=[alphanumeric]` - Property to sort by, e.g. '-type' for descending sort and 'type' for ascending sort
 
 
 * **Response headers:**
 
-   `X-Total-Count=[number]` // Total count of stores based on filtering used for pagination
+   `X-Total-Count=[number]` - Total count of stores based on filtering used for pagination
 
 
 * **Success Response:**

@@ -1,27 +1,27 @@
-import escape from 'escape-string-regexp'
 import { mongoose } from '../lib/connections'
-import { fuzzySearch, stringToBool } from '../lib/utils'
+import { fuzzySearch, stringToBool, caseInsensitive } from '../lib/utils'
 
 export default async (ctx, next) => {
   const Product = mongoose.model('Product')
   const maxLimit = 100
 
-  const limit = parseInt(ctx.query.limit, 10) || 10
   const skip = parseInt(ctx.query.skip, 10) || 0
   const ecological = stringToBool(ctx.query.ecologial)
   const ethical = stringToBool(ctx.query.ethical)
   const koscher = stringToBool(ctx.query.koscher)
-  const year_from = parseInt(ctx.query.year_from, 10) || 0
-  const year_to = parseInt(ctx.query.year_to, 10) || 0
-  const price_from = parseInt(ctx.query.price_from, 10) || 0
-  const price_to = parseInt(ctx.query.price_to, 10) || 0
-  const volume_from = parseInt(ctx.query.volume_from, 10) || 0
-  const volume_to = parseInt(ctx.query.volume_to, 10) || 0
+  const yearFrom = parseInt(ctx.query.year_from, 10) || 0
+  const yearTo = parseInt(ctx.query.year_to, 10) || 0
+  const priceFrom = parseInt(ctx.query.price_from, 10) || 0
+  const priceTo = parseInt(ctx.query.price_to, 10) || 0
+  const volumeFrom = parseInt(ctx.query.volume_from, 10) || 0
+  const volumeTo = parseInt(ctx.query.volume_to, 10) || 0
   const sort = ctx.query.sort || 'name'
   const name = ctx.query.name
   const type = ctx.query.type
   const style = ctx.query.style
-  const product_group = ctx.query.product_group
+  const productGroup = ctx.query.product_group
+
+  let limit = parseInt(ctx.query.limit, 10) || 10
 
   if (limit > maxLimit) {
     limit = maxLimit
@@ -40,9 +40,8 @@ export default async (ctx, next) => {
     Object.assign(filter, { koscher: true })
   }
 
-  if (product_group) {
-    let regexp = new RegExp(`^${escape(product_group)}$`, 'i');
-    Object.assign(filter, { product_group: regexp })
+  if (productGroup) {
+    Object.assign(filter, { product_group: caseInsensitive(productGroup) })
   }
 
   if (name) {
@@ -57,40 +56,40 @@ export default async (ctx, next) => {
     Object.assign(filter, { style: fuzzySearch(style) })
   }
 
-  if (price_from) {
-    Object.assign(filter, { price: { $gte: price_from } })
+  if (priceFrom) {
+    Object.assign(filter, { price: { $gte: priceFrom } })
   }
 
-  if (price_to) {
-    Object.assign(filter, { price: { $lte: price_to } })
+  if (priceTo) {
+    Object.assign(filter, { price: { $lte: priceTo } })
   }
 
-  if (price_from && price_to) {
-    Object.assign(filter, { price: { $gte: price_from, $lte: price_to } })
+  if (priceFrom && priceTo) {
+    Object.assign(filter, { price: { $gte: priceFrom, $lte: priceTo } })
   }
 
-  if (volume_from) {
-    Object.assign(filter, { volume_in_milliliter: { $gte: volume_from } })
+  if (volumeFrom) {
+    Object.assign(filter, { volume_in_milliliter: { $gte: volumeFrom } })
   }
 
-  if (volume_to) {
-    Object.assign(filter, { volume_in_milliliter: { $lte: volume_to } })
+  if (volumeTo) {
+    Object.assign(filter, { volume_in_milliliter: { $lte: volumeTo } })
   }
 
-  if (volume_from && volume_to) {
-    Object.assign(filter, { volume_in_milliliter: { $gte: volume_from, $lte: volume_to } })
+  if (volumeFrom && volumeTo) {
+    Object.assign(filter, { volume_in_milliliter: { $gte: volumeFrom, $lte: volumeTo } })
   }
 
-  if (year_from) {
-    Object.assign(filter, { year: { $gte: year_from } })
+  if (yearFrom) {
+    Object.assign(filter, { year: { $gte: yearFrom } })
   }
 
-  if (year_to) {
-    Object.assign(filter, { year: { $lte: year_to } })
+  if (yearTo) {
+    Object.assign(filter, { year: { $lte: yearTo } })
   }
 
-  if (year_from && year_to) {
-    Object.assign(filter, { year: { $gte: year_from, $lte: year_to } })
+  if (yearFrom && yearTo) {
+    Object.assign(filter, { year: { $gte: yearFrom, $lte: yearTo } })
   }
 
   const getProducts = Product.find(filter, { _id: 0 })

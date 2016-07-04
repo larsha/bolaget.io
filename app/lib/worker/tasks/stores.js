@@ -1,5 +1,5 @@
 import { mongoose } from '../../connections'
-import { model, mapping, filter } from '../../../models/store'
+import { mapping, reduce } from '../../../models/store'
 import Request from '../../request'
 
 const Store = mongoose.model('Store')
@@ -13,20 +13,11 @@ class Task extends Request {
     return Store.remove().then(() => Store.insertMany(data))
   }
 
-  model (data) {
-    return model(data)
-  }
-
-  filter (data) {
-    return filter(data)
-  }
-
   run () {
     return this.get()
       .then(this.parse)
-      .then(this.filter)
+      .then(reduce)
       .then(json => this.map(json))
-      .then(this.model)
       .then(this.save)
   }
 }

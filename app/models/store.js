@@ -1,7 +1,9 @@
 import mongoose from 'mongoose'
+import { capitalize } from '../lib/utils'
+
 const Schema = mongoose.Schema
 
-function filter (data) {
+function reduce (data) {
   return data['BUTIKEROMBUD']['BUTIKOMBUD']
 }
 
@@ -22,29 +24,25 @@ function transformOpeningHours (str) {
   return formattedStr
 }
 
-function model (data) {
-  return data.map(obj => {
-    const labels = obj.labels ? obj.labels.split(';') : []
-    const phone = obj.phone ? obj.phone.replace(/[\/\-]|\s/g, '') : ''
-    const openingHours = transformOpeningHours(obj.opening_hours)
+function transformLabels (str) {
+  const labels = str.split(';')
 
-    Object.assign(obj, { phone, labels,
-      opening_hours: openingHours
-    })
+  return labels.map(capitalize)
+}
 
-    return obj
-  })
+function transformPhone (str) {
+  return str.replace(/[\/\-]|\s/g, '')
 }
 
 const mapping = {
   NR: 'nr',
   NAMN: 'name',
   TYP: 'type',
-  ADDRESS1: 'address_1',
-  ADDRESS2: 'address_2',
-  ADDRESS3: 'address_3',
-  ADDRESS4: 'address_4',
-  ADDRESS5: 'address_5',
+  ADDRESS1: 'address',
+  ADDRESS2: 'additional_address',
+  ADDRESS3: 'zip_code',
+  ADDRESS4: 'city',
+  ADDRESS5: 'county',
   TELEFON: 'phone',
   BUTIKSTYP: 'shop_type',
   TJANSTER: 'services',
@@ -55,23 +53,23 @@ const mapping = {
 }
 
 const Store = new Schema({
-  nr: { type: String, required: true },
+  nr: { type: String, index: true, required: true },
   name: { type: String, index: true, default: '' },
   type: { type: String, index: true, default: '' },
-  address_1: { type: String, index: true, default: '' },
-  address_2: { type: String, index: true, default: '' },
-  address_3: { type: String, index: true, default: '' },
-  address_4: { type: String, index: true, default: '' },
-  address_5: { type: String, index: true, default: '' },
-  phone: { type: String, default: '' },
+  address: { type: String, index: true, default: '' },
+  additional_address: { type: String, index: true, default: '' },
+  zip_code: { type: String, index: true, default: '' },
+  city: { type: String, index: true, default: '', set: capitalize },
+  county: { type: String, index: true, default: '' },
+  phone: { type: String, index: true, default: '', set: transformPhone },
   shop_type: { type: String, index: true, default: '' },
-  services: { type: String, default: '' },
-  labels: { type: Array, default: [] },
-  opening_hours: { type: Array, default: [] },
-  RT90x: { type: Number, default: null },
-  RT90y: { type: Number, default: null }
+  services: { type: String, index: true, default: '' },
+  labels: { type: Array, index: true, default: [], set: transformLabels },
+  opening_hours: { type: Array, index: true, default: [], set: transformOpeningHours },
+  RT90x: { type: Number, index: true, default: null },
+  RT90y: { type: Number, index: true, default: null }
 })
 
 mongoose.model('Store', Store)
 
-export { mapping, model, filter }
+export { mapping, reduce }

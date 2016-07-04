@@ -1,5 +1,5 @@
 import Koa from 'koa'
-import router from 'koa-simple-router'
+import path from 'path'
 import logger from 'koa-logger'
 import parser from 'koa-bodyparser'
 import views from 'koa-views'
@@ -14,7 +14,7 @@ app.use(logger())
 // Parses json body requests
 app.use(parser())
 
-app.use(views(__dirname + '/views', {
+app.use(views(path.join(__dirname, 'views'), {
   extension: 'hbs',
   map: {
     hbs: 'handlebars'
