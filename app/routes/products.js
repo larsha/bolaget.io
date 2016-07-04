@@ -19,6 +19,12 @@ export default async (ctx, next) => {
   const name = ctx.query.name
   const type = ctx.query.type
   const style = ctx.query.style
+  const provider = ctx.query.provider
+  const producer = ctx.query.producer
+  const origin = ctx.query.origin
+  const originCountry = ctx.query.origin_country
+  const packaging = ctx.query.packaging
+  const assortment = ctx.query.assortment
   const productGroup = ctx.query.product_group
 
   let limit = parseInt(ctx.query.limit, 10) || 10
@@ -44,6 +50,18 @@ export default async (ctx, next) => {
     Object.assign(filter, { product_group: caseInsensitive(productGroup) })
   }
 
+  if (productGroup) {
+    Object.assign(filter, { product_group: caseInsensitive(productGroup) })
+  }
+
+  if (packaging) {
+    Object.assign(filter, { packaging: caseInsensitive(packaging) })
+  }
+
+  if (assortment) {
+    Object.assign(filter, { assortment: caseInsensitive(assortment) })
+  }
+
   if (name) {
     Object.assign(filter, { name: fuzzySearch(name) })
   }
@@ -54,6 +72,22 @@ export default async (ctx, next) => {
 
   if (style) {
     Object.assign(filter, { style: fuzzySearch(style) })
+  }
+
+  if (provider) {
+    Object.assign(filter, { provider: fuzzySearch(provider) })
+  }
+
+  if (producer) {
+    Object.assign(filter, { producer: fuzzySearch(producer) })
+  }
+
+  if (origin) {
+    Object.assign(filter, { origin: fuzzySearch(origin) })
+  }
+
+  if (originCountry) {
+    Object.assign(filter, { origin_country: fuzzySearch(originCountry) })
   }
 
   if (priceFrom) {

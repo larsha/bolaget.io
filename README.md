@@ -44,9 +44,13 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
    `volume_to=[number]`
 
+   `assortment=[alphanumeric]` - BS = Reservation assortment, TS = Temporary assortment, FS	= Regular assortment and FSN = Regular assortment (new product)
+
+   `packaging=[alphanumeric]` - Packaing search (case insensitive)
+
    `sort=[alphanumeric]` - Property to sort by, e.g. '-name' for descending sort and 'name' for ascending sort
 
-   `name|type|style=[alphanumeric]` - Simple fuzzy search (case insensitive)
+   `name|type|style|provider|producer|origin|origin_country=[alphanumeric]` - Simple fuzzy search (case insensitive)
 
    `product_group=[alphanumeric]` - Product group search (case insensitive)
 
