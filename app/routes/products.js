@@ -26,6 +26,7 @@ export default async (ctx, next) => {
   const packaging = ctx.query.packaging
   const assortment = ctx.query.assortment
   const productGroup = ctx.query.product_group
+  const sealing = ctx.query.sealing
 
   let limit = parseInt(ctx.query.limit, 10) || 10
 
@@ -50,6 +51,10 @@ export default async (ctx, next) => {
     Object.assign(filter, { product_group: caseInsensitive(productGroup) })
   }
 
+  if (sealing) {
+    Object.assign(filter, { sealing: caseInsensitive(sealing) })
+  }
+
   if (productGroup) {
     Object.assign(filter, { product_group: caseInsensitive(productGroup) })
   }
@@ -63,7 +68,7 @@ export default async (ctx, next) => {
   }
 
   if (name) {
-    Object.assign(filter, { name: fuzzySearch(name) })
+    Object.assign(filter, { $or: [ { 'name': fuzzySearch(name) }, { 'additional_name': fuzzySearch(name) } ] })
   }
 
   if (type) {
