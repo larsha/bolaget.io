@@ -8,7 +8,7 @@ export default async (ctx, next) => {
   const ecological = stringToBool(ctx.query.ecologial)
   const ethical = stringToBool(ctx.query.ethical)
   const koscher = stringToBool(ctx.query.koscher)
-  const skip = parseInt(ctx.query.skip, 10) || 0
+  const offset = parseInt(ctx.query.offset, 10) || 0
   const yearFrom = parseInt(ctx.query.year_from, 10) || 0
   const yearTo = parseInt(ctx.query.year_to, 10) || 0
   const priceFrom = parseInt(ctx.query.price_from, 10) || 0
@@ -132,7 +132,7 @@ export default async (ctx, next) => {
   }
 
   const getProducts = Product.find(filter, { _id: 0 })
-    .skip(skip)
+    .skip(offset)
     .limit(limit)
     .sort(sort)
     .exec()

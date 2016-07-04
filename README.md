@@ -24,7 +24,7 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
    `limit=[number]` - Default limit is 10, max limit is 100
 
-   `skip=[number]`
+   `offset=[number]`
 
    `ecologial=[bool]`
 
@@ -143,7 +143,7 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
    `limit=[number]` - Default limit is 10, max limit is 100
 
-   `skip=[number]`
+   `offset=[number]`
 
    `type=[alphanumeric]` - 'ombud' or 'butik'
 

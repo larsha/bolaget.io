@@ -9,7 +9,7 @@ export default async (ctx, next) => {
   const Store = mongoose.model('Store')
   const maxLimit = 100
 
-  const skip = parseInt(ctx.query.skip, 10) || 0
+  const offset = parseInt(ctx.query.offset, 10) || 0
   const sort = ctx.query.sort || 'type'
   const type = ctx.query.type
   const city = ctx.query.city
@@ -41,7 +41,7 @@ export default async (ctx, next) => {
   }
 
   const getStores = Store.find(filter, { _id: 0 })
-    .skip(skip)
+    .skip(offset)
     .limit(limit)
     .sort(sort)
     .exec()
