@@ -27,7 +27,9 @@ function transformOpeningHours (str) {
 function transformLabels (str) {
   const labels = str.split(';')
 
-  return labels.map(capitalize)
+  return labels
+    .filter(Boolean)
+    .map(capitalize)
 }
 
 function transformPhone (str) {
