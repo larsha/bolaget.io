@@ -9,8 +9,8 @@
   "scripts": {
     "build": "rm -rf .build && cp -rf app .build && babel app -d .build",
     "heroku-postbuild": "npm run build",
-    "start": "node .build/web.js",
-    "worker": "node .build/worker.js",
+    "start": "node --optimize_for_size --max_old_space_size=384 --gc_interval=100 .build/web.js",
+    "worker": "node --optimize_for_size --max_old_space_size=384 --gc_interval=100 .build/worker.js",
     "dev": "DEBUG_MONGO=true DEBUG=koa* nodemon app/web.js --exec babel-node",
     "dev:worker": "DEBUG_MONGO=true nodemon app/worker.js --exec babel-node"
   },
