@@ -4,7 +4,6 @@ import logger from 'koa-logger'
 import parser from 'koa-bodyparser'
 import views from 'koa-views'
 import routes from './routes'
-import { mongooseConnection } from './lib/connections'
 
 const app = new Koa()
 
@@ -42,8 +41,6 @@ app.use(async ctx => {
   }
 })
 
-mongooseConnection.on('connected', () => {
-  app.listen(process.env.PORT || 3000)
-})
+app.listen(process.env.PORT || 3000)
 
 export default app

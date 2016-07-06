@@ -1,20 +1,25 @@
-import { mongooseConnection } from './lib/connections'
+import Elastic from './lib/elastic'
+import logger from 'winston'
 import ProductsTask from './lib/worker/tasks/products'
 import StoresTask from './lib/worker/tasks/stores'
-import logger from 'winston'
 
 const productsTask = new ProductsTask()
 const storeTask = new StoresTask()
 
-mongooseConnection.on('connected', run)
+Elastic.getIndex()
+  .then(Elastic.deleteIndex)
+  .then(Elastic.createIndex)
+  .catch(Elastic.createIndex)
+  .then(async () => {
+    try {
+      await Promise.all([productsTask.run(), storeTask.run()])
+      logger.info('Inserted products and stores!')
+    } catch (e) {
+      logger.error(e)
+    }
 
-async function run () {
-  try {
-    await Promise.all([productsTask.run(), storeTask.run()])
-    logger.info('Inserted products and stores!')
-  } catch (e) {
-    logger.error(e)
-  }
-
-  process.exit()
-}
+    process.exit()
+  })
+  .catch(() => {
+    process.exit()
+  })

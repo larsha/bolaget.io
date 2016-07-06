@@ -2,9 +2,8 @@ import http from 'http'
 import xml2js from 'xml2js'
 
 class Request {
-  constructor (endpoint, mapping) {
+  constructor (endpoint) {
     this.endpoint = endpoint
-    this.mapping = mapping
   }
 
   get () {
@@ -22,27 +21,6 @@ class Request {
 
       req.on('error', reject)
     })
-  }
-
-  map (data) {
-    if (!this.mapping) {
-      return data
-    }
-
-    let mapped = []
-
-    data.forEach(obj => {
-      let mappedData = {}
-      for (var prop in obj) {
-        if (obj.hasOwnProperty(prop)) {
-          mappedData[this.mapping[prop]] = obj[prop]
-        }
-      }
-
-      mapped.push(mappedData)
-    })
-
-    return mapped
   }
 
   parse (xml) {

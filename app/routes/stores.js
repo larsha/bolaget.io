@@ -1,61 +1,100 @@
-import { mongoose } from '../lib/connections'
-import { capitalize, caseInsensitive, fuzzySearch } from '../lib/utils'
-
-function mapLabels (labels) {
-  return labels.split(',').map(capitalize)
-}
+import Store from '../models/store'
+import { fuzzyMatch, listToArray } from '../lib/utils'
 
 export default async (ctx, next) => {
-  const Store = mongoose.model('Store')
   const maxLimit = 100
-
   const offset = parseInt(ctx.query.offset, 10) || 0
-  const sort = ctx.query.sort || 'type'
   const type = ctx.query.type
   const city = ctx.query.city
+  const county = ctx.query.county
   const name = ctx.query.name
   const labels = ctx.query.labels
+  const address = ctx.query.address
+  const search = ctx.query.search
 
   let limit = parseInt(ctx.query.limit, 10) || 10
+  let sort = ctx.query.sort
 
   if (limit > maxLimit) {
     limit = maxLimit
   }
 
-  const filter = {}
-
-  if (city) {
-    Object.assign(filter, { city: caseInsensitive(city) })
-  }
-
-  if (name) {
-    Object.assign(filter, { name: fuzzySearch(name) })
+  let query = {
+    bool: {
+      must: []
+    }
   }
 
   if (type) {
-    Object.assign(filter, { type: caseInsensitive(type) })
+    query.bool.must.push(fuzzyMatch('type', type))
+  }
+
+  if (name) {
+    query.bool.must.push(fuzzyMatch('name', name))
+  }
+
+  if (address) {
+    query.bool.must.push(fuzzyMatch('address', address))
+  }
+
+  if (city) {
+    query.bool.must.push(fuzzyMatch('city', city))
+  }
+
+  if (county) {
+    query.bool.must.push(fuzzyMatch('county', county))
   }
 
   if (labels) {
-    Object.assign(filter, { labels: { $all: mapLabels(labels) } })
+    let list = listToArray(labels)
+
+    list.forEach(str => {
+      query.bool.must.push({
+        match: {
+          labels: {
+            query: str,
+            fuzziness: 'AUTO'
+          }
+        }
+      })
+    })
   }
 
-  const getStores = Store.find(filter, { _id: 0 })
-    .skip(offset)
-    .limit(limit)
-    .sort(sort)
-    .exec()
-
-  const getCount = Store.count(filter).exec()
-
-  const [stores, count] = await Promise.all([getStores, getCount])
-
-  if (stores.length <= 0) {
-    let e = new Error(`Stores doesn't exists`)
-    e.status = 404
-    throw e
+  if (search) {
+    query.bool.filter = {
+      multi_match: {
+        query: search,
+        fields: [ 'name^2', 'address', 'additional_address', 'city', 'county' ],
+        type: 'phrase',
+        fuzziness: 'AUTO',
+        prefix_length: 0
+      }
+    }
   }
+
+  const [prop, order] = (sort || '').split(':')
+
+  switch (prop) {
+    case 'RT90x':
+    case 'RT90Y':
+    case 'zip_code':
+      sort = { [prop]: { order } }
+      break
+    case 'address':
+      sort = { 'address.sort': { order } }
+      break
+    case 'county':
+      sort = { 'county.sort': { order } }
+      break
+    case 'city':
+      sort = { 'city.sort': { order } }
+      break
+    default:
+      sort = { 'zip_code': { order: 'asc' } }
+  }
+
+  const { result, count } = await Store.find(query, offset, limit, sort)
 
   ctx.set('X-Total-Count', count)
-  ctx.body = stores
+  ctx.body = result
 }

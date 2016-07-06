@@ -1,16 +1,9 @@
-import { mongoose } from '../lib/connections'
+import Product from '../models/product'
 
 export default async (ctx, next) => {
-  const Product = mongoose.model('Product')
-  const nr = parseInt(ctx.params.nr) || null
+  const id = ctx.params.id || null
 
-  const product = await Product.findOne({ nr }, { _id: 0 }).exec()
-
-  if (!product) {
-    let e = new Error(`Product doesn't exist`)
-    e.status = 404
-    throw e
-  }
+  const product = await Product.getById(id)
 
   ctx.body = product
 }

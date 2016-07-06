@@ -26,7 +26,7 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
    `offset=[number]`
 
-   `ecologial=[bool]`
+   `ecological=[bool]`
 
    `koscher=[bool]`
 
@@ -46,13 +46,17 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
    `assortment=[alphanumeric]` - BS = Reservation assortment, TS = Temporary assortment, FS	= Regular assortment and FSN = Regular assortment (new product)
 
-   `packaging=[alphanumeric]` - Packaing search (case insensitive)
+   `sort=[alphanumeric]` - Property to sort by, accepting:
+      - `price:asc|desc`
+      - `price_per_liter:asc|desc`
+      - `volume_in_milliliter:asc|desc`
+      - `year:asc|desc`
+      - `zip_code:asc|desc`
+      - `name:asc|desc`<br><br>
 
-   `sort=[alphanumeric]` - Property to sort by, e.g. '-name' for descending sort and 'name' for ascending sort
+   `name|type|style|provider|producer|origin|origin_country|packaging|product_group|sealing=[alphanumeric]` - Fuzzy match
 
-   `name|type|style|provider|producer|origin|origin_country=[alphanumeric]` - Simple fuzzy search (case insensitive)
-
-   `product_group=[alphanumeric]` - Product group search (case insensitive)
+   `search=[alphanumeric]` - Fuzzy search in several fields
 
 
 * **Response headers:**
@@ -118,7 +122,7 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
   OR
 
   * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ error : "Product doesn't exist" }`
+    **Content:** `{ error : "Not Found" }`
 
 
 
@@ -145,15 +149,18 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
    `offset=[number]`
 
-   `type=[alphanumeric]` - 'ombud' or 'butik'
+   `labels=[alphanumeric]` - Takes a comma separated list, eg. norrbotten,jämtland, returns documents containing all labels matched (fuzzy)
 
-   `city=[alphanumeric]` - city filter (case insensitive)
+   `sort=[alphanumeric]` - Property to sort by, accepting:
+      - `RT90x:asc|desc`
+      - `RT90y:asc|desc`
+      - `address:asc|desc`
+      - `city:asc|desc`
+      - `county:asc|desc`<br><br>
 
-   `name=[alphanumeric]` - Simple fuzzy name search (case insensitive)
+   `type|name|city|county|address=[alphanumeric]` - Fuzzy match
 
-   `labels=[alphanumeric]` - Takes a comma separated list, eg. norrbotten,jämtland, returns documents containing all labels matched
-
-   `sort=[alphanumeric]` - Property to sort by, e.g. '-type' for descending sort and 'type' for ascending sort
+   `search=[alphanumeric]` - Fuzzy search in several fields
 
 
 * **Response headers:**
@@ -175,4 +182,47 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
   OR
 
   * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ error : "Stores doesn't exist" }`
+    **Content:** `{ error : "Not Found" }`
+
+
+**Show Store**
+----
+  Returns json data about a single store.
+
+* **URL**
+
+  /stores/:nr
+
+
+* **Method:**
+
+  `GET`
+
+
+*  **URL Params**
+
+   ***Required:***
+
+   `nr=[number]`
+
+
+* **Data Params**
+
+  None
+
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `{ address: "Vasagatan 25", ... }`
+
+
+* **Error Response:**
+
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** `{ error : e }`
+
+  OR
+
+  * **Code:** 404 NOT FOUND <br />
+    **Content:** `{ error : "Not Found" }`

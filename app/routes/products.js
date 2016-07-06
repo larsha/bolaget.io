@@ -1,21 +1,13 @@
-import { mongoose } from '../lib/connections'
-import { fuzzySearch, stringToBool, caseInsensitive } from '../lib/utils'
+import Product from '../models/product'
+import { stringToBool, fuzzyMatch, rangeMatch } from '../lib/utils'
 
 export default async (ctx, next) => {
-  const Product = mongoose.model('Product')
   const maxLimit = 100
-
-  const ecological = stringToBool(ctx.query.ecologial)
-  const ethical = stringToBool(ctx.query.ethical)
-  const koscher = stringToBool(ctx.query.koscher)
+  const ecological = ctx.query.ecological
+  const ethical = ctx.query.ethical
+  const koscher = ctx.query.koscher
   const offset = parseInt(ctx.query.offset, 10) || 0
-  const yearFrom = parseInt(ctx.query.year_from, 10) || 0
-  const yearTo = parseInt(ctx.query.year_to, 10) || 0
-  const priceFrom = parseInt(ctx.query.price_from, 10) || 0
-  const priceTo = parseInt(ctx.query.price_to, 10) || 0
-  const volumeFrom = parseInt(ctx.query.volume_from, 10) || 0
-  const volumeTo = parseInt(ctx.query.volume_to, 10) || 0
-  const sort = ctx.query.sort || 'name'
+  const search = ctx.query.search
   const name = ctx.query.name
   const type = ctx.query.type
   const style = ctx.query.style
@@ -24,129 +16,127 @@ export default async (ctx, next) => {
   const origin = ctx.query.origin
   const originCountry = ctx.query.origin_country
   const packaging = ctx.query.packaging
-  const assortment = ctx.query.assortment
   const productGroup = ctx.query.product_group
   const sealing = ctx.query.sealing
+  const assortment = ctx.query.assortment
+  const yearFrom = parseInt(ctx.query.year_from, 10) || 0
+  const yearTo = parseInt(ctx.query.year_to, 10) || 0
+  const priceFrom = parseInt(ctx.query.price_from, 10) || 0
+  const priceTo = parseInt(ctx.query.price_to, 10) || 0
+  const volumeFrom = parseInt(ctx.query.volume_from, 10) || 0
+  const volumeTo = parseInt(ctx.query.volume_to, 10) || 0
 
   let limit = parseInt(ctx.query.limit, 10) || 10
+  let sort = ctx.query.sort
 
   if (limit > maxLimit) {
     limit = maxLimit
   }
 
-  let filter = {}
-  if (ecological) {
-    Object.assign(filter, { ecological: true })
-  }
+  let query = {}
 
-  if (ethical) {
-    Object.assign(filter, { ethical: true })
-  }
-
-  if (koscher) {
-    Object.assign(filter, { koscher: true })
-  }
-
-  if (productGroup) {
-    Object.assign(filter, { product_group: caseInsensitive(productGroup) })
-  }
-
-  if (sealing) {
-    Object.assign(filter, { sealing: caseInsensitive(sealing) })
-  }
-
-  if (productGroup) {
-    Object.assign(filter, { product_group: caseInsensitive(productGroup) })
-  }
-
-  if (packaging) {
-    Object.assign(filter, { packaging: caseInsensitive(packaging) })
-  }
-
-  if (assortment) {
-    Object.assign(filter, { assortment: caseInsensitive(assortment) })
+  query.bool = {
+    must: [
+      { term: { ecological: stringToBool(ecological) } },
+      { term: { ethical: stringToBool(ethical) } },
+      { term: { koscher: stringToBool(koscher) } }
+    ]
   }
 
   if (name) {
-    Object.assign(filter, { $or: [ { 'name': fuzzySearch(name) }, { 'additional_name': fuzzySearch(name) } ] })
+    query.bool.must.push(fuzzyMatch('name', name))
   }
 
   if (type) {
-    Object.assign(filter, { type: fuzzySearch(type) })
+    query.bool.must.push(fuzzyMatch('type', type))
   }
 
   if (style) {
-    Object.assign(filter, { style: fuzzySearch(style) })
+    query.bool.must.push(fuzzyMatch('style', style))
   }
 
   if (provider) {
-    Object.assign(filter, { provider: fuzzySearch(provider) })
+    query.bool.must.push(fuzzyMatch('provider', provider))
   }
 
   if (producer) {
-    Object.assign(filter, { producer: fuzzySearch(producer) })
+    query.bool.must.push(fuzzyMatch('producer', producer))
   }
 
   if (origin) {
-    Object.assign(filter, { origin: fuzzySearch(origin) })
+    query.bool.must.push(fuzzyMatch('origin', origin))
   }
 
   if (originCountry) {
-    Object.assign(filter, { origin_country: fuzzySearch(originCountry) })
+    query.bool.must.push(fuzzyMatch('originCountry', originCountry))
   }
 
-  if (priceFrom) {
-    Object.assign(filter, { price: { $gte: priceFrom } })
+  if (packaging) {
+    query.bool.must.push(fuzzyMatch('packaging', packaging))
   }
 
-  if (priceTo) {
-    Object.assign(filter, { price: { $lte: priceTo } })
+  if (productGroup) {
+    query.bool.must.push(fuzzyMatch('productGroup', productGroup))
   }
 
-  if (priceFrom && priceTo) {
-    Object.assign(filter, { price: { $gte: priceFrom, $lte: priceTo } })
+  if (sealing) {
+    query.bool.must.push(fuzzyMatch('sealing', sealing))
   }
 
-  if (volumeFrom) {
-    Object.assign(filter, { volume_in_milliliter: { $gte: volumeFrom } })
+  if (assortment) {
+    query.bool.must.push({
+      match: {
+        assortment: {
+          query: assortment
+        }
+      }
+    })
   }
 
-  if (volumeTo) {
-    Object.assign(filter, { volume_in_milliliter: { $lte: volumeTo } })
+  if (yearFrom || yearTo) {
+    query.bool.must.push(rangeMatch('year', yearFrom, yearTo))
   }
 
-  if (volumeFrom && volumeTo) {
-    Object.assign(filter, { volume_in_milliliter: { $gte: volumeFrom, $lte: volumeTo } })
+  if (priceFrom || priceTo) {
+    query.bool.must.push(rangeMatch('price', priceFrom, priceTo))
   }
 
-  if (yearFrom) {
-    Object.assign(filter, { year: { $gte: yearFrom } })
+  if (volumeFrom || volumeTo) {
+    query.bool.must.push(rangeMatch('volume_in_milliliter', volumeFrom, volumeTo))
   }
 
-  if (yearTo) {
-    Object.assign(filter, { year: { $lte: yearTo } })
+  if (search) {
+    query.bool.filter = {
+      multi_match: {
+        query: search,
+        fields: [ 'name^2', 'additional_name', 'type^2', 'style^2', 'provider', 'producer', 'origin', 'origin_country', 'sealing', 'productGroup', 'packaging' ],
+        type: 'phrase',
+        fuzziness: 'AUTO',
+        prefix_length: 0
+      }
+    }
   }
 
-  if (yearFrom && yearTo) {
-    Object.assign(filter, { year: { $gte: yearFrom, $lte: yearTo } })
+  const [prop, order] = (sort || '').split(':')
+
+  switch (prop) {
+    case 'price':
+    case 'volume_in_milliliter':
+    case 'year':
+    case 'price_per_liter':
+      sort = { [prop]: { order } }
+      break
+    case 'name':
+      sort = { 'name.sort': { order } }
+      break
+    default:
+      sort = { 'name.sort': { order: 'asc' } }
   }
 
-  const getProducts = Product.find(filter, { _id: 0 })
-    .skip(offset)
-    .limit(limit)
-    .sort(sort)
-    .exec()
+  console.log(query.bool.must)
 
-  const getCount = Product.count(filter).exec()
-
-  const [products, count] = await Promise.all([getProducts, getCount])
-
-  if (products.length <= 0) {
-    let e = new Error(`Products doesn't exists`)
-    e.status = 404
-    throw e
-  }
+  const { result, count } = await Product.find(query, offset, limit, sort)
 
   ctx.set('X-Total-Count', count)
-  ctx.body = products
+  ctx.body = result
 }

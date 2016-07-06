@@ -1,23 +1,25 @@
-import { mongoose } from '../../connections'
-import { mapping, reduce } from '../../../models/product'
+import Product from '../../../models/product'
 import Request from '../../request'
-
-const Product = mongoose.model('Product')
 
 class Task extends Request {
   constructor () {
-    super('http://www.systembolaget.se/api/assortment/products/xml', mapping)
+    super('http://www.systembolaget.se/api/assortment/products/xml')
   }
 
-  save (data) {
-    return Product.remove().then(() => Product.insertMany(data))
+  save (products) {
+    return Product.putMapping()
+      .then(() => {
+        return Promise.all(products.map(obj => {
+          let product = new Product(obj)
+          return product.save().catch(() => Promise.resolve())
+        }))
+      })
   }
 
   run () {
     return this.get()
       .then(this.parse)
-      .then(reduce)
-      .then(json => this.map(json))
+      .then(json => Product.reduce(json))
       .then(this.save)
   }
 }

@@ -29,15 +29,13 @@
     "babel-cli": "6.10.1",
     "babel-plugin-transform-async-to-generator": "6.8.0",
     "babel-plugin-transform-es2015-modules-commonjs": "6.8.0",
-    "escape-string-regexp": "1.0.5",
+    "elasticsearch": "11.0.1",
     "handlebars": "4.0.5",
-    "jackrabbit": "4.3.0",
     "koa": "2.0.0",
     "koa-bodyparser": "3.1.0",
     "koa-logger": "2.0.0",
     "koa-simple-router": "0.2.0",
     "koa-views": "5.0.2",
-    "mongoose": "4.5.1",
     "winston": "2.2.0",
     "xml2js": "0.4.16"
   }

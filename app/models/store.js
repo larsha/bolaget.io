@@ -1,78 +1,114 @@
-import mongoose from 'mongoose'
-import { capitalize, empty } from '../lib/utils'
+import { capitalize, empty, toNumber } from '../lib/utils'
+import Elastic from '../lib/elastic'
 
-const Schema = mongoose.Schema
+class Store extends Elastic {
+  static reduce (data) {
+    return data['BUTIKEROMBUD']['BUTIKOMBUD']
+  }
 
-function reduce (data) {
-  return data['BUTIKEROMBUD']['BUTIKOMBUD']
-}
+  static transformOpeningHours (str) {
+    const list = str ? str.split(/;;;0?\-?;/g) : []
 
-function transformOpeningHours (str) {
-  const list = str ? str.split(/;;;0?\-?;/g) : []
+    return list
+      .filter(empty)
+      .map(str => {
+        let opening = str.replace('_*', '').split(';')
+        const [day, openingHours, closingHours] = opening
 
-  return list
-    .filter(empty)
-    .map(str => {
-      let opening = str.replace('_*', '').split(';')
-      const [day, openingHours, closingHours] = opening
+        if ((parseInt(closingHours) - parseInt(openingHours)) <= 0) {
+          return null
+        }
 
-      if ((parseInt(closingHours) - parseInt(openingHours)) <= 0) {
-        return null
+        return `${day} ${openingHours}-${closingHours}`
+      })
+      .filter(empty)
+  }
+
+  static transformLabels (str) {
+    const labels = str ? str.split(';') : []
+
+    return labels
+      .filter(empty)
+      .map(capitalize)
+  }
+
+  static transformPhone (str) {
+    return str.replace(/[\/\-]|\s/g, '')
+  }
+
+  static get model () {
+    return {
+      NR: { value: 'nr' },
+      NAMN: { value: 'name' },
+      TYP: { value: 'type' },
+      ADDRESS1: { value: 'address' },
+      ADDRESS2: { value: 'additional_address' },
+      ADDRESS3: { value: 'zip_code' },
+      ADDRESS4: { value: 'city', transform: capitalize },
+      ADDRESS5: { value: 'county' },
+      TELEFON: { value: 'phone', transform: this.transformPhone },
+      BUTIKSTYP: { value: 'shop_type' },
+      TJANSTER: { value: 'services' },
+      SOKORD: { value: 'labels', transform: this.transformLabels },
+      OPPETTIDER: { value: 'opening_hours', transform: this.transformOpeningHours },
+      RT90X: { value: 'RT90x', transform: toNumber },
+      RT90Y: { value: 'RT90y', transform: toNumber }
+    }
+  }
+
+  static get mapping () {
+    return {
+      _all: {
+        enabled: false
+      },
+      properties: {
+        nr: { type: 'string', index: 'not_analyzed' },
+        name: { type: 'string', index: 'analyzed', analyzer: 'swedish' },
+        address: {
+          type: 'string',
+          index: 'analyzed',
+          analyzer: 'swedish',
+          fields: {
+            sort: {
+              type: 'string',
+              analyzer: 'swedish_sort'
+            }
+          }
+        },
+        additional_address: { type: 'string', index: 'analyzed', analyzer: 'swedish' },
+        zip_code: { type: 'string', index: 'not_analyzed' },
+        city: {
+          type: 'string',
+          index: 'analyzed',
+          analyzer: 'swedish',
+          fields: {
+            sort: {
+              type: 'string',
+              analyzer: 'swedish_sort'
+            }
+          }
+        },
+        county: {
+          type: 'string',
+          index: 'analyzed',
+          analyzer: 'swedish',
+          fields: {
+            sort: {
+              type: 'string',
+              analyzer: 'swedish_sort'
+            }
+          }
+        },
+        phone: { type: 'long', index: 'not_analyzed' },
+        shop_type: { type: 'string', index: 'analyzed', analyzer: 'swedish' },
+        services: { type: 'string', index: 'analyzed', analyzer: 'swedish' },
+        labels: { type: 'string', index: 'analyzed', analyzer: 'swedish' },
+        opening_hours: { type: 'string', index: 'not_analyzed' },
+        RT90x: { type: 'long', index: 'not_analyzed', coerce: false },
+        RT90y: { type: 'long', index: 'not_analyzed', coerce: false }
       }
-
-      return `${day} ${openingHours}-${closingHours}`
-    })
-    .filter(empty)
+    }
+  }
 }
 
-function transformLabels (str) {
-  const labels = str ? str.split(';') : []
-
-  return labels
-    .filter(empty)
-    .map(capitalize)
-}
-
-function transformPhone (str) {
-  return str.replace(/[\/\-]|\s/g, '')
-}
-
-const mapping = {
-  NR: 'nr',
-  NAMN: 'name',
-  TYP: 'type',
-  ADDRESS1: 'address',
-  ADDRESS2: 'additional_address',
-  ADDRESS3: 'zip_code',
-  ADDRESS4: 'city',
-  ADDRESS5: 'county',
-  TELEFON: 'phone',
-  BUTIKSTYP: 'shop_type',
-  TJANSTER: 'services',
-  SOKORD: 'labels',
-  OPPETTIDER: 'opening_hours',
-  RT90X: 'RT90x',
-  RT90Y: 'RT90y'
-}
-
-const Store = new Schema({
-  nr: { type: String, index: true, required: true },
-  name: { type: String, index: true, default: null },
-  type: { type: String, index: true, default: null },
-  address: { type: String, index: true, default: null },
-  additional_address: { type: String, index: true, default: null },
-  zip_code: { type: String, index: true, default: null },
-  city: { type: String, index: true, default: null, set: capitalize },
-  county: { type: String, index: true, default: null },
-  phone: { type: String, index: true, default: null, set: transformPhone },
-  shop_type: { type: String, index: true, default: null },
-  services: { type: String, index: true, default: null },
-  labels: { type: Array, index: true, default: [], set: transformLabels },
-  opening_hours: { type: Array, index: true, default: [], set: transformOpeningHours },
-  RT90x: { type: Number, index: true, default: null },
-  RT90y: { type: Number, index: true, default: null }
-})
-
-mongoose.model('Store', Store)
-
-export { mapping, reduce }
+export default Store

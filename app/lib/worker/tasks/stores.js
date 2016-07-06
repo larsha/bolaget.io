@@ -1,23 +1,25 @@
-import { mongoose } from '../../connections'
-import { mapping, reduce } from '../../../models/store'
+import Store from '../../../models/store'
 import Request from '../../request'
-
-const Store = mongoose.model('Store')
 
 class Task extends Request {
   constructor () {
-    super('http://www.systembolaget.se/api/assortment/stores/xml', mapping)
+    super('http://www.systembolaget.se/api/assortment/stores/xml')
   }
 
-  save (data) {
-    return Store.remove().then(() => Store.insertMany(data))
+  save (stores) {
+    return Store.putMapping()
+      .then(() => {
+        return Promise.all(stores.map(obj => {
+          let store = new Store(obj)
+          return store.save().catch(() => Promise.resolve())
+        }))
+      })
   }
 
   run () {
     return this.get()
       .then(this.parse)
-      .then(reduce)
-      .then(json => this.map(json))
+      .then(json => Store.reduce(json))
       .then(this.save)
   }
 }
