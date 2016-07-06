@@ -134,6 +134,24 @@ class Elastic {
     return client.indices.putMapping(mapping)
   }
 
+  static async bulk (data) {
+    let batch = []
+
+    data.forEach(obj => {
+      batch.push({
+        index: {
+          _index: Elastic.index,
+          _type: this.type,
+          _id: obj.body.nr
+        }
+      })
+
+      batch.push(obj.body)
+    })
+
+    return client.bulk({ body: batch })
+  }
+
   constructor (data) {
     let mapped = {}
     this.body = {}

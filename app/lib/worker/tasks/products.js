@@ -9,10 +9,11 @@ class Task extends Request {
   save (products) {
     return Product.putMapping()
       .then(() => {
-        return Promise.all(products.map(obj => {
-          let product = new Product(obj)
-          return product.save().catch(() => Promise.resolve())
-        }))
+        const data = products.map(obj => {
+          return new Product(obj)
+        })
+
+        return Product.bulk(data).catch(() => Promise.resolve())
       })
   }
 
