@@ -133,8 +133,6 @@ export default async (ctx, next) => {
       sort = { 'name.sort': { order: 'asc' } }
   }
 
-  console.log(query.bool.must)
-
   const { result, count } = await Product.find(query, offset, limit, sort)
 
   ctx.set('X-Total-Count', count)
