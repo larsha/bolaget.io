@@ -64,7 +64,7 @@ export default async (ctx, next) => {
     query.bool.filter = {
       multi_match: {
         query: search,
-        fields: [ 'name^2', 'address', 'additional_address', 'city', 'county' ],
+        fields: [ 'name^2', 'address', 'additional_address', 'city', 'county', 'labels' ],
         type: 'phrase',
         fuzziness: 'AUTO',
         prefix_length: 0
