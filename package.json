@@ -11,8 +11,8 @@
     "heroku-postbuild": "npm run build",
     "start": "node .build/web.js",
     "worker": "node .build/worker.js",
-    "dev": "DEBUG_MONGO=true DEBUG=koa* nodemon app/web.js --exec babel-node",
-    "dev:worker": "DEBUG_MONGO=true nodemon app/worker.js --exec babel-node"
+    "dev": "DEBUG=koa* nodemon app/web.js --exec babel-node",
+    "dev:worker": "nodemon app/worker.js --exec babel-node"
   },
   "author": "Fredrik Lack <fredrik@nody.se>",
   "url": "https://github.com/larsha/bolaget.io",
