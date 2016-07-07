@@ -1,7 +1,7 @@
 import elasticsearch from 'elasticsearch'
 
 const client = new elasticsearch.Client({
-  host: process.env.FOUNDELASTICSEARCH_URL || 'localhost:9200',
+  host: process.env.ELASTIC_HOST || 'localhost:9200',
   log: process.env.ELASTIC_LOG || 'trace'
 })
 
