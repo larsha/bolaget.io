@@ -3,7 +3,9 @@ import path from 'path'
 import logger from 'koa-logger'
 import parser from 'koa-bodyparser'
 import views from 'koa-views'
+
 import routes from './routes'
+import config from './config'
 
 const app = new Koa()
 
@@ -41,6 +43,6 @@ app.use(async ctx => {
   }
 })
 
-app.listen(process.env.PORT || 3000)
+app.listen(config.PORT)
 
 export default app

@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: devops/docker/Dockerfile
+    volumes:
+      - ".:/app/"
+    ports:
+      - "3000:3000"
+    links:
+      - elasticsearch
+  elasticsearch:
+    environment:
+      - ES_HEAP_SIZE=1g
+    ports:
+      - "9200:9200"
+    build:
+      context: .
+      dockerfile: devops/docker/elastic/Dockerfile

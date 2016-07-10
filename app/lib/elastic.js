@@ -1,9 +1,7 @@
 import elasticsearch from 'elasticsearch'
+import config from '../config'
 
-const client = new elasticsearch.Client({
-  host: process.env.ELASTIC_HOST || 'localhost:9200',
-  log: process.env.ELASTIC_LOG || 'trace'
-})
+const client = new elasticsearch.Client({ host: config.ELASTIC_HOST, log: config.ELASTIC_LOG })
 
 class Elastic {
   static get type () {
@@ -11,7 +9,7 @@ class Elastic {
   }
 
   static get index () {
-    return process.env.ELASTIC_INDEX || 'bolaget_dev'
+    return config.ELASTIC_INDEX
   }
 
   static async createIndex () {
