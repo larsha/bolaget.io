@@ -4,21 +4,19 @@ import ProductsTask from './lib/worker/tasks/products'
 import StoresTask from './lib/worker/tasks/stores'
 
 const productsTask = new ProductsTask()
-const storeTask = new StoresTask()
+const storesTask = new StoresTask()
 
-Elastic.getIndex()
-  .then(Elastic.deleteIndex)
-  .then(Elastic.createIndex)
-  .catch(Elastic.createIndex)
-  .then(async () => {
-    try {
-      await Promise.all([productsTask.run(), storeTask.run()])
-      logger.info('Inserted products and stores!')
-    } catch (e) {
-      logger.error(e)
-    }
-
-    process.exit()
+Promise.all([productsTask.get(), storesTask.get()])
+  .then(([products, stores]) => {
+    return Elastic.getIndex()
+      .then(Elastic.deleteIndex)
+      .then(Elastic.createIndex)
+      .catch(Elastic.createIndex)
+      .then(() => Promise.all([productsTask.index(products), storesTask.index(stores)]))
+      .then(() => {
+        logger.info(`${new Date()}: Inserted products and stores!`)
+        process.exit()
+      })
   })
   .catch(() => {
     process.exit()

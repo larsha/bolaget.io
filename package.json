@@ -4,11 +4,10 @@
   "description": "RESTful JSON API for Swedish alcohol monopoly, Systembolaget",
   "main": "app/web.js",
   "engines": {
-    "node": "6.2.2"
+    "node": "6.3.0"
   },
   "scripts": {
     "build": "rm -rf .build && cp -rf app .build && babel app -d .build",
-    "heroku-postbuild": "npm run build",
     "start": "node .build/web.js",
     "worker": "node .build/worker.js",
     "dev": "DEBUG=koa* nodemon app/web.js --exec babel-node",

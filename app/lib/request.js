@@ -6,7 +6,7 @@ class Request {
     this.endpoint = endpoint
   }
 
-  get () {
+  async get () {
     return new Promise((resolve, reject) => {
       var req = http.get(this.endpoint, res => {
         let xml = ''
@@ -15,7 +15,7 @@ class Request {
         })
 
         res.on('end', () => {
-          return resolve(xml)
+          return resolve(this.parse(xml))
         })
       })
 

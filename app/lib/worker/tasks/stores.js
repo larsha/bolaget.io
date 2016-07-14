@@ -17,11 +17,8 @@ class Task extends Request {
       })
   }
 
-  run () {
-    return this.get()
-      .then(this.parse)
-      .then(json => Store.reduce(json))
-      .then(this.save)
+  index (stores) {
+    return this.save(Store.reduce(stores))
   }
 }
 
