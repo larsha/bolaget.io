@@ -12,7 +12,9 @@ Promise.all([productsTask.get(), storesTask.get()])
       .then(Elastic.deleteIndex)
       .then(Elastic.createIndex)
       .catch(Elastic.createIndex)
-      .then(() => Promise.all([productsTask.index(products), storesTask.index(stores)]))
+      .then(() => {
+        return Promise.all([productsTask.index(products), storesTask.index(stores)])
+      })
       .then(() => {
         logger.info(`${new Date()}: Inserted products and stores!`)
         process.exit()
