@@ -4,6 +4,13 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
 *Work in progress, feel free to add issues and make PR's. API will be considered unstable (breaking changes might occur) until release 1.0.*
 
+**Development environment**
+----
+  Using Docker (https://www.docker.com/) and Docker Compose (https://docs.docker.com/compose/) for development environment.
+
+  - docker-compose -p bolaget build|up|down|start|stop
+
+
 **Products**
 ----
   Returns json data for products.
@@ -226,11 +233,3 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
   * **Code:** 404 NOT FOUND <br />
     **Content:** `{ error : "Not Found" }`
-
-
-
-**Development environment**
-
-Using Docker (https://www.docker.com/) and Docker Compose (https://docs.docker.com/compose/) for development environment.
-
-- docker-compose -p bolaget build|up|down|start|stop
