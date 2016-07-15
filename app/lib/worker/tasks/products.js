@@ -13,7 +13,7 @@ class Task extends Request {
           return new Product(obj)
         })
 
-        return Product.bulk(data).catch(() => Promise.resolve())
+        return Product.bulk(data)
       })
   }
 

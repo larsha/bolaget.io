@@ -20,6 +20,7 @@ Promise.all([productsTask.get(), storesTask.get()])
         process.exit()
       })
   })
-  .catch(() => {
+  .catch(e => {
+    logger.info(`${new Date()}: ${e}`)
     process.exit()
   })
