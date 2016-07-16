@@ -1,7 +1,7 @@
 import elasticsearch from 'elasticsearch'
 import config from '../config'
 
-const client = new elasticsearch.Client({ host: config.ELASTIC_HOST, log: config.ELASTIC_LOG })
+const client = new elasticsearch.Client({ host: config.ELASTIC_HOST, log: config.ELASTIC_LOG, requestTimeout: 60000 })
 
 class Elastic {
   static get type () {
