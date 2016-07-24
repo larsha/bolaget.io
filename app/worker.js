@@ -22,5 +22,5 @@ Promise.all([productsTask.get(), storesTask.get()])
   })
   .catch(e => {
     logger.info(`${new Date()}: ${e}`)
-    process.exit()
+    process.exit(1)
   })
