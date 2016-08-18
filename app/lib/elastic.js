@@ -12,9 +12,42 @@ class Elastic {
     return config.ELASTIC_INDEX
   }
 
-  static async createIndex () {
+  static async newAlias () {
+    return client.indices.getAlias({
+      index: '*',
+      name: Elastic.index
+    }).then(alias => {
+      const newIndex = new Date().getTime()
+      const oldIndex = Object.keys(alias).toString()
+
+      return { newIndex, oldIndex }
+    })
+    .catch(e => {
+      throw e
+    })
+  }
+
+  static async deleteAlias (index) {
+    return client.indices.deleteAlias({
+      name: Elastic.index,
+      index: index
+    })
+    .catch(() => Promise.resolve())
+  }
+
+  static async putAlias (index) {
+    return client.indices.putAlias({
+      name: Elastic.index,
+      index: index
+    })
+    .catch(e => {
+      throw e
+    })
+  }
+
+  static async createIndex (index) {
     const options = {
-      index: Elastic.index,
+      index,
       body: {
         mappings: {},
         settings: {
@@ -65,20 +98,8 @@ class Elastic {
     return client.indices.create(options)
   }
 
-  static async getIndex () {
-    const options = {
-      index: Elastic.index
-    }
-
-    return client.indices.get(options)
-  }
-
-  static async deleteIndex () {
-    const options = {
-      index: Elastic.index
-    }
-
-    return client.indices.delete(options)
+  static async deleteIndex (index) {
+    return client.indices.delete({ index }).catch(() => Promise.resolve())
   }
 
   static async getById (id) {
@@ -122,23 +143,23 @@ class Elastic {
       })
   }
 
-  static async putMapping () {
+  static async putMapping (index) {
     const mapping = {
-      index: Elastic.index,
       type: this.type,
-      body: this.mapping
+      body: this.mapping,
+      index
     }
 
     return client.indices.putMapping(mapping)
   }
 
-  static async bulk (data) {
+  static async bulk (data, index) {
     let batch = []
 
     data.forEach(obj => {
       batch.push({
         index: {
-          _index: Elastic.index,
+          _index: index,
           _type: this.type,
           _id: obj.body.nr
         }
@@ -148,6 +169,14 @@ class Elastic {
     })
 
     return client.bulk({ body: batch })
+  }
+
+  static get mapping () {
+    throw new Error('Mapping not implemented!')
+  }
+
+  static get model () {
+    throw new Error('Model not implemented!')
   }
 
   constructor (data) {
@@ -176,25 +205,6 @@ class Elastic {
         this.body[key] = mapped[key]
       }
     }
-  }
-
-  static get mapping () {
-    throw new Error('Mapping not implemented!')
-  }
-
-  static get model () {
-    throw new Error('Model not implemented!')
-  }
-
-  save () {
-    const doc = {
-      index: Elastic.index,
-      type: this.type,
-      id: this.body.nr,
-      body: this.body
-    }
-
-    return client.index(doc)
   }
 }
 

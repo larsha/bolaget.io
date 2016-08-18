@@ -6,19 +6,15 @@ class Task extends Request {
     super('http://www.systembolaget.se/api/assortment/products/xml')
   }
 
-  save (products) {
+  index (products, index) {
     return Product.putMapping()
       .then(() => {
-        const data = products.map(obj => {
+        const data = Product.reduce(products).map(obj => {
           return new Product(obj)
         })
 
-        return Product.bulk(data)
+        return Product.bulk(data, index)
       })
-  }
-
-  index (products) {
-    return this.save(Product.reduce(products))
   }
 }
 

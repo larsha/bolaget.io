@@ -8,19 +8,25 @@ const storesTask = new StoresTask()
 
 Promise.all([productsTask.get(), storesTask.get()])
   .then(([products, stores]) => {
-    return Elastic.getIndex()
-      .then(Elastic.deleteIndex)
-      .then(Elastic.createIndex)
-      .catch(Elastic.createIndex)
-      .then(() => {
-        return Promise.all([productsTask.index(products), storesTask.index(stores)])
-      })
-      .then(() => {
-        logger.info(`${new Date()}: Inserted products and stores!`)
-        process.exit()
+    return Elastic.newAlias()
+      .then(indexes => {
+        const { newIndex, oldIndex } = indexes
+
+        return Elastic.createIndex(newIndex)
+          .then(() => Promise.all([
+            productsTask.index(products, newIndex),
+            storesTask.index(stores, newIndex)
+          ]))
+          .then(() => Elastic.deleteIndex(oldIndex))
+          .then(() => Elastic.deleteAlias(oldIndex))
+          .then(() => Elastic.putAlias(newIndex))
+          .then(() => {
+            logger.info(`${new Date()}: Inserted products and stores!`)
+            process.exit()
+          })
       })
   })
   .catch(e => {
     logger.info(`${new Date()}: ${e}`)
-    process.exit(1)
+    process.exit()
   })
