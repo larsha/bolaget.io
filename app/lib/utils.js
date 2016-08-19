@@ -36,13 +36,7 @@ function fuzzyMatch (prop, query) {
 }
 
 function rangeMatch (prop, from, to) {
-  let match = {
-    range: {
-      [prop]: {
-        boost: 2.0
-      }
-    }
-  }
+  let match = { range: { [prop]: {} } }
 
   if (from) {
     match.range[prop].gte = from

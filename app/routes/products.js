@@ -98,7 +98,7 @@ export default async (ctx, next) => {
   }
 
   if (priceFrom || priceTo) {
-    query.bool.must.push(rangeMatch('price', priceFrom, priceTo))
+    query.bool.must.push(rangeMatch('price.amount', priceFrom, priceTo))
   }
 
   if (volumeFrom || volumeTo) {
@@ -120,11 +120,13 @@ export default async (ctx, next) => {
   const [prop, order] = (sort || '').split(':')
 
   switch (prop) {
-    case 'price':
     case 'volume_in_milliliter':
     case 'year':
     case 'price_per_liter':
       sort = { [prop]: { order } }
+      break
+    case 'price':
+      sort = { 'price.amount': { order } }
       break
     case 'name':
       sort = { 'name.sort': { order } }

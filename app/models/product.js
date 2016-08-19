@@ -2,6 +2,13 @@ import { toNumber, numberToBool } from '../lib/utils'
 import Elastic from '../lib/elastic'
 
 class Product extends Elastic {
+  static transformPrice (price) {
+    return {
+      amount: parseFloat(price),
+      currency: 'SEK'
+    }
+  }
+
   static reduce (data) {
     return data['ARTIKLAR']['ARTIKEL']
   }
@@ -13,7 +20,7 @@ class Product extends Elastic {
       VARNUMMER: { value: 'article_nr', transform: toNumber },
       NAMN: { value: 'name' },
       NAMN2: { value: 'additional_name' },
-      PRISINKLMOMS: { value: 'price', transform: parseFloat },
+      PRISINKLMOMS: { value: 'price', transform: this.transformPrice },
       VOLYMIML: { value: 'volume_in_milliliter', transform: parseFloat },
       PRISPERLITER: { value: 'price_per_liter', transform: parseFloat },
       SALJSTART: { value: 'sales_start' },
@@ -58,7 +65,12 @@ class Product extends Elastic {
           }
         },
         additional_name: { type: 'string', index: 'analyzed', analyzer: 'swedish' },
-        price: { type: 'double', index: 'not_analyzed' },
+        price: {
+          properties: {
+            amount: { type: 'double', index: 'not_analyzed' },
+            currency: { type: 'string', index: 'not_analyzed' }
+          }
+        },
         volume_in_milliliter: { type: 'double', index: 'not_analyzed' },
         price_per_liter: { type: 'double', index: 'not_analyzed' },
         sales_start: { type: 'string', index: 'not_analyzed' },
