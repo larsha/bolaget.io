@@ -7,7 +7,7 @@ class Task extends Request {
   }
 
   index (products, index) {
-    return Product.putMapping()
+    return Product.putMapping(index)
       .then(() => {
         const data = Product.reduce(products).map(obj => {
           return new Product(obj)
