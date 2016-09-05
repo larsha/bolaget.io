@@ -1,6 +1,6 @@
 docker_pull:
-	docker pull fredriklack/bolaget.io:node
 	docker pull fredriklack/bolaget.io:elasticsearch
+	docker pull fredriklack/bolaget.io:node
 
 production_index:
 	docker exec bolagetio_web npm run worker

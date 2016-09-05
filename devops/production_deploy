@@ -25,6 +25,5 @@ docker service create \
   --replicas 1 \
   -e ES_HEAP_SIZE=256m \
   --restart-condition on-failure \
-  -p 9200/tcp \
   --network bolagetio \
   fredriklack/bolaget.io:elasticsearch
