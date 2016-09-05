@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -e
+
+docker run -d \
+  -p 9200:9200/tcp \
+  --name bolagetio_elasticsearch \
+  --restart always \
+  -e ES_HEAP_SIZE=256m \
+  fredriklack/bolaget.io:elasticsearch
+
+docker run \
+  -w /web \
+  --name bolagetio_web \
+  --link bolagetio_elasticsearch \
+  -e NODE_ENV=development \
+  -e ELASTIC_INDEX=bolaget_dev \
+  -e ELASTIC_HOST=http://bolagetio_elasticsearch:9200 \
+  -e ELASTIC_LOG=error \
+  -p 3000:3000/tcp \
+  --restart always \
+  fredriklack/bolaget.io:node \
+  npm run dev
