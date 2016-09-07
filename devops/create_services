@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -e
+
+eval $(docker-machine env manager1)
+
+docker service create \
+  --with-registry-auth \
+  --name bolagetio_elasticsearch \
+  --replicas 1 \
+  -e ES_HEAP_SIZE=256m \
+  --restart-condition on-failure \
+  --network bolagetio \
+  fredriklack/bolaget.io:elasticsearch
+
+docker service create \
+  --with-registry-auth \
+  --name bolagetio_web \
+  --replicas 1 \
+  -e NODE_ENV=production \
+  -e ELASTIC_INDEX=bolaget_prod \
+  -e ELASTIC_HOST=http://bolagetio_elasticsearch:9200 \
+  -e ELASTIC_LOG=error \
+  -p 80:3000 \
+  --network bolagetio \
+  -w /web \
+  --restart-condition on-failure \
+  fredriklack/bolaget.io:node \
+  npm run production

@@ -2,11 +2,11 @@ docker_pull:
 	docker pull fredriklack/bolaget.io:elasticsearch
 	docker pull fredriklack/bolaget.io:node
 
-production_index:
-	docker exec bolagetio_web npm run worker
+create_services:
+	make docker_pull
+	./devops/create_services
 
 production_deploy:
-	make docker_pull
 	./devops/production_deploy
 
 development_index:
@@ -23,3 +23,6 @@ development_stop:
 development_create:
 	make docker_pull
 	./devops/development_create
+
+fill_elastic:
+	./devops/fill_elastic

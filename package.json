@@ -9,7 +9,7 @@
   "scripts": {
     "build": "rm -rf .build && cp -rf app .build && babel app -d .build",
     "start": "node .build/web.js",
-    "worker": "node .build/worker.js",
+    "worker": "npm run build && node .build/worker.js",
     "production": "npm run build && npm start",
     "dev": "DEBUG=koa* nodemon app/web.js --exec babel-node",
     "dev:worker": "nodemon app/worker.js --exec babel-node"
