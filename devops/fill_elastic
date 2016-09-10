@@ -4,6 +4,4 @@ set -e
 
 eval $(docker-machine env manager1)
 
-docker service update \
-  --replicas 1 \
-  bolagetio_worker
+docker service update --image fredriklack/bolaget.io:node bolagetio_worker
