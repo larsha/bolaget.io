@@ -12,7 +12,6 @@ docker service create \
   -e ES_HEAP_SIZE=256m \
   --restart-condition any \
   --restart-max-attempts 10 \
-  --constraint 'node.hostname == manager1' \
   --network bolagetio \
   fredriklack/bolaget.io:elasticsearch
 
@@ -38,6 +37,7 @@ docker service create \
   -e ELASTIC_INDEX=bolaget_prod \
   -e ELASTIC_LOG=error \
   --network bolagetio \
+  --restart-condition none \
   -w /web \
   fredriklack/bolaget.io:node \
   npm run worker
