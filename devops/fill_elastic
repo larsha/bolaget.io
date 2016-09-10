@@ -4,16 +4,6 @@ set -e
 
 eval $(docker-machine env manager1)
 
-docker service create \
-  --with-registry-auth \
-  --name bolagetio_worker \
+docker service update \
   --replicas 1 \
-  -e NODE_ENV=production \
-  -e ELASTIC_INDEX=bolaget_prod \
-  -e ELASTIC_HOST=http://bolagetio_elasticsearch:9200 \
-  -e ELASTIC_LOG=error \
-  --network bolagetio \
-  -w /web \
-  --restart-condition none \
-  fredriklack/bolaget.io:node \
-  npm run worker
+  bolagetio_worker

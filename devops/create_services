@@ -8,8 +8,11 @@ docker service create \
   --with-registry-auth \
   --name bolagetio_elasticsearch \
   --replicas 1 \
+  --limit-memory 512m \
   -e ES_HEAP_SIZE=256m \
-  --restart-condition on-failure \
+  --restart-condition any \
+  --restart-max-attempts 10 \
+  --constraint 'node.hostname == manager1' \
   --network bolagetio \
   fredriklack/bolaget.io:elasticsearch
 
@@ -19,11 +22,22 @@ docker service create \
   --replicas 1 \
   -e NODE_ENV=production \
   -e ELASTIC_INDEX=bolaget_prod \
-  -e ELASTIC_HOST=http://bolagetio_elasticsearch:9200 \
   -e ELASTIC_LOG=error \
-  -p 80:3000 \
   --network bolagetio \
   -w /web \
-  --restart-condition on-failure \
+  --restart-condition any \
+  --restart-max-attempts 10 \
   fredriklack/bolaget.io:node \
   npm run production
+
+docker service create \
+  --with-registry-auth \
+  --name bolagetio_worker \
+  --replicas 1 \
+  -e NODE_ENV=production \
+  -e ELASTIC_INDEX=bolaget_prod \
+  -e ELASTIC_LOG=error \
+  --network bolagetio \
+  -w /web \
+  fredriklack/bolaget.io:node \
+  npm run worker

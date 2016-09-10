@@ -15,9 +15,18 @@ docker run \
   --link bolagetio_elasticsearch \
   -e NODE_ENV=development \
   -e ELASTIC_INDEX=bolaget_dev \
-  -e ELASTIC_HOST=http://bolagetio_elasticsearch:9200 \
-  -e ELASTIC_LOG=error \
+  -e ELASTIC_LOG=trace \
   -p 3000:3000/tcp \
   --restart always \
   fredriklack/bolaget.io:node \
   npm run dev
+
+docker run \
+  -w /web \
+  --name bolagetio_worker \
+  --link bolagetio_elasticsearch \
+  -e NODE_ENV=development \
+  -e ELASTIC_INDEX=bolaget_dev \
+  -e ELASTIC_LOG=trace \
+  fredriklack/bolaget.io:node \
+  npm run dev:worker
