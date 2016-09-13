@@ -7,9 +7,10 @@ docker run -d \
   --name bolagetio_elasticsearch \
   --restart always \
   -e ES_HEAP_SIZE=256m \
-  fredriklack/bolaget.io:elasticsearch
+  bolagetio_elasticsearch
 
 docker run \
+  -v $(pwd):/web \
   -w /web \
   --name bolagetio_web \
   --link bolagetio_elasticsearch \
@@ -17,16 +18,5 @@ docker run \
   -e ELASTIC_INDEX=bolaget_dev \
   -e ELASTIC_LOG=trace \
   -p 3000:3000/tcp \
-  --restart always \
-  fredriklack/bolaget.io:node \
+  bolagetio_web \
   npm run dev
-
-docker run \
-  -w /web \
-  --name bolagetio_worker \
-  --link bolagetio_elasticsearch \
-  -e NODE_ENV=development \
-  -e ELASTIC_INDEX=bolaget_dev \
-  -e ELASTIC_LOG=trace \
-  fredriklack/bolaget.io:node \
-  npm run dev:worker

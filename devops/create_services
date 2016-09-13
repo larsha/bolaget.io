@@ -2,17 +2,16 @@
 
 set -e
 
-eval $(docker-machine env manager1)
-
 docker service create \
   --with-registry-auth \
   --name bolagetio_elasticsearch \
   --replicas 1 \
   --limit-memory 512m \
   -e ES_HEAP_SIZE=256m \
+  --constraint 'node.role == manager' \
   --restart-condition any \
   --restart-max-attempts 10 \
-  --network bolagetio \
+  --network cloud \
   fredriklack/bolaget.io:elasticsearch
 
 docker service create \
@@ -22,22 +21,19 @@ docker service create \
   -e NODE_ENV=production \
   -e ELASTIC_INDEX=bolaget_prod \
   -e ELASTIC_LOG=error \
-  --network bolagetio \
   -w /web \
   --restart-condition any \
   --restart-max-attempts 10 \
+  --network cloud \
   fredriklack/bolaget.io:node \
   npm run production
 
 docker service create \
-  --with-registry-auth \
   --name bolagetio_worker \
-  --replicas 1 \
   -e NODE_ENV=production \
   -e ELASTIC_INDEX=bolaget_prod \
   -e ELASTIC_LOG=error \
-  --network bolagetio \
-  --restart-condition none \
+  --network cloud \
   -w /web \
   fredriklack/bolaget.io:node \
   npm run worker

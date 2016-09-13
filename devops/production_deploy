@@ -1,8 +1,0 @@
-#!/bin/bash
-
-set -e
-
-eval $(docker-machine env manager1)
-
-docker service update --image fredriklack/bolaget.io:elasticsearch bolagetio_elasticsearch
-docker service update --image fredriklack/bolaget.io:node bolagetio_web
