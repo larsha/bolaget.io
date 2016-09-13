@@ -8,7 +8,6 @@ docker service create \
   --replicas 1 \
   --limit-memory 512m \
   -e ES_HEAP_SIZE=256m \
-  --constraint 'node.role == manager' \
   --restart-condition any \
   --restart-max-attempts 10 \
   --network cloud \
