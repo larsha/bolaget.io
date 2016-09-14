@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+docker run -i -d \
+  -w /web \
+  --name bolagetio_worker \
+  --link bolagetio_elasticsearch \
+  -e NODE_ENV=production \
+  -e ELASTIC_INDEX=bolaget_prod \
+  -e ELASTIC_LOG=error \
+  bolagetio_web \
+  npm run worker
