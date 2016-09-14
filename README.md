@@ -8,7 +8,7 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 ----
   Using Docker (https://www.docker.com/)
 
-  - `make development_create`
+  - ./development
 
 
 **Products**
