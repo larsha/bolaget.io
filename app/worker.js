@@ -8,7 +8,7 @@ const storesTask = new StoresTask()
 
 try {
   const { products, stores } = await Promise.all([productsTask.get(), storesTask.get()])
-  const { newIndex, oldIndex } = await Elastic.newAlias();
+  const { newIndex, oldIndex } = await Elastic.newAlias()
 
   await Elastic.createIndex(newIndex)
   await Promise.all([
