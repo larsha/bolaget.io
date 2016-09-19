@@ -6,27 +6,21 @@ import StoresTask from './lib/worker/tasks/stores'
 const productsTask = new ProductsTask()
 const storesTask = new StoresTask()
 
-Promise.all([productsTask.get(), storesTask.get()])
-  .then(([products, stores]) => {
-    return Elastic.newAlias()
-      .then(indexes => {
-        const { newIndex, oldIndex } = indexes
+try {
+  const { products, stores } = await Promise.all([productsTask.get(), storesTask.get()])
+  const { newIndex, oldIndex } = await Elastic.newAlias();
 
-        return Elastic.createIndex(newIndex)
-          .then(() => Promise.all([
-            productsTask.index(products, newIndex),
-            storesTask.index(stores, newIndex)
-          ]))
-          .then(() => Elastic.deleteIndex(oldIndex))
-          .then(() => Elastic.deleteAlias(oldIndex))
-          .then(() => Elastic.putAlias(newIndex))
-          .then(() => {
-            logger.info(`${new Date()}: Inserted products and stores!`)
-            process.exit()
-          })
-      })
-  })
-  .catch(e => {
-    logger.info(`${new Date()}: ${e}`)
-    process.exit()
-  })
+  await Elastic.createIndex(newIndex)
+  await Promise.all([
+    productsTask.index(products, newIndex),
+    storesTask.index(stores, newIndex)
+  ])
+  await Elastic.deleteIndex(oldIndex)
+  await Elastic.deleteAlias(oldIndex)
+  await Elastic.putAlias(newIndex)
+  logger.info(`${new Date()}: Inserted products and stores!`)
+  process.exit()
+} catch (e) {
+  logger.info(`${new Date()}: ${e}`)
+  process.exit(1)
+}

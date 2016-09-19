@@ -19,3 +19,13 @@ docker run \
   -p 3000:3000/tcp \
   bolagetio_web \
   npm run dev
+
+docker run -i -d \
+  -w /web \
+  --name bolagetio_worker \
+  --link bolagetio_elasticsearch \
+  -e NODE_ENV=production \
+  -e ELASTIC_INDEX=bolaget_dev \
+  -e ELASTIC_LOG=error \
+  bolagetio_web \
+  npm run worker
