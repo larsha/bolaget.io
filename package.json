@@ -11,8 +11,9 @@
     "start": "node .build/web.js",
     "worker": "npm run build && node .build/worker.js",
     "production": "npm run build && npm start",
-    "dev": "DEBUG=koa* nodemon app/web.js --exec babel-node",
-    "dev:worker": "nodemon app/worker.js --exec babel-node"
+    "dev": "DEBUG=koa* nodemon --debug app/web.js --exec babel-node",
+    "elasticDebug": "ELASTIC_LOG=trace DEBUG=koa* nodemon --debug app/web.js --exec babel-node",
+    "dev:worker": "babel-node --debug app/worker.js"
   },
   "author": "Fredrik Lack <fredrik@nody.se>",
   "url": "https://github.com/larsha/bolaget.io",

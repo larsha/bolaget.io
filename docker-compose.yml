@@ -1,0 +1,39 @@
+version: '2'
+services:
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    command: npm run dev:worker
+    container_name: bolagetio_worker
+    environment:
+      - NODE_ENV=development
+      - ELASTIC_INDEX=bolagetio_dev
+    volumes:
+      - .:/web
+    links:
+        - elastic
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    command: npm run dev
+    container_name: bolagetio_web
+    environment:
+      - NODE_ENV=development
+      - ELASTIC_INDEX=bolagetio_dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/web
+    links:
+        - elastic
+  elastic:
+      build:
+        context: .
+        dockerfile: Dockerfile.es
+      container_name: bolagetio_elasticsearch
+      environment:
+        - ES_HEAP_SIZE=256m
+      ports:
+        - "9200:9200"

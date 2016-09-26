@@ -13,36 +13,28 @@ class Elastic {
   }
 
   static async newAlias () {
-    return client.indices.getAlias({
-      index: '*',
-      name: Elastic.index
-    }).then(alias => {
-      const newIndex = new Date().getTime()
-      const oldIndex = Object.keys(alias).toString()
+    return client.indices.getAlias({ index: '*', name: Elastic.index })
+      .then(alias => {
+        const newIndex = new Date().getTime()
+        const oldIndex = Object.keys(alias).toString()
 
-      return { newIndex, oldIndex }
-    })
-    .catch(e => {
-      throw e
-    })
+        return { newIndex, oldIndex }
+      })
+      .catch(e => {
+        throw e
+      })
   }
 
   static async deleteAlias (index) {
-    return client.indices.deleteAlias({
-      name: Elastic.index,
-      index: index
-    })
-    .catch(() => Promise.resolve())
+    return client.indices.deleteAlias({ name: Elastic.index, index })
+      .catch(() => Promise.resolve())
   }
 
   static async putAlias (index) {
-    return client.indices.putAlias({
-      name: Elastic.index,
-      index: index
-    })
-    .catch(e => {
-      throw e
-    })
+    return client.indices.putAlias({ name: Elastic.index, index })
+      .catch(e => {
+        throw e
+      })
   }
 
   static async createIndex (index) {

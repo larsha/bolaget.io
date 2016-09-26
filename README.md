@@ -6,9 +6,19 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
 **Development environment**
 ----
-  Using Docker (https://www.docker.com/)
+  Using Docker and Docker Compose (https://www.docker.com/)
 
-  - ./development
+**Build**
+
+- ```docker-compose build```
+
+**Start**
+
+- ```docker-compose up web```
+
+**Start worker**
+
+- ```docker-compose run worker```
 
 
 **Products**
