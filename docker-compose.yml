@@ -11,8 +11,10 @@ services:
       - ELASTIC_INDEX=bolagetio_dev
     volumes:
       - .:/web
+    depends_on:
+      - elastic
     links:
-        - elastic
+      - elastic
   web:
     build:
       context: .
@@ -26,14 +28,16 @@ services:
       - "3000:3000"
     volumes:
       - .:/web
+    depends_on:
+      - elastic
     links:
-        - elastic
+      - elastic
   elastic:
-      build:
-        context: .
-        dockerfile: Dockerfile.es
-      container_name: bolagetio_elasticsearch
-      environment:
-        - ES_HEAP_SIZE=256m
-      ports:
-        - "9200:9200"
+    build:
+      context: .
+      dockerfile: Dockerfile.es
+    container_name: bolagetio_elasticsearch
+    environment:
+      - ES_HEAP_SIZE=256m
+    ports:
+      - "9200:9200"
