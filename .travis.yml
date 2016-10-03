@@ -6,7 +6,4 @@ services:
 before_script:
   - sleep 10
 before_install:
-  - curl -O https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-2.3.3.deb
-  - sudo dpkg -i --force-confnew elasticsearch-2.3.3.deb
-  - sudo /usr/share/elasticsearch/bin/plugin install analysis-icu
-  - sudo service elasticsearch restart
+  - wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-2.3.3.deb && sudo dpkg -i elasticsearch-2.3.3.deb && sudo /usr/share/elasticsearch/bin/plugin install analysis-icu && sudo service elasticsearch restart
