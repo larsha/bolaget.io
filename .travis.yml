@@ -1,7 +1,11 @@
 sudo: required
 language: node_js
+node_js:
+  - "6.5.0"
 services:
   - docker
 install:
   - docker build --force-rm -t bolagetio_elasticsearch -f Dockerfile.es .
   - docker run -d -p 9200:9200/tcp --name bolagetio_elasticsearch -e ES_HEAP_SIZE=256m bolagetio_elasticsearch
+before_script:
+  - sleep 10
