@@ -1,20 +1,5 @@
 version: '2'
 services:
-  test:
-    build:
-      context: .
-      dockerfile: Dockerfile.node
-    command: npm test
-    container_name: bolagetio_test
-    environment:
-      - NODE_ENV=development
-    volumes:
-      - .:/web
-      - /web/node_modules
-    depends_on:
-      - elastic
-    links:
-      - elastic
   worker:
     build:
       context: .
