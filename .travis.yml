@@ -1,8 +1,9 @@
 sudo: required
 services:
   - docker
-script:
+install:
   - ./build
+script:
   - docker run -d --name bolagetio_elasticsearch --memory 512m -e ES_HEAP_SIZE=256m bolagetio_elasticsearch
   - sleep 10
   - ./test
