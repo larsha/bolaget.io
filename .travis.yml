@@ -5,8 +5,9 @@ node_js:
 services:
   - docker
 install:
-  - docker build --force-rm -t bolagetio_elasticsearch -f Dockerfile.es .
-  - docker run -d -p 9200:9200/tcp --name bolagetio_elasticsearch -e ES_HEAP_SIZE=256m bolagetio_elasticsearch
+  - ./build
 before_script:
   - sleep 10
   - npm install
+script:
+  - docker run -i -d -w /web --name bolagetio_test --link bolagetio_elasticsearch bolagetio_web npm test
