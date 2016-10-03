@@ -1,9 +1,7 @@
+sudo: required
 language: node_js
-node_js:
-  - "6.5.0"
 services:
-  - elasticsearch
-before_script:
-  - sleep 10
-before_install:
-  - wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-2.3.3.deb && sudo dpkg -i elasticsearch-2.3.3.deb && sudo /usr/share/elasticsearch/bin/plugin install analysis-icu && sudo service elasticsearch restart
+  - docker
+install:
+  - docker build --force-rm -t bolagetio_elasticsearch -f Dockerfile.es .
+  - docker run -d -p 9200:9200/tcp --name bolagetio_elasticsearch -e ES_HEAP_SIZE=256m bolagetio_elasticsearch
