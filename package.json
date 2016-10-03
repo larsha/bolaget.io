@@ -13,7 +13,8 @@
     "production": "npm run build && npm start",
     "dev": "DEBUG=koa* nodemon --debug app/web.js --exec babel-node",
     "elasticDebug": "ELASTIC_LOG=trace DEBUG=koa* nodemon --debug app/web.js --exec babel-node",
-    "dev:worker": "babel-node --debug app/worker.js"
+    "dev:worker": "babel-node --debug app/worker.js",
+    "test": "ELASTIC_HOST=127.0.0.1:9200 mocha --compilers js:babel-register --recursive 'app'"
   },
   "author": "Fredrik Lack <fredrik@nody.se>",
   "url": "https://github.com/larsha/bolaget.io",
@@ -22,7 +23,11 @@
     "parser": "babel-eslint"
   },
   "devDependencies": {
+    "babel": "6.5.2",
     "babel-eslint": "6.0.5",
+    "chai": "3.5.0",
+    "chai-as-promised": "6.0.0",
+    "mocha": "3.1.0",
     "nodemon": "1.9.2",
     "standard": "7.1.2"
   },
