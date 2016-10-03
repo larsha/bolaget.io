@@ -1,5 +1,7 @@
 # bolaget.io (https://bolaget.io)
 
+[![Build Status](https://travis-ci.org/larsha/bolaget.io.svg?branch=master)](https://travis-ci.org/larsha/bolaget.io)
+
 This API has nothing to do with Systembolaget, this app consumes a large XML API from Systembolaget and transforms it into a REST JSON API. More info can be found here: http://www.systembolaget.se/api
 
 *Work in progress, feel free to add issues and make PR's. API will be considered unstable (breaking changes might occur) until release 1.0.*
