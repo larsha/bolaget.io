@@ -3,6 +3,7 @@ import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
 import Elastic from '../elastic'
 
+chai.use(chaiAsPromised)
 chai.should()
 
 describe('Elastic', () => {
@@ -13,18 +14,18 @@ describe('Elastic', () => {
   describe('indexing()', () => {
     const index = 'test'
 
-    after(async () => {
-      const promise = await Elastic.deleteIndex(index)
+    after(() => {
+      const promise = Elastic.deleteIndex(index)
       return promise.should.be.fulfilled
     })
 
-    it('delete index', async () => {
-      const promise = await Elastic.deleteIndex(index)
+    it('delete index', () => {
+      const promise = Elastic.deleteIndex(index)
       return promise.should.be.fulfilled
     })
 
-    it('create new index', async () => {
-      const promise = await Elastic.createIndex(index)
+    it('create new index', () => {
+      const promise = Elastic.createIndex(index)
       return promise.should.be.fulfilled
     })
   })

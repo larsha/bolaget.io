@@ -1,9 +1,13 @@
 sudo: required
 services:
   - docker
-install:
-  - ./build
+env:
+  DOCKER_COMPOSE_VERSION: 1.8.0
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
 script:
-  - docker run -d -p 9200:9200/tcp --name bolagetio_elasticsearch -e ES_HEAP_SIZE=256m bolagetio_elasticsearch
-  - sleep 10
-  - docker run -w /web --name bolagetio_test --link bolagetio_elasticsearch bolagetio_web npm test
+  - docker-compose build
+  - docker-compose up test
