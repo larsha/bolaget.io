@@ -10,4 +10,6 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 script:
   - docker-compose build
+  - docker-compose start elastic
+  - sleep 10
   - docker-compose up test

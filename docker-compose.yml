@@ -10,6 +10,7 @@ services:
       - NODE_ENV=development
     volumes:
       - .:/web
+      - /web/node_modules
     depends_on:
       - elastic
     links:
@@ -25,6 +26,7 @@ services:
       - ELASTIC_INDEX=bolagetio_dev
     volumes:
       - .:/web
+      - /web/node_modules
     depends_on:
       - elastic
     links:
@@ -42,6 +44,7 @@ services:
       - "3000:3000"
     volumes:
       - .:/web
+      - /web/node_modules
     depends_on:
       - elastic
     links:
