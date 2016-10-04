@@ -55,6 +55,7 @@ test () {
 
 remove () {
   ! docker rm --force $WEB
+  ! docker rm --force $WORKER
   ! docker rm --force $ELASTIC
 }
 

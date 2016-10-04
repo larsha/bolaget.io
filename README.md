@@ -22,6 +22,9 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
 - ```docker-compose run worker```
 
+**Run tests**
+
+- ```docker-compose run test```
 
 **Products**
 ----
