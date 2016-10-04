@@ -3,7 +3,7 @@ services:
   test:
     build:
       context: .
-      dockerfile: Dockerfile.node
+      dockerfile: Dockerfile.web
     command: npm test
     container_name: bolagetio_test
     volumes:
@@ -16,12 +16,9 @@ services:
   worker:
     build:
       context: .
-      dockerfile: Dockerfile.node
+      dockerfile: Dockerfile.web
     command: npm run dev:worker
     container_name: bolagetio_worker
-    environment:
-      - NODE_ENV=development
-      - ELASTIC_INDEX=bolagetio_dev
     volumes:
       - .:/web
       - /web/node_modules
@@ -32,12 +29,9 @@ services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile.node
+      dockerfile: Dockerfile.web
     command: npm run dev
     container_name: bolagetio_web
-    environment:
-      - NODE_ENV=development
-      - ELASTIC_INDEX=bolagetio_dev
     ports:
       - "3000:3000"
     volumes:
@@ -50,7 +44,7 @@ services:
   elastic:
     build:
       context: .
-      dockerfile: Dockerfile.es
+      dockerfile: Dockerfile.elasticsearch
     container_name: bolagetio_elasticsearch
     environment:
       - ES_HEAP_SIZE=256m

@@ -7,8 +7,8 @@ ELASTIC=bolagetio_elasticsearch
 WORKER=bolagetio_worker
 
 build () {
-  docker build --force-rm -t $WEB -f Dockerfile.node .
-  docker build --force-rm -t $ELASTIC -f Dockerfile.es .
+  docker build --force-rm -t $WEB -f Dockerfile.web .
+  docker build --force-rm -t $ELASTIC -f Dockerfile.elasticsearch .
 }
 
 worker () {
@@ -17,9 +17,7 @@ worker () {
     -w /web \
     --name $WORKER \
     --link $ELASTIC \
-    -e NODE_ENV=production \
-    -e ELASTIC_INDEX=bolaget_prod \
-    -e ELASTIC_LOG=error \
+    --env-file .env \
     $WEB \
     npm run worker
 }
@@ -30,9 +28,7 @@ web () {
     -w /web \
     --name $WEB \
     --link $ELASTIC \
-    -e NODE_ENV=production \
-    -e ELASTIC_INDEX=bolaget_prod \
-    -e ELASTIC_LOG=error \
+    --env-file .env \
     --restart always \
     $WEB \
     npm run production
