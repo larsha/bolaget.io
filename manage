@@ -1,0 +1,71 @@
+#!/bin/bash
+
+set -e
+
+WEB=bolagetio_web
+ELASTIC=bolagetio_elasticsearch
+
+build () {
+  docker build --force-rm -t $WEB -f Dockerfile.node .
+  docker build --force-rm -t $ELASTIC -f Dockerfile.es .
+}
+
+worker () {
+  docker run -t -i --rm \
+    -w /web \
+    --name bolagetio_worker \
+    --link $ELASTIC \
+    -e NODE_ENV=production \
+    -e ELASTIC_INDEX=bolaget_prod \
+    -e ELASTIC_LOG=error \
+    --net bolagetio_default \
+    $WEB \
+    npm run worker
+}
+
+web () {
+  ! docker rm --force $WEB
+  docker run -d \
+    -w /web \
+    --name $WEB \
+    --link $ELASTIC \
+    -e NODE_ENV=production \
+    -e ELASTIC_INDEX=bolaget_prod \
+    -e ELASTIC_LOG=error \
+    --restart always \
+    $WEB \
+    npm run production
+}
+
+elastic () {
+  ! docker rm --force $ELASTIC
+  docker run -d \
+    --name $ELASTIC \
+    --memory 512m \
+    -e ES_HEAP_SIZE=256m \
+    --restart always \
+    $ELASTIC
+}
+
+test () {
+  docker run -t -i --rm \
+    -w /web \
+    --name bolagetio_test \
+    --link $ELASTIC \
+    $WEB \
+    npm test
+}
+
+remove () {
+  ! docker rm --force $WEB
+  ! docker rm --force $ELASTIC
+}
+
+release () {
+  git checkout master
+  git pull
+  build
+  web
+}
+
+$1

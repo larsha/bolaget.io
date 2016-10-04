@@ -1,6 +1,0 @@
-#!/bin/bash
-
-set -e
-
-docker build --force-rm -t bolagetio_web -f Dockerfile.node .
-docker build --force-rm -t bolagetio_elasticsearch -f Dockerfile.es .

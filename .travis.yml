@@ -2,9 +2,8 @@ sudo: required
 services:
   - docker
 install:
-  - ./build
+  - ./manage build
 script:
-  - docker network create bolagetio_default
-  - docker run -d --name bolagetio_elasticsearch --net bolagetio_default --memory 512m -e ES_HEAP_SIZE=256m bolagetio_elasticsearch
+  - ./manage elastic
   - sleep 10
-  - ./test
+  - ./manage test
