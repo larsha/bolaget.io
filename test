@@ -5,7 +5,6 @@ set -e
 docker run -t -i --rm \
   -w /web \
   --name bolagetio_test \
-  --link bolagetio_elasticsearch \
   --net bolagetio_default \
   bolagetio_web \
   npm test

@@ -4,6 +4,7 @@ services:
 install:
   - ./build
 script:
-  - docker run -d --name bolagetio_elasticsearch --memory 512m -e ES_HEAP_SIZE=256m bolagetio_elasticsearch
+  - docker network create bolagetio_default
+  - docker run -d --name bolagetio_elasticsearch --net bolagetio_default --memory 512m -e ES_HEAP_SIZE=256m bolagetio_elasticsearch
   - sleep 10
   - ./test
