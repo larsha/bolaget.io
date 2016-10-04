@@ -68,7 +68,7 @@ export default async (ctx, next) => {
   }
 
   if (originCountry) {
-    query.bool.must.push(fuzzyMatch('originCountry', originCountry))
+    query.bool.must.push(fuzzyMatch('origin_country', originCountry))
   }
 
   if (packaging) {
@@ -76,7 +76,7 @@ export default async (ctx, next) => {
   }
 
   if (productGroup) {
-    query.bool.must.push(fuzzyMatch('productGroup', productGroup))
+    query.bool.must.push(fuzzyMatch('product_group', productGroup))
   }
 
   if (sealing) {
@@ -109,7 +109,7 @@ export default async (ctx, next) => {
     query.bool.filter = {
       multi_match: {
         query: search,
-        fields: [ 'name^2', 'additional_name', 'type^2', 'style^2', 'provider', 'producer', 'origin', 'origin_country', 'sealing', 'productGroup', 'packaging' ],
+        fields: [ 'name^2', 'additional_name', 'type^2', 'style^2', 'provider', 'producer', 'origin', 'origin_country', 'sealing', 'product_group', 'packaging' ],
         type: 'phrase',
         fuzziness: 'AUTO',
         prefix_length: 0
