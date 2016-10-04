@@ -4,6 +4,7 @@ set -e
 
 WEB=bolagetio_web
 ELASTIC=bolagetio_elasticsearch
+WORKER=bolagetio_worker
 
 build () {
   docker build --force-rm -t $WEB -f Dockerfile.node .
@@ -11,14 +12,14 @@ build () {
 }
 
 worker () {
+  ! docker rm --force $WORKER
   docker run -t -i --rm \
     -w /web \
-    --name bolagetio_worker \
+    --name $WORKER \
     --link $ELASTIC \
     -e NODE_ENV=production \
     -e ELASTIC_INDEX=bolaget_prod \
     -e ELASTIC_LOG=error \
-    --net bolagetio_default \
     $WEB \
     npm run worker
 }
