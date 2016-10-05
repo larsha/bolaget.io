@@ -17,7 +17,7 @@ worker () {
     -w /web \
     --name $WORKER \
     --link $ELASTIC \
-    --env-file .env \
+    --env-file /.env \
     $WEB \
     npm run worker
 }
@@ -28,7 +28,7 @@ web () {
     -w /web \
     --name $WEB \
     --link $ELASTIC \
-    --env-file .env \
+    --env-file /.env \
     --restart always \
     $WEB \
     npm run production
