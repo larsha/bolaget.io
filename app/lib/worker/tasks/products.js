@@ -3,7 +3,7 @@ import Request from '../../request'
 
 class Task extends Request {
   constructor () {
-    super('http://www.systembolaget.se/api/assortment/products/xml')
+    super('https://www.systembolaget.se/api/assortment/products/xml')
   }
 
   index (products, index) {

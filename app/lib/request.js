@@ -1,4 +1,4 @@
-import http from 'http'
+import https from 'https'
 import xml2js from 'xml2js'
 
 class Request {
@@ -8,7 +8,7 @@ class Request {
 
   async get () {
     return new Promise((resolve, reject) => {
-      var req = http.get(this.endpoint, res => {
+      var req = https.get(this.endpoint, res => {
         let xml = ''
         res.on('data', chunk => {
           xml += chunk

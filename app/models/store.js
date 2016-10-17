@@ -15,7 +15,7 @@ class Store extends Elastic {
         let opening = str.replace('_*', '').split(';')
         const [day, openingHours, closingHours] = opening
 
-        if ((parseInt(closingHours) - parseInt(openingHours)) <= 0) {
+        if ((parseInt(closingHours, 10) - parseInt(openingHours, 10)) <= 0) {
           return null
         }
 
