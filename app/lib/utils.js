@@ -17,7 +17,7 @@ function empty (str) {
 }
 
 function numberToBool (value) {
-  return !!parseInt(value)
+  return !!parseInt(value, 10)
 }
 
 function listToArray (list) {

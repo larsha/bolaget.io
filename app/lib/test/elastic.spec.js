@@ -6,25 +6,31 @@ import Elastic from '../elastic'
 chai.use(chaiAsPromised)
 chai.should()
 
-describe('Elastic', () => {
-  it('should exist', () => {
+describe('Elastic', function () {
+  it('should exist', function () {
     expect(Elastic).to.exist
   })
 
-  describe('indexing()', () => {
+  describe('Methods', function () {
+    it('static get index', function () {
+      expect(Elastic.index).to.be.a('string')
+    })
+  })
+
+  describe('Indexing', function () {
     const index = 'test'
 
-    after(() => {
+    after(function () {
       const promise = Elastic.deleteIndex(index)
       return promise.should.be.fulfilled
     })
 
-    it('delete index', () => {
+    it('delete index', function () {
       const promise = Elastic.deleteIndex(index)
       return promise.should.be.fulfilled
     })
 
-    it('create new index', () => {
+    it('create new index', function () {
       const promise = Elastic.createIndex(index)
       return promise.should.be.fulfilled
     })

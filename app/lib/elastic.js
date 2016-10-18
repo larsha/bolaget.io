@@ -4,14 +4,6 @@ import config from '../config'
 const client = new elasticsearch.Client({ host: config.ELASTIC_HOST, log: config.ELASTIC_LOG, requestTimeout: 60000 })
 
 class Elastic {
-  static get type () {
-    return this.name.toLowerCase()
-  }
-
-  static get index () {
-    return config.ELASTIC_INDEX
-  }
-
   static async newAlias () {
     return client.indices.getAlias({ index: '*', name: Elastic.index })
       .then(alias => {
@@ -161,6 +153,14 @@ class Elastic {
     })
 
     return client.bulk({ body: batch })
+  }
+
+  static get type () {
+    return this.name.toLowerCase()
+  }
+
+  static get index () {
+    return config.ELASTIC_INDEX
   }
 
   static get mapping () {
