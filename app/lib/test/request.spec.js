@@ -12,7 +12,7 @@ describe('Request', function () {
   })
 
   describe('Get', function () {
-    this.timeout(60000)
+    this.timeout(60 * 2 * 1000)
 
     it('products', function () {
       const request = new Request('https://www.systembolaget.se/api/assortment/products/xml')
