@@ -11,6 +11,7 @@ before_install:
 install:
   - make build_web build_elasticsearch
 script:
+  - docker-compose build
   - docker-compose start elastic
   - sleep 10
   - docker-compose run test
