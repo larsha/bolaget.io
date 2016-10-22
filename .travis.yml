@@ -9,9 +9,8 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 install:
-  - make build_web build_elasticsearch
-script:
   - docker-compose build
+script:
   - docker-compose start elastic
   - sleep 10
   - docker-compose run test
