@@ -1,0 +1,25 @@
+worker:
+  image: fredriklack/brynn:web
+  command: npm run worker
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.container.start_once: true
+web:
+  image: fredriklack/brynn:web
+  restart: always
+  expose:
+    - "3000"
+  environment:
+    NODE_ENV: production
+  labels:
+    io.rancher.container.pull_image: always
+elastic:
+  image: fredriklack/brynn:elasticsearch
+  restart: always
+  mem_limit: 1000m
+  expose:
+    - "9200"
+  environment:
+    ES_HEAP_SIZE: 512m
+  labels:
+    io.rancher.container.pull_image: always

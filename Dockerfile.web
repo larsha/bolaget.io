@@ -1,9 +1,10 @@
 FROM node:6.5.0
 
-RUN mkdir -p /web
+ADD package.json /web/package.json
+RUN cd /web && npm install
+
 COPY . /web
 
 WORKDIR /web
-RUN npm install
 
 CMD ["npm", "run", "production"]

@@ -5,7 +5,6 @@ services:
       context: .
       dockerfile: Dockerfile.web
     command: npm test
-    container_name: bolagetio_test
     volumes:
       - .:/web
       - /web/node_modules
@@ -18,7 +17,6 @@ services:
       context: .
       dockerfile: Dockerfile.web
     command: npm run dev:worker
-    container_name: bolagetio_worker
     volumes:
       - .:/web
       - /web/node_modules
@@ -31,7 +29,6 @@ services:
       context: .
       dockerfile: Dockerfile.web
     command: npm run dev
-    container_name: bolagetio_web
     ports:
       - "3000:3000"
     volumes:
@@ -45,7 +42,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.elasticsearch
-    container_name: bolagetio_elasticsearch
     environment:
       - ES_HEAP_SIZE=256m
     ports:
