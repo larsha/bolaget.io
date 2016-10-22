@@ -10,8 +10,6 @@ services:
       - /web/node_modules
     depends_on:
       - elastic
-    links:
-      - elastic
   worker:
     build:
       context: .
@@ -21,8 +19,6 @@ services:
       - .:/web
       - /web/node_modules
     depends_on:
-      - elastic
-    links:
       - elastic
   web:
     build:
@@ -35,8 +31,6 @@ services:
       - .:/web
       - /web/node_modules
     depends_on:
-      - elastic
-    links:
       - elastic
   elastic:
     build:
