@@ -16,10 +16,10 @@ web:
 elastic:
   image: fredriklack/brynn:elasticsearch
   restart: always
-  mem_limit: 1000m
+  mem_limit: 512m
   expose:
     - "9200"
   environment:
-    ES_HEAP_SIZE: 512m
+    ES_HEAP_SIZE: 256m
   labels:
     io.rancher.container.pull_image: always
