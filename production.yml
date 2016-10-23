@@ -23,3 +23,6 @@ elastic:
     ES_HEAP_SIZE: 256m
   labels:
     io.rancher.container.pull_image: always
+  volumes:
+    - /bolagetio/elasticsearch/data:/usr/share/elasticsearch/data
+  volume_driver: nfs
