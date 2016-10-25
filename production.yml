@@ -16,13 +16,13 @@ web:
 elastic:
   image: fredriklack/brynn:elasticsearch
   restart: always
-  mem_limit: 512m
+  mem_limit: 1g
   expose:
     - "9200"
   environment:
-    ES_HEAP_SIZE: 256m
+    ES_HEAP_SIZE: 512m
   labels:
     io.rancher.container.pull_image: always
+    io.rancher.scheduler.affinity:host_label: persistent_host=true
   volumes:
-    - /bolagetio/elasticsearch/data:/usr/share/elasticsearch/data
-  volume_driver: nfs
+    - /var/lib/bolagetio/esdata:/usr/share/elasticsearch/data
