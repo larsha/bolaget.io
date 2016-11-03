@@ -1,5 +1,5 @@
-web = fredriklack/brynn:web
-elasticsearch = fredriklack/brynn:elasticsearch
+web = fredriklack/brynn:bolagetio_web
+elasticsearch = fredriklack/brynn:bolagetio_elasticsearch
 
 build_web:
 	docker build -t $(web) -f Dockerfile.web .

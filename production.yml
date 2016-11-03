@@ -1,11 +1,12 @@
 worker:
-  image: fredriklack/brynn:web
+  image: fredriklack/brynn:bolagetio_web
   command: npm run worker
   labels:
     io.rancher.container.pull_image: always
-    io.rancher.container.start_once: true
+    io.rancher.container.start_once: true,
+    com.socialengine.rancher-cron.schedule: @midnight
 web:
-  image: fredriklack/brynn:web
+  image: fredriklack/brynn:bolagetio_web
   restart: always
   expose:
     - "3000"
@@ -14,7 +15,7 @@ web:
   labels:
     io.rancher.container.pull_image: always
 elastic:
-  image: fredriklack/brynn:elasticsearch
+  image: fredriklack/brynn:bolagetio_elasticsearch
   restart: always
   mem_limit: 1g
   expose:
