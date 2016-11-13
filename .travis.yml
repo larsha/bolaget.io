@@ -5,7 +5,8 @@ env:
   DOCKER_COMPOSE_VERSION: 1.8.0
 before_install:
   - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname
+    -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 install:
@@ -14,3 +15,9 @@ script:
   - docker-compose up -d elastic
   - sleep 10
   - docker-compose run test
+notifications:
+  email: false
+  slack:
+    on_success: always
+    on_failure: always
+    secure: Lmkd8eNlmrf57syUjdp4qUKOYf3OLXkPXUAcjh1tlCHeD+Yjo92m651xdp60KfsPNXtk0Vp71FA1ExSyLjzIDPBSK+yaC1muzah4OZdkDVjGa9nEg5AvzivpBxHU2CQJgtcqt9HBHqqx1KA2XcXK3bi8rRtIP4mslN7S+s7bKnWgk5fO81lpch9F1JilcvWqjSqkglxuleeI3XCELRInIobc4b5LhCX86B1ADO65vlCM4aMo004OtD3tEXr925nY8biR7x/30heEho2ZucmWk960ZOYNO+/o0O/E6LCD4yO15XXaVx72yo3bGhFABlHrQXzI8y+0xssOe87g13Q74YUlmY0v59EWyyCYYy6/PumN9ETbMUMlwX9uEe1il55rafs9I5nfhM2W8MxR+EfShnyYv0H1njMqhjpwhs0NPBl6Bp7zKnsZG+Xqy2U4QEXPtETu7IDMy2nbni4BVnUEEsca/vGiFqArPdDnOPqhKUgS7YJhNssb8sK6Nyy+9LsqShgUglricRLYj6WBwYEFFSFQhIJVFch+R1Yvp3qIyW1dZ10TtLFM5xjdVwYddax3F0U1YI6DhFnQeNoH9GL8QbjVOPT8K8Lz1yTIvhHTMBecSTONEt37HMkO09eRUjzLj08qP01K3HyLQRR2gUQA3uGYM1bLb0kMsgSoo96eiDM=
