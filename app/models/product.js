@@ -2,15 +2,15 @@ import { toNumber, numberToBool } from '../lib/utils'
 import Elastic from '../lib/elastic'
 
 class Product extends Elastic {
+  static transform (data) {
+    return data['ARTIKLAR']['ARTIKEL']
+  }
+
   static transformPrice (price) {
     return {
       amount: parseFloat(price),
       currency: 'SEK'
     }
-  }
-
-  static reduce (data) {
-    return data['ARTIKLAR']['ARTIKEL']
   }
 
   static get model () {

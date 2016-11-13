@@ -4,29 +4,16 @@ import config from '../config'
 const client = new elasticsearch.Client({ host: config.ELASTIC_HOST, log: config.ELASTIC_LOG, requestTimeout: 60000 })
 
 class Elastic {
-  static async newAlias () {
-    return client.indices.getAlias({ index: '*', name: Elastic.index })
-      .then(alias => {
-        const newIndex = new Date().getTime()
-        const oldIndex = Object.keys(alias).toString()
-
-        return { newIndex, oldIndex }
-      })
-      .catch(e => {
-        throw e
-      })
-  }
-
-  static async deleteAlias (index) {
-    return client.indices.deleteAlias({ name: Elastic.index, index })
-      .catch(() => Promise.resolve())
+  static async getIndex () {
+    return client.indices.get({ index: '*' })
   }
 
   static async putAlias (index) {
     return client.indices.putAlias({ name: Elastic.index, index })
-      .catch(e => {
-        throw e
-      })
+  }
+
+  static async deleteIndex (index) {
+    return client.indices.delete({ index })
   }
 
   static async createIndex (index) {
@@ -80,10 +67,6 @@ class Elastic {
     }
 
     return client.indices.create(options)
-  }
-
-  static async deleteIndex (index) {
-    return client.indices.delete({ index }).catch(() => Promise.resolve())
   }
 
   static async getById (id) {

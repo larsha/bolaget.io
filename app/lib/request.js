@@ -23,7 +23,7 @@ class Request {
     })
   }
 
-  parse (xml) {
+  async parse (xml) {
     let parse = xml2js.parseString
     return new Promise((resolve, reject) => {
       parse(xml, {

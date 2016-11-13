@@ -3,23 +3,36 @@ import logger from 'winston'
 import ProductsTask from './lib/worker/tasks/products'
 import StoresTask from './lib/worker/tasks/stores'
 
-const productsTask = new ProductsTask()
-const storesTask = new StoresTask()
-
-async function work () {
+async function worker () {
   try {
-    const [ products, stores ] = await Promise.all([productsTask.get(), storesTask.get()])
-    const { newIndex, oldIndex } = await Elastic.newAlias()
+    const productsTask = new ProductsTask()
+    const storesTask = new StoresTask()
 
+    const [products, stores] = await Promise.all([
+      productsTask.get(),
+      storesTask.get()
+    ])
+
+    // setup new index
+    const newIndex = new Date().getTime().toString()
     await Elastic.createIndex(newIndex)
+
     await Promise.all([
       productsTask.index(products, newIndex),
       storesTask.index(stores, newIndex)
     ])
-    await Elastic.deleteIndex(oldIndex)
-    await Elastic.deleteAlias(oldIndex)
+
     await Elastic.putAlias(newIndex)
-    logger.info(`${new Date()}: Inserted products and stores!`)
+
+    // remove old ones
+    const indexes = await Elastic.getIndex()
+    const oldIndexes = Object.keys(indexes)
+      .filter(o => o !== newIndex)
+      .join()
+
+    await Elastic.deleteIndex(oldIndexes)
+
+    logger.info(`${new Date()}: worker done!`)
     process.exit()
   } catch (e) {
     logger.info(`${new Date()}: ${e.stack}`)
@@ -27,4 +40,4 @@ async function work () {
   }
 }
 
-work()
+worker()

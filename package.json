@@ -13,10 +13,10 @@
     "production": "npm run build && npm start",
     "dev": "DEBUG=koa* nodemon --debug app/web.js --exec babel-node",
     "elasticDebug": "ELASTIC_LOG=trace DEBUG=koa* nodemon --debug app/web.js --exec babel-node",
-    "dev:worker": "babel-node --debug app/worker.js",
+    "dev:worker": "babel-node app/worker.js",
     "test": "mocha --compilers js:babel-register --recursive 'app'"
   },
-  "author": "Fredrik Lack <fredrik@nody.se>",
+  "author": "Fredrik Lack <fredrik@brynn.se>",
   "url": "https://github.com/larsha/bolaget.io",
   "license": "MIT",
   "standard": {

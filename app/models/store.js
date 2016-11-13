@@ -2,7 +2,7 @@ import { capitalize, empty, toNumber } from '../lib/utils'
 import Elastic from '../lib/elastic'
 
 class Store extends Elastic {
-  static reduce (data) {
+  static transform (data) {
     return data['BUTIKEROMBUD']['BUTIKOMBUD']
   }
 
