@@ -14,7 +14,7 @@
     "dev": "DEBUG=koa* nodemon --debug app/web.js --exec babel-node",
     "elasticDebug": "ELASTIC_LOG=trace DEBUG=koa* nodemon --debug app/web.js --exec babel-node",
     "dev:worker": "babel-node app/worker.js",
-    "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --compilers js:babel-core/register --colors app/lib/test/*.spec.js",
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec --compilers js:babel-core/register --colors app/lib/test/*.spec.js",
     "cover": "npm test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "author": "Fredrik Lack <fredrik@brynn.se>",
