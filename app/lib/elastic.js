@@ -4,8 +4,8 @@ import config from '../config'
 const client = new elasticsearch.Client({ host: config.ELASTIC_HOST, log: config.ELASTIC_LOG, requestTimeout: 60000 })
 
 class Elastic {
-  static async getIndex () {
-    return client.indices.get({ index: '*' })
+  static async getIndex (index = '*') {
+    return client.indices.get({ index })
   }
 
   static async putAlias (index) {

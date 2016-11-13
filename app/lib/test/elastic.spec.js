@@ -20,18 +20,23 @@ describe('Elastic', function () {
   describe('Indexing', function () {
     const index = 'test'
 
-    after(function () {
-      const promise = Elastic.deleteIndex(index)
+    it('create index', function () {
+      const promise = Elastic.createIndex(index)
       return promise.should.be.fulfilled
+    })
+
+    it('get index', function () {
+      const promise = Elastic.getIndex(index)
+      return promise.should.be.fulfilled
+    })
+
+    it('get index that does not exist should throw', function () {
+      const promise = Elastic.getIndex(Date.now().toString())
+      return promise.should.be.rejected
     })
 
     it('delete index', function () {
       const promise = Elastic.deleteIndex(index)
-      return promise.should.be.fulfilled
-    })
-
-    it('create new index', function () {
-      const promise = Elastic.createIndex(index)
       return promise.should.be.fulfilled
     })
   })
