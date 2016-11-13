@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ButikerOmbud xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <ButikOmbud xsi:type="StoreAssortmentViewModel">
+        <Typ>Butik</Typ>
+        <Nr>0102</Nr>
+        <Namn>Fältöversten</Namn>
+        <Address1>Karlaplan 13</Address1><Address2/>
+        <Address3>115 20</Address3>
+        <Address4>STOCKHOLM</Address4>
+        <Address5>Stockholms län</Address5>
+        <Telefon>08/662 22 89</Telefon><ButiksTyp/><Tjanster/>
+        <SokOrd>STOCKHOLM;STHLM;ÖSTERMALM;KARLAPLANSRONDELLEN;FÄLTAN</SokOrd>
+        <Oppettider>2016-11-13;00:00;00:00;;;-;_*2016-11-14;10:00;19:00;;;0;_*2016-11-15;10:00;19:00;;;0;_*2016-11-16;10:00;19:00;;;0;_*2016-11-17;10:00;19:00;;;0;_*2016-11-18;10:00;19:00;;;0;_*2016-11-19;10:00;15:00;;;0;_*2016-11-20;00:00;00:00;;;-;_*2016-11-21;10:00;19:00;;;0;_*2016-11-22;10:00;19:00;;;0;_*2016-11-23;10:00;19:00;;;0;_*2016-11-24;10:00;19:00;;;0;_*2016-11-25;10:00;19:00;;;0;_*2016-11-26;10:00;15:00;;;0;_*2016-11-27;00:00;00:00;;;-;_*2016-11-28;10:00;19:00;;;0;</Oppettider>
+        <RT90x>6582011</RT90x>
+        <RT90y>1630064</RT90y>
+    </ButikOmbud>
+    <ButikOmbud xsi:type="StoreAssortmentViewModel">
+        <Typ>Butik</Typ>
+        <Nr>0104</Nr><Namn/>
+        <Address1>Nybrogatan 47</Address1><Address2/>
+        <Address3>114 39</Address3>
+        <Address4>STOCKHOLM</Address4>
+        <Address5>Stockholms län</Address5>
+        <Telefon>08/662 50 16</Telefon><ButiksTyp/><Tjanster/>
+        <SokOrd>STOCKHOLM;STHLM;ÖSTERMALM</SokOrd>
+        <Oppettider>2016-11-13;00:00;00:00;;;-;_*2016-11-14;10:00;18:00;;;0;_*2016-11-15;10:00;18:00;;;0;_*2016-11-16;10:00;18:00;;;0;_*2016-11-17;10:00;19:00;;;0;_*2016-11-18;10:00;19:00;;;0;_*2016-11-19;10:00;15:00;;;0;_*2016-11-20;00:00;00:00;;;-;_*2016-11-21;10:00;18:00;;;0;_*2016-11-22;10:00;18:00;;;0;_*2016-11-23;10:00;18:00;;;0;_*2016-11-24;10:00;19:00;;;0;_*2016-11-25;10:00;19:00;;;0;_*2016-11-26;10:00;15:00;;;0;_*2016-11-27;00:00;00:00;;;-;_*2016-11-28;10:00;18:00;;;0;</Oppettider>
+        <RT90x>6581787</RT90x>
+        <RT90y>1629382</RT90y>
+    </ButikOmbud>
+    <ButikOmbud xsi:type="StoreAssortmentViewModel">
+        <Typ>Butik</Typ>
+        <Nr>0106</Nr>
+        <Namn>Garnisonen</Namn>
+        <Address1>Karlavägen 100 A</Address1><Address2/>
+        <Address3>115 26</Address3>
+        <Address4>STOCKHOLM</Address4>
+        <Address5>Stockholms län</Address5>
+        <Telefon>08/662 64 85</Telefon><ButiksTyp/><Tjanster/>
+        <SokOrd>STOCKHOLM;STHLM;ÖSTERMALM</SokOrd>
+        <Oppettider>2016-11-13;00:00;00:00;;;-;_*2016-11-14;10:00;18:00;;;0;_*2016-11-15;10:00;18:00;;;0;_*2016-11-16;10:00;18:00;;;0;_*2016-11-17;10:00;19:00;;;0;_*2016-11-18;10:00;19:00;;;0;_*2016-11-19;10:00;15:00;;;0;_*2016-11-20;00:00;00:00;;;-;_*2016-11-21;10:00;18:00;;;0;_*2016-11-22;10:00;18:00;;;0;_*2016-11-23;10:00;18:00;;;0;_*2016-11-24;10:00;19:00;;;0;_*2016-11-25;10:00;19:00;;;0;_*2016-11-26;10:00;15:00;;;0;_*2016-11-27;00:00;00:00;;;-;_*2016-11-28;10:00;18:00;;;0;</Oppettider>
+        <RT90x>6581720</RT90x>
+        <RT90y>1630377</RT90y>
+    </ButikOmbud>
+    <ButikOmbud xsi:type="StoreAssortmentViewModel">
+        <Typ>Butik</Typ>
+        <Nr>0110</Nr><Namn/>
+        <Address1>Hötorgshallen</Address1><Address2/>
+        <Address3>111 57</Address3>
+        <Address4>STOCKHOLM</Address4>
+        <Address5>Stockholms län</Address5>
+        <Telefon>08/56849241</Telefon><ButiksTyp/><Tjanster/>
+        <SokOrd>STOCKHOLM;STHLM;NORRMALM;KONSERTHUSET;HÖTORGET;HÖTORGSBUTIK</SokOrd>
+        <Oppettider>2016-11-13;00:00;00:00;;;-;_*2016-11-14;10:00;18:00;;;0;_*2016-11-15;10:00;18:00;;;0;_*2016-11-16;10:00;18:00;;;0;_*2016-11-17;10:00;18:00;;;0;_*2016-11-18;10:00;19:00;;;0;_*2016-11-19;10:00;15:00;;;0;_*2016-11-20;00:00;00:00;;;-;_*2016-11-21;10:00;18:00;;;0;_*2016-11-22;10:00;18:00;;;0;_*2016-11-23;10:00;18:00;;;0;_*2016-11-24;10:00;18:00;;;0;_*2016-11-25;10:00;19:00;;;0;_*2016-11-26;10:00;15:00;;;0;_*2016-11-27;00:00;00:00;;;-;_*2016-11-28;10:00;18:00;;;0;</Oppettider>
+        <RT90x>6581443.113</RT90x>
+        <RT90y>1628483.985</RT90y>
+    </ButikOmbud>
+    <ButikOmbud xsi:type="StoreAssortmentViewModel">
+        <Typ>Butik</Typ>
+        <Nr>0113</Nr><Namn/>
+        <Address1>Klarabergsgatan 62</Address1><Address2/>
+        <Address3>111 21</Address3>
+        <Address4>STOCKHOLM</Address4>
+        <Address5>Stockholms län</Address5>
+        <Telefon>08/21 47 44</Telefon><ButiksTyp/><Tjanster/>
+        <SokOrd>STOCKHOLM;STHLM;NORRMALM</SokOrd>
+        <Oppettider>2016-11-13;00:00;00:00;;;-;_*2016-11-14;10:00;20:00;;;0;_*2016-11-15;10:00;20:00;;;0;_*2016-11-16;10:00;20:00;;;0;_*2016-11-17;10:00;20:00;;;0;_*2016-11-18;10:00;20:00;;;0;_*2016-11-19;10:00;15:00;;;0;_*2016-11-20;00:00;00:00;;;-;_*2016-11-21;10:00;20:00;;;0;_*2016-11-22;10:00;20:00;;;0;_*2016-11-23;10:00;20:00;;;0;_*2016-11-24;10:00;20:00;;;0;_*2016-11-25;10:00;20:00;;;0;_*2016-11-26;10:00;15:00;;;0;_*2016-11-27;00:00;00:00;;;-;_*2016-11-28;10:00;20:00;;;0;</Oppettider>
+        <RT90x>6581151</RT90x>
+        <RT90y>1628300</RT90y>
+    </ButikOmbud>
+</ButikerOmbud>

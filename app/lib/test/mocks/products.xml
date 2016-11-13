@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<artiklar xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <artikel>
+        <nr>101</nr>
+        <Artikelid>1</Artikelid>
+        <Varnummer>1</Varnummer>
+        <Namn>Renat</Namn><Namn2/>
+        <Prisinklmoms>205.00</Prisinklmoms>
+        <Volymiml>700.00</Volymiml>
+        <PrisPerLiter>292.86</PrisPerLiter>
+        <Saljstart>1993-10-01</Saljstart>
+        <Utgått>0</Utgått>
+        <Varugrupp>Okryddad sprit</Varugrupp><Typ/><Stil/>
+        <Forpackning>Flaska</Forpackning><Forslutning/><Ursprung/>
+        <Ursprunglandnamn>Sverige</Ursprunglandnamn>
+        <Producent>Pernod Ricard</Producent>
+        <Leverantor>Pernod Ricard Sweden AB</Leverantor><Argang/><Provadargang/>
+        <Alkoholhalt>37.50%</Alkoholhalt>
+        <Sortiment>FS</Sortiment>
+        <SortimentText>Ordinarie sortiment</SortimentText>
+        <Ekologisk>0</Ekologisk>
+        <Etiskt>0</Etiskt>
+        <Koscher>0</Koscher>
+        <RavarorBeskrivning>Säd.</RavarorBeskrivning>
+    </artikel>
+    <artikel>
+        <nr>7599701</nr>
+        <Artikelid>1000005</Artikelid>
+        <Varnummer>75997</Varnummer>
+        <Namn>Motzenbäcker Marie</Namn>
+        <Namn2>Riesling Weissburgunder Spätlese Trocken</Namn2>
+        <Prisinklmoms>139.00</Prisinklmoms>
+        <Volymiml>750.00</Volymiml>
+        <PrisPerLiter>185.33</PrisPerLiter>
+        <Saljstart>2015-09-01</Saljstart>
+        <Utgått>0</Utgått>
+        <Varugrupp>Vitt vin</Varugrupp><Typ/><Stil/>
+        <Forpackning>Flaska</Forpackning><Forslutning/>
+        <Ursprung>Pfalz</Ursprung>
+        <Ursprunglandnamn>Tyskland</Ursprunglandnamn>
+        <Producent>Menger-Krug</Producent>
+        <Leverantor>Terrific Wines AB</Leverantor>
+        <Argang>2014</Argang><Provadargang/>
+        <Alkoholhalt>12.00%</Alkoholhalt>
+        <Sortiment>BS</Sortiment>
+        <SortimentText>Övrigt sortiment</SortimentText>
+        <Ekologisk>0</Ekologisk>
+        <Etiskt>0</Etiskt>
+        <Koscher>0</Koscher>
+    </artikel>
+    <artikel>
+        <nr>7548901</nr>
+        <Artikelid>1000008</Artikelid>
+        <Varnummer>75489</Varnummer>
+        <Namn>Valtellina Superiore</Namn>
+        <Namn2>Sassella Riserva</Namn2>
+        <Prisinklmoms>310.00</Prisinklmoms>
+        <Volymiml>750.00</Volymiml>
+        <PrisPerLiter>413.33</PrisPerLiter>
+        <Saljstart>2015-09-01</Saljstart>
+        <Utgått>0</Utgått>
+        <Varugrupp>Rött vin</Varugrupp><Typ/><Stil/>
+        <Forpackning>Flaska</Forpackning><Forslutning/>
+        <Ursprung>Lombardiet</Ursprung>
+        <Ursprunglandnamn>Italien</Ursprunglandnamn>
+        <Producent>Arpepe</Producent>
+        <Leverantor>Vinoliv Import AB</Leverantor>
+        <Argang>2011</Argang><Provadargang/>
+        <Alkoholhalt>13.50%</Alkoholhalt>
+        <Sortiment>BS</Sortiment>
+        <SortimentText>Övrigt sortiment</SortimentText>
+        <Ekologisk>0</Ekologisk>
+        <Etiskt>0</Etiskt>
+        <Koscher>0</Koscher>
+    </artikel>
+    <artikel>
+        <nr>7774701</nr>
+        <Artikelid>1000080</Artikelid>
+        <Varnummer>77747</Varnummer>
+        <Namn>Canella</Namn>
+        <Namn2>Valdobbiadene Prosecco Superiore Extra Dry</Namn2>
+        <Prisinklmoms>145.00</Prisinklmoms>
+        <Volymiml>750.00</Volymiml>
+        <PrisPerLiter>193.33</PrisPerLiter>
+        <Saljstart>2015-09-01</Saljstart>
+        <Utgått>0</Utgått>
+        <Varugrupp>Mousserande vin</Varugrupp>
+        <Typ>Vitt Torrt</Typ><Stil/>
+        <Forpackning>Flaska</Forpackning><Forslutning/>
+        <Ursprung>Venetien</Ursprung>
+        <Ursprunglandnamn>Italien</Ursprunglandnamn>
+        <Producent>Canella SpA</Producent>
+        <Leverantor>Fine Brands Sweden AB</Leverantor>
+        <Argang>2014</Argang><Provadargang/>
+        <Alkoholhalt>11.00%</Alkoholhalt>
+        <Sortiment>BS</Sortiment>
+        <SortimentText>Övrigt sortiment</SortimentText>
+        <Ekologisk>0</Ekologisk>
+        <Etiskt>0</Etiskt>
+        <Koscher>0</Koscher>
+    </artikel>
+    <artikel>
+        <nr>7563901</nr>
+        <Artikelid>1000083</Artikelid>
+        <Varnummer>75639</Varnummer>
+        <Namn>Viña Soledad</Namn>
+        <Namn2>Tête de Cuvée Reserva</Namn2>
+        <Prisinklmoms>149.00</Prisinklmoms>
+        <Volymiml>750.00</Volymiml>
+        <PrisPerLiter>198.67</PrisPerLiter>
+        <Saljstart>2015-09-01</Saljstart>
+        <Utgått>0</Utgått>
+        <Varugrupp>Vitt vin</Varugrupp>
+        <Typ>Fylligt &amp; Smakrikt</Typ><Stil/>
+        <Forpackning>Flaska</Forpackning>
+        <Forslutning>Naturkork</Forslutning>
+        <Ursprung>Rioja</Ursprung>
+        <Ursprunglandnamn>Spanien</Ursprunglandnamn>
+        <Producent>Bodegas Franco-Españolas</Producent>
+        <Leverantor>Terrific Wines AB</Leverantor>
+        <Argang>2005</Argang><Provadargang/>
+        <Alkoholhalt>12.00%</Alkoholhalt>
+        <Sortiment>BS</Sortiment>
+        <SortimentText>Övrigt sortiment</SortimentText>
+        <Ekologisk>0</Ekologisk>
+        <Etiskt>0</Etiskt>
+        <Koscher>0</Koscher>
+        <RavarorBeskrivning>Viura.</RavarorBeskrivning>
+    </artikel>
+    <artikel>
+        <nr>7521801</nr>
+        <Artikelid>1000131</Artikelid>
+        <Varnummer>75218</Varnummer>
+        <Namn>Purcari</Namn>
+        <Namn2>Freedom Blend</Namn2>
+        <Prisinklmoms>166.00</Prisinklmoms>
+        <Volymiml>750.00</Volymiml>
+        <PrisPerLiter>221.33</PrisPerLiter>
+        <Saljstart>2015-09-01</Saljstart>
+        <Utgått>0</Utgått>
+        <Varugrupp>Rött vin</Varugrupp><Typ/><Stil/>
+        <Forpackning>Flaska</Forpackning><Forslutning/><Ursprung/>
+        <Ursprunglandnamn>Moldavien</Ursprunglandnamn>
+        <Producent>Purcari</Producent>
+        <Leverantor>High Coast Wine AB</Leverantor>
+        <Argang>2014</Argang><Provadargang/>
+        <Alkoholhalt>13.50%</Alkoholhalt>
+        <Sortiment>BS</Sortiment>
+        <SortimentText>Övrigt sortiment</SortimentText>
+        <Ekologisk>0</Ekologisk>
+        <Etiskt>0</Etiskt>
+        <Koscher>0</Koscher>
+    </artikel>
+    <artikel>
+        <nr>8936603</nr>
+        <Artikelid>1000155</Artikelid>
+        <Varnummer>89366</Varnummer>
+        <Namn>Midas Golden Pilsner</Namn><Namn2/>
+        <Prisinklmoms>26.90</Prisinklmoms>
+        <Volymiml>330.00</Volymiml>
+        <PrisPerLiter>81.52</PrisPerLiter>
+        <Saljstart>2015-09-01</Saljstart>
+        <Utgått>0</Utgått>
+        <Varugrupp>Öl</Varugrupp>
+        <Typ>Ljus lager</Typ>
+        <Stil>Modern stil</Stil>
+        <Forpackning>Flaska</Forpackning><Forslutning/><Ursprung/>
+        <Ursprunglandnamn>Sverige</Ursprunglandnamn>
+        <Producent>Imperiebryggeriet AB</Producent>
+        <Leverantor>Imperiebryggeriet AB</Leverantor><Argang/><Provadargang/>
+        <Alkoholhalt>4.90%</Alkoholhalt>
+        <Sortiment>BS</Sortiment>
+        <SortimentText>Övrigt sortiment</SortimentText>
+        <Ekologisk>0</Ekologisk>
+        <Etiskt>0</Etiskt>
+        <Koscher>0</Koscher>
+    </artikel>
+    <artikel>
+        <nr>8962603</nr>
+        <Artikelid>1000158</Artikelid>
+        <Varnummer>89626</Varnummer>
+        <Namn>Barbarossa</Namn>
+        <Namn2>Imperial Red Ale</Namn2>
+        <Prisinklmoms>35.90</Prisinklmoms>
+        <Volymiml>330.00</Volymiml>
+        <PrisPerLiter>108.79</PrisPerLiter>
+        <Saljstart>2015-09-01</Saljstart>
+        <Utgått>0</Utgått>
+        <Varugrupp>Öl</Varugrupp>
+        <Typ>Ale brittisk-amerikansk stil</Typ>
+        <Stil>Strong ale</Stil>
+        <Forpackning>Flaska</Forpackning><Forslutning/><Ursprung/>
+        <Ursprunglandnamn>Sverige</Ursprunglandnamn>
+        <Producent>Imperiebryggeriet AB</Producent>
+        <Leverantor>Imperiebryggeriet AB</Leverantor>
+        <Argang>2015</Argang><Provadargang/>
+        <Alkoholhalt>7.50%</Alkoholhalt>
+        <Sortiment>BS</Sortiment>
+        <SortimentText>Övrigt sortiment</SortimentText>
+        <Ekologisk>0</Ekologisk>
+        <Etiskt>0</Etiskt>
+        <Koscher>0</Koscher>
+    </artikel>
+    <artikel>
+        <nr>7785701</nr>
+        <Artikelid>1000178</Artikelid>
+        <Varnummer>77857</Varnummer>
+        <Namn>Canella</Namn>
+        <Namn2>Bellini</Namn2>
+        <Prisinklmoms>132.00</Prisinklmoms>
+        <Volymiml>750.00</Volymiml>
+        <PrisPerLiter>176.00</PrisPerLiter>
+        <Saljstart>2015-09-01</Saljstart>
+        <Utgått>0</Utgått>
+        <Varugrupp>Mousserande vin</Varugrupp>
+        <Typ>Övrigt</Typ><Stil/>
+        <Forpackning>Flaska</Forpackning><Forslutning/><Ursprung/>
+        <Ursprunglandnamn>Italien</Ursprunglandnamn>
+        <Producent>Canella SpA</Producent>
+        <Leverantor>Fine Brands Sweden AB</Leverantor><Argang/><Provadargang/>
+        <Alkoholhalt>5.00%</Alkoholhalt>
+        <Sortiment>BS</Sortiment>
+        <SortimentText>Övrigt sortiment</SortimentText>
+        <Ekologisk>0</Ekologisk>
+        <Etiskt>0</Etiskt>
+        <Koscher>0</Koscher>
+    </artikel>
+</artiklar>
