@@ -14,8 +14,8 @@
     "dev": "DEBUG=koa* nodemon --debug app/web.js --exec babel-node",
     "elasticDebug": "ELASTIC_LOG=trace DEBUG=koa* nodemon --debug app/web.js --exec babel-node",
     "dev:worker": "babel-node app/worker.js",
-    "dev:test": "mocha --compilers js:babel-register --recursive 'app'",
-    "test": "YOURPACKAGE_COVERAGE=1 mocha --compilers js:babel-register --recursive 'app' -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js"
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --compilers js:babel-core/register --colors --reporter dot app/lib/test/*.spec.js -R spec",
+    "cover": "npm test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "author": "Fredrik Lack <fredrik@brynn.se>",
   "url": "https://github.com/larsha/bolaget.io",
@@ -49,6 +49,7 @@
     "winston": "2.2.0",
     "xml2js": "0.4.16",
     "coveralls": "2.11.15",
-    "mocha-lcov-reporter": "1.2.0"
+    "mocha-lcov-reporter": "1.2.0",
+    "istanbul": "1.0.0-alpha.2"
   }
 }

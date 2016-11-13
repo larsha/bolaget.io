@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.web
-    command: npm run dev:test
+    command: npm test
     volumes:
       - .:/web
       - /web/node_modules
