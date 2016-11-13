@@ -14,7 +14,8 @@
     "dev": "DEBUG=koa* nodemon --debug app/web.js --exec babel-node",
     "elasticDebug": "ELASTIC_LOG=trace DEBUG=koa* nodemon --debug app/web.js --exec babel-node",
     "dev:worker": "babel-node app/worker.js",
-    "test": "mocha --compilers js:babel-register --recursive 'app'"
+    "dev:test": "mocha --compilers js:babel-register --recursive 'app'",
+    "test": "YOURPACKAGE_COVERAGE=1 mocha --compilers js:babel-register --recursive 'app' -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js"
   },
   "author": "Fredrik Lack <fredrik@brynn.se>",
   "url": "https://github.com/larsha/bolaget.io",
@@ -35,6 +36,7 @@
     "babel-cli": "6.10.1",
     "babel-plugin-transform-async-to-generator": "6.8.0",
     "babel-plugin-transform-es2015-modules-commonjs": "6.8.0",
+    "coveralls": "2.11.15",
     "elasticsearch": "11.0.1",
     "handlebars": "4.0.5",
     "koa": "2.0.0",
@@ -42,8 +44,11 @@
     "koa-logger": "2.0.0",
     "koa-simple-router": "0.2.0",
     "koa-views": "5.0.2",
+    "mocha-lcov-reporter": "1.2.0",
     "nock": "9.0.2",
     "winston": "2.2.0",
-    "xml2js": "0.4.16"
+    "xml2js": "0.4.16",
+    "coveralls": "2.11.15",
+    "mocha-lcov-reporter": "1.2.0"
   }
 }
