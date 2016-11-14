@@ -1,4 +1,4 @@
-import { expect, assert } from 'chai'
+import { expect } from 'chai'
 import chai from 'chai'
 import nock from 'nock'
 import chaiAsPromised from 'chai-as-promised'

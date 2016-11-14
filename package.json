@@ -20,7 +20,13 @@
   "url": "https://github.com/larsha/bolaget.io",
   "license": "MIT",
   "standard": {
-    "parser": "babel-eslint"
+    "parser": "babel-eslint",
+    "globals": [
+      "describe",
+      "it",
+      "before",
+      "after"
+    ]
   },
   "devDependencies": {
     "babel": "6.5.2",
