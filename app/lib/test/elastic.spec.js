@@ -5,6 +5,9 @@ import chaiAsPromised from 'chai-as-promised'
 import Elastic from '../elastic'
 import ProductsTask from '../worker/tasks/products'
 import StoresTask from '../worker/tasks/stores'
+import Product from '../../models/product'
+import Store from '../../models/store'
+import { fuzzyMatch } from '../utils'
 
 chai.use(chaiAsPromised)
 chai.should()
@@ -14,48 +17,47 @@ describe('Elastic', function () {
     expect(Elastic).to.exist
   })
 
+  it('index should match', function () {
+    expect(Elastic.index).to.equal('bolaget_test')
+  })
+
   describe('Methods', function () {
     it('static method index exists and has a value', function () {
       expect(Elastic.index).to.be.a('string')
     })
 
     it('static method type exists and has a value', function () {
-      expect(Elastic.type).to.be.a('string')
+      expect(Product.type).to.equal('product')
+      expect(Store.type).to.equal('store')
     })
   })
 
-  describe('Indexing', function () {
-    const newIndex = new Date().getTime().toString()
+  describe('Indices', function () {
+    before(function () {
+      this.index = Date.now().toString()
+    })
+
+    after(function () {
+      return Elastic.deleteIndex(this.index).should.be.fulfilled
+    })
 
     it('create index', function () {
-      const promise = Elastic.createIndex(newIndex)
-      return promise.should.be.fulfilled
+      return Elastic.createIndex(this.index).should.be.fulfilled
+    })
+
+    it('put alias', function () {
+      return Elastic.putAlias(this.index).should.be.fulfilled
     })
 
     it('get index', function () {
-      const promise = Elastic.getIndex(newIndex)
-      return promise.should.be.fulfilled
+      return Elastic.getIndex(this.index).should.be.fulfilled
     })
 
     it('get index that does not exist should throw', function () {
-      const promise = Elastic.getIndex(Date.now().toString())
-      return promise.should.be.rejected
-    })
-
-    it('delete index', function () {
-      const promise = Elastic.deleteIndex(newIndex)
-      return promise.should.be.fulfilled
+      return Elastic.getIndex(Date.now().toString()).should.be.rejected
     })
 
     describe('Entities', function () {
-      before(function () {
-        return Elastic.createIndex(newIndex).should.be.fulfilled
-      })
-
-      after(function () {
-        return Elastic.deleteIndex(newIndex).should.be.fulfilled
-      })
-
       it('get and index products', function () {
         const productsTask = new ProductsTask()
 
@@ -65,7 +67,7 @@ describe('Elastic', function () {
           .replyWithFile(200, `${__dirname}/mocks/products.xml`)
 
         return productsTask.get()
-          .then(products => productsTask.index(products, newIndex))
+          .then(products => productsTask.index(products, this.index))
           .then(data => {
             expect(data).to.be.an('object')
             expect(data.errors).to.be.false
@@ -83,13 +85,87 @@ describe('Elastic', function () {
           .replyWithFile(200, `${__dirname}/mocks/stores.xml`)
 
         return storesTask.get()
-          .then(stores => storesTask.index(stores, newIndex))
+          .then(stores => storesTask.index(stores, this.index))
           .then(data => {
             expect(data).to.be.an('object')
             expect(data.errors).to.be.false
             expect(data.items).to.be.instanceof(Array)
           })
           .should.be.fulfilled
+      })
+
+      describe('Store', function () {
+        it('#getById()', function () {
+          return Store.getById('0102')
+            .then(data => {
+              expect(data).to.be.an('object')
+              expect(data.nr).to.be.a('string')
+              expect(data.nr).to.equal('0102')
+            })
+            .should.be.fulfilled
+        })
+
+        it('#find()', function (done) {
+          let query = {
+            bool: {
+              must: [
+                fuzzyMatch('city', 'Stockho')
+              ]
+            }
+          }
+
+          let sort = { 'city.sort': { 'order': 'asc' } }
+
+          // ES search API is not realtime
+          // Takes some time to sync, using setTimeout here.
+          setTimeout(() => {
+            Store.find(query, 0, 1, sort)
+              .then(({ result, count }) => {
+                expect(result).to.be.instanceof(Array)
+                expect(count).to.be.above(0)
+                expect(result[0]).to.be.an('object')
+                expect(result[0].city).to.equal('Stockholm')
+              })
+              .should.be.fulfilled.and.notify(done)
+          }, 1000)
+        })
+      })
+
+      describe('Product', function () {
+        it('#getById()', function () {
+          return Product.getById('7599701')
+            .then(data => {
+              expect(data).to.be.an('object')
+              expect(data.nr).to.be.a('string')
+              expect(data.nr).to.equal('7599701')
+            })
+            .should.be.fulfilled
+        })
+
+        it('#find()', function (done) {
+          let query = {
+            bool: {
+              must: [
+                fuzzyMatch('name', 'Motzenbäcker')
+              ]
+            }
+          }
+
+          let sort = { 'name.sort': { 'order': 'asc' } }
+
+          // ES search API is not realtime
+          // Takes some time to sync, using setTimeout here.
+          setTimeout(() => {
+            Product.find(query, 0, 1, sort)
+              .then(({ result, count }) => {
+                expect(result).to.be.instanceof(Array)
+                expect(count).to.be.above(0)
+                expect(result[0]).to.be.an('object')
+                expect(result[0].name).to.equal('Motzenbäcker Marie')
+              })
+              .should.be.fulfilled.and.notify(done)
+          }, 1000)
+        })
       })
     })
   })

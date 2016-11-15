@@ -20,11 +20,11 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
 **Start worker**
 
-- ```docker-compose run worker```
+- ```docker-compose run --rm worker```
 
 **Run tests**
 
-- ```docker-compose run test```
+- ```docker-compose run --rm test```
 
 **Products**
 ----

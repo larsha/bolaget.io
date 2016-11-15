@@ -74,39 +74,35 @@ class Elastic {
       index: Elastic.index,
       type: this.type,
       id
-    }).then(result => {
-      return result._source
-    })
-    .catch(e => {
-      throw e
-    })
+    }).then(result => result._source)
   }
 
-  static async find (query, offset, limit, sort) {
+  static async find (query = null, offset = 0, limit = 1, sort = null) {
     let filter = {
       index: Elastic.index,
       type: this.type,
       body: {
         from: offset,
         size: limit,
-        sort
+        query: {
+          match_all: {}
+        }
       }
     }
 
-    if (Object.keys(query).length) {
-      Object.assign(filter.body, { query })
+    if (sort) {
+      Object.assign(filter.body, { sort })
+    }
+
+    if (query) {
+      filter.body.query = query
     }
 
     return client.search(filter)
       .then(data => {
-        const result = data.hits.hits.map(obj => {
-          return obj._source
-        })
-
-        return { result, count: data.hits.total }
-      })
-      .catch(e => {
-        throw e
+        const result = data.hits.hits.map(obj => obj._source)
+        const count = data.hits.total
+        return { result, count }
       })
   }
 

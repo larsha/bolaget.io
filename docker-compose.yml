@@ -5,6 +5,8 @@ services:
       context: .
       dockerfile: Dockerfile.web
     command: npm test
+    environment:
+      - ELASTIC_INDEX=bolaget_test
     volumes:
       - .:/web
       - /web/node_modules

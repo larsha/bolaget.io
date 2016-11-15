@@ -7,6 +7,16 @@ import views from 'koa-views'
 import routes from './routes'
 import config from './config'
 
+// 404
+const error404 = {
+  error: 'Move along, nothing to see here!'
+}
+
+// 500
+const error500 = {
+  error: 'Ouch, an ugly error has occured!'
+}
+
 const app = new Koa()
 
 // Logs information
@@ -28,7 +38,7 @@ app.use(async (ctx, next) => {
     await next()
   } catch (err) {
     ctx.status = err.status || 500
-    ctx.body = { error: err.message }
+    ctx.body = err.status === 404 ? error404 : error500
   }
 })
 
@@ -38,9 +48,7 @@ app.use(routes())
 // 404
 app.use(async ctx => {
   ctx.status = 404
-  ctx.body = {
-    error: 'Move Along, Nothing to See Here!'
-  }
+  ctx.body = error404
 })
 
 app.listen(config.PORT)
