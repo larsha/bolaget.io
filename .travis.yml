@@ -3,6 +3,8 @@ services:
   - docker
 env:
   DOCKER_COMPOSE_VERSION: 1.8.0
+  COVERALLS_GIT_COMMIT: ${TRAVIS_COMMIT}
+  COVERALLS_REPO_TOKEN: ${COVERALLS_REPO_TOKEN}
 before_install:
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname
@@ -14,7 +16,7 @@ install:
 script:
   - docker-compose up -d elastic
   - sleep 10
-  - docker-compose run -e COVERALLS_REPO_TOKEN=${COVERALLS_REPO_TOKEN} test npm run cover
+  - docker-compose run test npm run cover
 notifications:
   email: false
   slack:
