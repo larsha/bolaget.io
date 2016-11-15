@@ -3,7 +3,6 @@ services:
   - docker
 env:
   DOCKER_COMPOSE_VERSION: 1.8.0
-  COVERALLS_SERVICE_NAME: travis-ci
 before_install:
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname
@@ -15,7 +14,7 @@ install:
 script:
   - docker-compose up -d elastic
   - sleep 10
-  - docker-compose run -e COVERALLS_REPO_TOKEN=${COVERALLS_REPO_TOKEN} test npm run cover
+  - docker-compose run -e COVERALLS_REPO_TOKEN=${COVERALLS_REPO_TOKEN} -e CI_NAME=docker -e CI_BUILD_NUMBER=${TRAVIS_BUILD_NUMBER} -e CI_BRANCH=${TRAVIS_BRANCH} -e CI_PULL_REQUEST=${TRAVIS_PULL_REQUEST} test npm run cover
 notifications:
   email: false
   slack:
