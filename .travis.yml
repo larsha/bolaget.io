@@ -14,7 +14,7 @@ install:
 script:
   - docker-compose up -d elastic
   - sleep 10
-  - docker-compose run -e COVERALLS_REPO_TOKEN=${COVERALLS_REPO_TOKEN} -e CI_NAME=docker -e CI_BUILD_NUMBER=${TRAVIS_BUILD_NUMBER} -e CI_BRANCH=${TRAVIS_BRANCH} -e CI_PULL_REQUEST=${TRAVIS_PULL_REQUEST} test npm run cover
+  - docker-compose run test
 notifications:
   email: false
   slack:
