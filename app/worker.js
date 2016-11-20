@@ -3,7 +3,7 @@ import logger from 'winston'
 import ProductsTask from './lib/worker/tasks/products'
 import StoresTask from './lib/worker/tasks/stores'
 
-async function worker () {
+async function worker (i = 0) {
   try {
     const productsTask = new ProductsTask()
     const storesTask = new StoresTask()
@@ -35,8 +35,16 @@ async function worker () {
     logger.info(`${new Date()}: worker done!`)
     process.exit()
   } catch (e) {
-    logger.info(`${new Date()}: ${e.stack}`)
-    process.exit(1)
+    if (i < 5) {
+      i++
+      setTimeout(() => {
+        logger.info(`retrying...`)
+        worker(i)
+      }, 10000)
+    } else {
+      logger.info(`${new Date()}: ${e.stack}`)
+      process.exit(1)
+    }
   }
 }
 
