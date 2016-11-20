@@ -6,39 +6,13 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
 *Work in progress, feel free to add issues and make PR's. API will be considered unstable (breaking changes might occur) until release 1.0.*
 
-**Development environment**
-----
-  Using Docker and Docker Compose (https://www.docker.com/)
-
-**Build**
-
-- ```docker-compose build```
-
-**Start**
-
-- ```docker-compose up web```
-
-**Start worker**
-
-- ```docker-compose run --rm worker```
-
-**Run tests**
-
-- ```docker-compose run --rm test```
-
 **Products**
-----
-  Returns json data for products.
+---
 
-* **URL**
-
-  /products
-
-
-* **Method:**
-
-  `GET`
-
+```http
+GET /products
+Host: bolaget.io
+```
 
 *  **URL Params**
 
@@ -104,31 +78,12 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
 
 
-**Show Product**
+**Show product**
 ----
-  Returns json data about a single product.
-
-* **URL**
-
-  /products/:nr
-
-
-* **Method:**
-
-  `GET`
-
-
-*  **URL Params**
-
-   ***Required:***
-
-   `nr=[number]`
-
-
-* **Data Params**
-
-  None
-
+```http
+GET /products/:nr
+Host: bolaget.io
+```
 
 * **Success Response:**
 
@@ -151,17 +106,10 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
 **Stores**
 ----
-  Returns json data for stores.
-
-* **URL**
-
-  /stores
-
-
-* **Method:**
-
-  `GET`
-
+```http
+GET /stores
+Host: bolaget.io
+```
 
 *  **URL Params**
 
@@ -207,31 +155,12 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
     **Content:** `{ error : "Not Found" }`
 
 
-**Show Store**
+**Show store**
 ----
-  Returns json data about a single store.
-
-* **URL**
-
-  /stores/:nr
-
-
-* **Method:**
-
-  `GET`
-
-
-*  **URL Params**
-
-   ***Required:***
-
-   `nr=[number]`
-
-
-* **Data Params**
-
-  None
-
+```http
+GET /stores/:nr
+Host: bolaget.io
+```
 
 * **Success Response:**
 
@@ -248,3 +177,24 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 
   * **Code:** 404 NOT FOUND <br />
     **Content:** `{ error : "Not Found" }`
+
+
+**Development environment**
+----
+  Using Docker and Docker Compose (https://www.docker.com/)
+
+**Build**
+
+- ```docker-compose build```
+
+**Start**
+
+- ```docker-compose up web```
+
+**Start worker**
+
+- ```docker-compose run --rm worker```
+
+**Run tests**
+
+- ```docker-compose run --rm test```
