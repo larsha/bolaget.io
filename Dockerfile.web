@@ -1,4 +1,4 @@
-FROM node:6.5.0
+FROM node:7.2.0
 
 ADD package.json /web/package.json
 RUN cd /web && npm install
