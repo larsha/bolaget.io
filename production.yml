@@ -1,3 +1,9 @@
+nginx:
+  image: fredriklack/brynn:bolagetio_nginx
+  expose:
+    - "80"
+  labels:
+    io.rancher.container.pull_image: always
 worker:
   image: fredriklack/brynn:bolagetio_web
   command: npm run worker
