@@ -13,7 +13,8 @@
     "production": "npm run build && npm start",
     "dev": "DEBUG=koa* nodemon --harmony --debug app/web.js --exec babel-node",
     "dev:worker": "babel-node --harmony app/worker.js",
-    "test": "mocha --harmony --compilers js:babel-core/register --colors app/lib/test/*.spec.js"
+    "test": "node --harmony-async-await ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --compilers js:babel-core/register --colors app/lib/test/*.spec.js",
+    "cover": "npm test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "author": "Fredrik Lack <fredrik@brynn.se>",
   "url": "https://github.com/larsha/bolaget.io",
@@ -37,6 +38,9 @@
     "mocha": "3.1.0",
     "nodemon": "1.9.2",
     "standard": "7.1.2",
+    "coveralls": "2.11.15",
+    "mocha-lcov-reporter": "1.2.0",
+    "istanbul": "1.0.0-alpha.2",
     "nock": "9.0.2"
   },
   "dependencies": {
