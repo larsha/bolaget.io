@@ -1,4 +1,5 @@
 FROM nginx:1.11.5-alpine
+RUN mkdir /etc/nginx/cache
 RUN rm /etc/nginx/nginx.conf
 COPY /devops/nginx/nginx.conf /etc/nginx/nginx.conf
 
