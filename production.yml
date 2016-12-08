@@ -1,35 +1,32 @@
-nginx:
-  image: fredriklack/brynn:bolagetio_nginx
-  expose:
-    - "80"
-  labels:
-    io.rancher.container.pull_image: always
-worker:
-  image: fredriklack/brynn:bolagetio_web
-  command: npm run worker
-  labels:
-    io.rancher.container.pull_image: always
-    io.rancher.container.start_once: true,
-    com.socialengine.rancher-cron.schedule: @midnight
-web:
-  image: fredriklack/brynn:bolagetio_web
-  restart: always
-  expose:
-    - "3000"
-  environment:
-    NODE_ENV: production
-  labels:
-    io.rancher.container.pull_image: always
-elastic:
-  image: fredriklack/brynn:bolagetio_elasticsearch
-  restart: always
-  mem_limit: 1g
-  expose:
-    - "9200"
-  environment:
-    ES_HEAP_SIZE: 512m
-  labels:
-    io.rancher.container.pull_image: always
-    io.rancher.scheduler.affinity:host_label: persistent_host=true
-  volumes:
-    - /var/lib/bolagetio/esdata:/usr/share/elasticsearch/data
+version: '2'
+services:
+  worker:
+    image: fredriklack/brynn:bolagetio_web
+    command: npm run worker
+    labels:
+      io.rancher.container.start_once: 'true'
+      com.socialengine.rancher-cron.schedule: '@midnight'
+    depends_on:
+      - elastic
+  nginx:
+    image: fredriklack/brynn:bolagetio_nginx
+    restart: always
+    depends_on:
+      - web
+  web:
+    image: fredriklack/brynn:bolagetio_web
+    restart: always
+    environment:
+      NODE_ENV: production
+    depends_on:
+      - elastic
+  elastic:
+    image: fredriklack/brynn:bolagetio_elasticsearch
+    restart: always
+    mem_limit: 1000000000
+    environment:
+      ES_HEAP_SIZE: 512m
+    labels:
+      io.rancher.scheduler.affinity:host_label: persistent=true
+    volumes:
+      - /usr/share/bolagetio/elasticsearch/data:/usr/share/elasticsearch/data
