@@ -19,3 +19,6 @@ push_web:
 
 push_elasticsearch:
 	docker push $(elasticsearch)
+
+scale:
+	rancher-compose -f production.yml scale web=$(number)
