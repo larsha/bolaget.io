@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: worker
+  namespace: bolagetio
+spec:
+  template:
+    metadata:
+      name: worker
+    spec:
+      containers:
+      - name: worker
+        image: eu.gcr.io/brynn-145714/bolagetio/web:latest
+        imagePullPolicy: Always
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: ES_HOST
+          value: "elasticsearch.bolagetio:9200"
+        command: ["npm", "run", "worker"]
+      restartPolicy: Never

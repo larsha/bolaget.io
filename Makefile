@@ -1,24 +1,21 @@
-web = fredriklack/brynn:bolagetio_web
-nginx = fredriklack/brynn:bolagetio_nginx
-elasticsearch = fredriklack/brynn:bolagetio_elasticsearch
+gce_web = eu.gcr.io/brynn-145714/bolagetio/web:latest
+gce_nginx = eu.gcr.io/brynn-145714/bolagetio/nginx:latest
+gce_elasticsearch = eu.gcr.io/brynn-145714/bolagetio/elasticsearch:latest
 
-build_nginx:
-	docker build -t $(nginx) -f Dockerfile.nginx .
+gce_build_web:
+	docker build -t $(gce_web) -f Dockerfile.web .
 
-build_web:
-	docker build -t $(web) -f Dockerfile.web .
+gce_push_web:
+	gcloud docker -- push $(gce_web)
 
-build_elasticsearch:
-	docker build -t $(elasticsearch) -f Dockerfile.elasticsearch .
+gce_build_nginx:
+	docker build -t $(gce_nginx) -f Dockerfile.nginx .
 
-push_nginx:
-	docker push $(nginx)
+gce_push_nginx:
+	gcloud docker -- push $(gce_nginx)
 
-push_web:
-	docker push $(web)
+gce_build_elasticsearch:
+	docker build -t $(gce_elasticsearch) -f Dockerfile.elasticsearch .
 
-push_elasticsearch:
-	docker push $(elasticsearch)
-
-scale:
-	rancher-compose -f production.yml scale web=$(number)
+gce_push_elasticsearch:
+	gcloud docker -- push $(gce_elasticsearch)
