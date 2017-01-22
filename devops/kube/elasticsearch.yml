@@ -4,6 +4,13 @@ metadata:
   name: elasticsearch
   namespace: bolagetio
 spec:
+  revisionHistoryLimit: 2
+  minReadySeconds: 5
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
   replicas: 1
   template:
     metadata:
