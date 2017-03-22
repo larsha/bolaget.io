@@ -1,18 +1,18 @@
 {
   "name": "bolaget.io",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "RESTful JSON API for Swedish alcohol monopoly, Systembolaget",
   "main": "app/web.js",
   "engines": {
-    "node": ">=7.2.0"
+    "node": "latest"
   },
   "scripts": {
     "build": "rm -rf .build && cp -rf app .build && babel app -d .build",
-    "start": "node --harmony-async-await .build/web.js",
-    "worker": "npm run build && node --harmony-async-await .build/worker.js",
-    "dev": "DEBUG=koa* nodemon --harmony --debug app/web.js --exec babel-node",
-    "dev:worker": "babel-node --harmony app/worker.js",
-    "test": "node --harmony-async-await ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --compilers js:babel-core/register --colors app/lib/test/*.spec.js",
+    "start": "node .build/web.js",
+    "worker": "npm run build && node .build/worker.js",
+    "dev": "DEBUG=koa* nodemon --debug app/web.js --exec babel-node",
+    "dev:worker": "babel-node app/worker.js",
+    "test": "node ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --compilers js:babel-core/register --colors app/lib/test/*.spec.js",
     "cover": "npm test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "author": "Fredrik Lack <fredrik@brynn.se>",
