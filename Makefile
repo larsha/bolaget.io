@@ -5,4 +5,4 @@ gce_deploy:
 	gcloud docker -- push eu.gcr.io/brynn-145714/bolagetio/$(service):$(version)
 	docker rmi eu.gcr.io/brynn-145714/bolagetio/$(service):latest
 	docker rmi eu.gcr.io/brynn-145714/bolagetio/$(service):$(version)
-	kubectl -n idun set image deployment/$(service) $(service)=eu.gcr.io/brynn-145714/bolagetio/$(service):$(version)
+	kubectl -n bolagetio set image deployment/$(service) $(service)=eu.gcr.io/brynn-145714/bolagetio/$(service):$(version)
