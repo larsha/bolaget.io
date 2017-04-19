@@ -6,12 +6,11 @@ metadata:
 spec:
   revisionHistoryLimit: 2
   minReadySeconds: 5
+  replicas: 1
   strategy:
     rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
+      maxUnavailable: 0
     type: RollingUpdate
-  replicas: 1
   template:
     metadata:
       labels:
@@ -34,16 +33,3 @@ spec:
         resources:
           limits:
             memory: 1Gi
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: elasticsearch
-  namespace: bolagetio
-spec:
-  ports:
-  - port: 9200
-    targetPort: 9200
-    protocol: TCP
-  selector:
-    app: elasticsearch
