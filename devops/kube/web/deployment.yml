@@ -5,10 +5,10 @@ metadata:
   namespace: bolagetio
 spec:
   revisionHistoryLimit: 2
-  minReadySeconds: 5
   replicas: 2
   strategy:
     rollingUpdate:
+      maxSurge: 2
       maxUnavailable: 1
     type: RollingUpdate
   template:
@@ -27,3 +27,9 @@ spec:
           value: "elasticsearch.bolagetio:9200"
         ports:
         - containerPort: 3000
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
