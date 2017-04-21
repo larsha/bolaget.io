@@ -22,9 +22,17 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
+          periodSeconds: 5
         livenessProbe:
           httpGet:
             path: /healthz
             port: 80
-          initialDelaySeconds: 30
+          initialDelaySeconds: 15
           timeoutSeconds: 1
+          periodSeconds: 5
