@@ -1,4 +1,4 @@
-import Product from '../../../models/product'
+import Product from '../../../models/v1/product'
 import Request from '../../request'
 
 class Task extends Request {

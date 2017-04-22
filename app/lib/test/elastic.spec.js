@@ -5,8 +5,8 @@ import chaiAsPromised from 'chai-as-promised'
 import Elastic from '../elastic'
 import ProductsTask from '../worker/tasks/products'
 import StoresTask from '../worker/tasks/stores'
-import Product from '../../models/product'
-import Store from '../../models/store'
+import Product from '../../models/v1/product'
+import Store from '../../models/v1/store'
 import { fuzzyMatch } from '../utils'
 
 chai.use(chaiAsPromised)
