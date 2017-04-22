@@ -1,5 +1,5 @@
-import Product from '../models/product'
-import { stringToBool, fuzzyMatch, rangeMatch } from '../lib/utils'
+import Product from '../../models/v1/product'
+import { stringToBool, fuzzyMatch, rangeMatch } from '../../lib/utils'
 
 export default async (ctx, next) => {
   const maxLimit = 100

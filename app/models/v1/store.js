@@ -1,5 +1,5 @@
-import { capitalize, empty, toNumber } from '../lib/utils'
-import Elastic from '../lib/elastic'
+import { capitalize, empty, toNumber } from '../../lib/utils'
+import Elastic from '../../lib/elastic'
 
 class Store extends Elastic {
   static transform (data) {

@@ -1,5 +1,5 @@
-import Store from '../models/store'
-import { fuzzyMatch, listToArray } from '../lib/utils'
+import Store from '../../models/v1/store'
+import { fuzzyMatch, listToArray } from '../../lib/utils'
 
 export default async (ctx, next) => {
   const maxLimit = 100

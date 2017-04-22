@@ -1,5 +1,5 @@
-import { toNumber, numberToBool } from '../lib/utils'
-import Elastic from '../lib/elastic'
+import { toNumber, numberToBool } from '../../lib/utils'
+import Elastic from '../../lib/elastic'
 
 class Product extends Elastic {
   static transform (data) {

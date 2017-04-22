@@ -4,7 +4,13 @@
 
 This API has nothing to do with Systembolaget, this app consumes a large XML API from Systembolaget and transforms it into a REST JSON API. More info can be found here: http://www.systembolaget.se/api
 
-*Work in progress, feel free to add issues and make PR's. API will be considered unstable (breaking changes might occur) until release 1.0.*
+**Versions**
+--
+| Version       | Url                   |
+| ------------- |:---------------------:|
+| `v1`          | https://bolaget.io/v1 |
+
+_All resources will be available without versioning in the url and be an alias for the latest API version._
 
 **Products**
 ---
@@ -78,7 +84,7 @@ Host: bolaget.io
 
 
 
-**Show product**
+**Product**
 ----
 ```http
 GET /products/:nr
@@ -155,7 +161,7 @@ Host: bolaget.io
     **Content:** `{ error : "Not Found" }`
 
 
-**Show store**
+**Store**
 ----
 ```http
 GET /stores/:nr

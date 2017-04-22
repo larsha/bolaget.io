@@ -1,4 +1,4 @@
-import Product from '../models/product'
+import Product from '../../models/v1/product'
 
 export default async (ctx, next) => {
   const id = ctx.params.id || null
