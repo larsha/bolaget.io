@@ -16,6 +16,8 @@ spec:
       labels:
         app: elasticsearch
     spec:
+      nodeSelector:
+        cloud.google.com/gke-nodepool: default-pool
       containers:
       - name: elasticsearch
         image: eu.gcr.io/brynn-145714/bolagetio/elasticsearch:latest
