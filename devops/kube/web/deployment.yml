@@ -16,6 +16,17 @@ spec:
       labels:
         app: web
     spec:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - web
+              topologyKey: kubernetes.io/hostname
       containers:
       - name: web
         image: eu.gcr.io/brynn-145714/bolagetio/web:latest
