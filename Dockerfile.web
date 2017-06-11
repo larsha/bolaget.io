@@ -1,6 +1,6 @@
-FROM node:latest
+FROM node:8
 
-ADD package.json /web/package.json
+ADD package.json package-lock.json /web/
 RUN cd /web && npm install
 
 COPY . /web

@@ -5,10 +5,11 @@ metadata:
   namespace: bolagetio
 spec:
   revisionHistoryLimit: 2
-  minReadySeconds: 5
-  replicas: 1
+  replicas: 2
+  minReadySeconds: 10
   strategy:
     rollingUpdate:
+      maxSurge: 1
       maxUnavailable: 0
     type: RollingUpdate
   template:
@@ -16,21 +17,19 @@ spec:
       labels:
         app: nginx
     spec:
+      terminationGracePeriodSeconds: 60
       nodeSelector:
         cloud.google.com/gke-nodepool: default-pool
       containers:
       - name: nginx
         image: eu.gcr.io/brynn-145714/bolagetio/nginx:latest
+        lifecycle:
+          preStop:
+            exec:
+              command: ["sleep", "15"]
         imagePullPolicy: Always
         ports:
         - containerPort: 80
-        readinessProbe:
-          httpGet:
-            path: /healthz
-            port: 80
-          initialDelaySeconds: 15
-          timeoutSeconds: 1
-          periodSeconds: 5
         livenessProbe:
           httpGet:
             path: /healthz

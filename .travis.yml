@@ -1,20 +1,55 @@
 sudo: required
+
 services:
   - docker
+
+cache:
+  directories:
+    - "$HOME/google-cloud-sdk/"
+    - node_modules
+
 env:
-  DOCKER_COMPOSE_VERSION: 1.8.0
+  global:
+    - DOCKER_COMPOSE_VERSION=1.8.0
+    - GOOGLE_APPLICATION_CREDENTIALS=~/gcloud-service-key.json
+    - PROJECT_NAME=brynn-145714
+    - CLUSTER_NAME=cluster-1
+    - CLOUDSDK_COMPUTE_ZONE=europe-west1-b
+    - DOCKER_IMAGE_NAME=bolagetio
+    - K8S_NAMESPACE=bolagetio
+    - K8S_DEPLOYMENT_NAME_WEB=web
+    - K8S_DEPLOYMENT_NAME_NGINX=nginx
+    - COMMIT=${TRAVIS_COMMIT::8}
+
 before_install:
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname
     -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
+
 install:
   - docker-compose build
+
 script:
   - docker-compose up -d elastic
   - sleep 10
   - docker-compose run test
+
+before_deploy:
+  - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash; fi
+  - source /home/travis/google-cloud-sdk/path.bash.inc
+  - gcloud --quiet version
+  - gcloud --quiet components update
+  - gcloud --quiet components update kubectl
+
+deploy:
+  - provider: script
+    script: /bin/sh devops/script/deploy.sh
+    skip_cleanup: true
+    on:
+      branch: master
+
 notifications:
   email: false
   slack:

@@ -4,13 +4,13 @@
   "description": "RESTful JSON API for Swedish alcohol monopoly, Systembolaget",
   "main": "app/web.js",
   "engines": {
-    "node": "latest"
+    "node": "8"
   },
   "scripts": {
     "build": "rm -rf .build && cp -rf app .build && babel app -d .build",
     "start": "node .build/web.js",
     "worker": "npm run build && node .build/worker.js",
-    "dev": "DEBUG=koa* nodemon --debug app/web.js --exec babel-node",
+    "dev": "DEBUG=koa* nodemon app/web.js --exec babel-node",
     "dev:worker": "babel-node app/worker.js",
     "test": "node ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --compilers js:babel-core/register --colors app/lib/test/*.spec.js",
     "cover": "npm test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
@@ -34,7 +34,7 @@
     "chai": "3.5.0",
     "chai-as-promised": "6.0.0",
     "mocha": "3.1.0",
-    "nodemon": "1.9.2",
+    "nodemon": "1.11.0",
     "standard": "7.1.2",
     "coveralls": "2.11.15",
     "mocha-lcov-reporter": "1.2.0",
