@@ -13,9 +13,20 @@ spec:
         image: eu.gcr.io/brynn-145714/bolagetio/web:latest
         imagePullPolicy: Always
         env:
-        - name: NODE_ENV
-          value: "production"
-        - name: ES_HOST
-          value: "elasticsearch.bolagetio:9200"
+          - name: NODE_ENV
+            valueFrom:
+              configMapKeyRef:
+                name: web-v1
+                key: node_env
+          - name: ES_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: web-v1
+                key: es_host
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: web-v1
+                key: port
         command: ["npm", "run", "worker"]
       restartPolicy: Never
