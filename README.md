@@ -37,6 +37,10 @@ Host: bolaget.io
    `year_from=[number]`
 
    `year_to=[number]`
+   
+   `sales_start_from=[date]` - YYYY-MM-DD
+
+   `sales_start_to=[date]` - YYYY-MM-DD
 
    `price_from=[number]`
 
@@ -53,6 +57,7 @@ Host: bolaget.io
       - `price_per_liter:asc|desc`
       - `volume_in_milliliter:asc|desc`
       - `year:asc|desc`
+      - `sales_start:asc|desc`
       - `zip_code:asc|desc`
       - `name:asc|desc`<br><br>
 
