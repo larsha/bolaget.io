@@ -21,6 +21,8 @@ export default async (ctx, next) => {
   const assortment = ctx.query.assortment
   const yearFrom = parseInt(ctx.query.year_from, 10) || 0
   const yearTo = parseInt(ctx.query.year_to, 10) || 0
+  const salesStartFrom = ctx.query.sales_start_from
+  const salesStartTo = ctx.query.sales_start_to
   const priceFrom = parseInt(ctx.query.price_from, 10) || 0
   const priceTo = parseInt(ctx.query.price_to, 10) || 0
   const volumeFrom = parseInt(ctx.query.volume_from, 10) || 0
@@ -97,6 +99,10 @@ export default async (ctx, next) => {
     query.bool.must.push(rangeMatch('year', yearFrom, yearTo))
   }
 
+  if (salesStartFrom || salesStartTo) {
+    query.bool.must.push(rangeMatch('sales_start', salesStartFrom, salesStartTo))
+  }
+
   if (priceFrom || priceTo) {
     query.bool.must.push(rangeMatch('price.amount', priceFrom, priceTo))
   }
@@ -122,6 +128,7 @@ export default async (ctx, next) => {
   switch (prop) {
     case 'volume_in_milliliter':
     case 'year':
+    case 'sales_start':
     case 'price_per_liter':
       sort = { [prop]: { order } }
       break
