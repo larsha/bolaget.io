@@ -73,7 +73,7 @@ class Product extends Elastic {
         },
         volume_in_milliliter: { type: 'double', index: 'not_analyzed' },
         price_per_liter: { type: 'double', index: 'not_analyzed' },
-        sales_start: { type: 'string', index: 'not_analyzed' },
+        sales_start: { type: 'date', index: 'not_analyzed'},
         expired: { type: 'boolean', index: 'not_analyzed' },
         product_group: { type: 'string', index: 'analyzed', analyzer: 'swedish' },
         type: { type: 'string', index: 'analyzed', analyzer: 'swedish' },
