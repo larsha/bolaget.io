@@ -1,6 +1,3 @@
-/stores
-/stores/0116
-/products
 /products?sort=volume_in_milliliter:desc
 /products?sort=volume_in_milliliter:asc
 /products?sort=price:asc

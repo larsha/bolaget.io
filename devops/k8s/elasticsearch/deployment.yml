@@ -18,8 +18,16 @@ spec:
     spec:
       nodeSelector:
         cloud.google.com/gke-nodepool: default-pool
+      volumes:
+      - name: storage
+        gcePersistentDisk:
+          pdName: bolagetio-elasticsearch-storage
+          fsType: ext4
       containers:
       - name: elasticsearch
+        volumeMounts:
+        - name: storage
+          mountPath: /usr/share/elasticsearch/data
         image: eu.gcr.io/brynn-145714/bolagetio/elasticsearch:latest
         imagePullPolicy: Always
         env:
