@@ -32,6 +32,10 @@ spec:
       - name: web
         image: eu.gcr.io/brynn-145714/bolagetio/web:latest
         imagePullPolicy: Always
+        lifecycle:
+          preStop:
+            exec:
+              command: ["sleep", "10"]
         env:
           - name: NODE_ENV
             valueFrom:
@@ -54,12 +58,11 @@ spec:
           httpGet:
             path: /
             port: 3000
-          initialDelaySeconds: 30
-          timeoutSeconds: 1
+          initialDelaySeconds: 15
+          periodSeconds: 5
         livenessProbe:
           httpGet:
             path: /
             port: 3000
           initialDelaySeconds: 15
-          timeoutSeconds: 1
           periodSeconds: 5
