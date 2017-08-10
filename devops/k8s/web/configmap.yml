@@ -1,9 +1,10 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: web-v1
+  name: web-v2
   namespace: bolagetio
 data:
-  port: "3000"
-  node_env: "production"
-  es_host: "elasticsearch.bolagetio:9200"
+  PORT: "3000"
+  SYSTEM_PORT: "3001"
+  NODE_ENV: "production"
+  ES_HOST: "elasticsearch.bolagetio:9200"

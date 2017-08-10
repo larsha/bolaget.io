@@ -1,8 +1,10 @@
 import Koa from 'koa'
+import router from 'koa-simple-router'
 import path from 'path'
 import logger from 'koa-logger'
 import parser from 'koa-bodyparser'
 import views from 'koa-views'
+import http from 'http'
 
 import routes from './routes'
 import config from './config'
@@ -52,5 +54,37 @@ app.use(async ctx => {
 })
 
 app.listen(config.PORT)
+const server = http.createServer(app.callback())
+
+// Start the system server for health checks and graceful shutdowns
+const system = new Koa()
+
+let status = {
+  ready: false
+}
+
+system.use(router(r => {
+  r.get('/ready', ctx => {
+    if (status.ready) {
+      ctx.status = 200
+    } else {
+      ctx.status = 500
+    }
+  })
+
+  r.get('/prestop', async ctx => {
+    status.ready = false
+    await new Promise(r => setTimeout(r, 10000))
+    ctx.status = 200
+  })
+}))
+
+system.listen(config.SYSTEM_PORT)
+
+process.on('SIGTERM', () => {
+  server.close(() => process.exit(0))
+})
+
+status.ready = true
 
 export default app

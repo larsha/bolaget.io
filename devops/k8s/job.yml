@@ -12,21 +12,8 @@ spec:
       - name: worker
         image: eu.gcr.io/brynn-145714/bolagetio/web:latest
         imagePullPolicy: Always
-        env:
-          - name: NODE_ENV
-            valueFrom:
-              configMapKeyRef:
-                name: web-v1
-                key: node_env
-          - name: ES_HOST
-            valueFrom:
-              configMapKeyRef:
-                name: web-v1
-                key: es_host
-          - name: PORT
-            valueFrom:
-              configMapKeyRef:
-                name: web-v1
-                key: port
+        envFrom:
+        - configMapRef:
+            name: web-v2
         command: ["npm", "run", "worker"]
       restartPolicy: Never

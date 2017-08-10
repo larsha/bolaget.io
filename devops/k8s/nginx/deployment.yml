@@ -6,7 +6,6 @@ metadata:
 spec:
   revisionHistoryLimit: 2
   replicas: 2
-  minReadySeconds: 10
   strategy:
     rollingUpdate:
       maxSurge: 2
@@ -26,19 +25,21 @@ spec:
         lifecycle:
           preStop:
             exec:
-              command: ["sleep", "15"]
+              command: ["sleep", "30"]
         imagePullPolicy: Always
         ports:
         - containerPort: 80
         readinessProbe:
           httpGet:
-            path: /healthz
+            path: /ready
             port: 80
-          initialDelaySeconds: 15
-          timeoutSeconds: 1
+          periodSeconds: 1
+          successThreshold: 1
+          failureThreshold: 1
         livenessProbe:
           httpGet:
-            path: /healthz
+            path: /ready
             port: 80
-          initialDelaySeconds: 3
-          periodSeconds: 3
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 1
