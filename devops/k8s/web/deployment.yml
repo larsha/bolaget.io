@@ -8,13 +8,14 @@ spec:
   replicas: 4
   strategy:
     rollingUpdate:
-      maxSurge: 2
+      maxSurge: 50%
       maxUnavailable: 0
     type: RollingUpdate
   template:
     metadata:
       labels:
         app: web
+        web: bolagetio-web
     spec:
       affinity:
         podAntiAffinity:
@@ -23,10 +24,10 @@ spec:
             podAffinityTerm:
               labelSelector:
                 matchExpressions:
-                - key: app
+                - key: web
                   operator: In
                   values:
-                  - web
+                  - bolagetio-web
               topologyKey: kubernetes.io/hostname
       containers:
       - name: web
@@ -36,7 +37,6 @@ spec:
         - configMapRef:
             name: web-v2
         ports:
-        ports:
         - containerPort: 3000
         - containerPort: 3001
         readinessProbe:
@@ -44,6 +44,7 @@ spec:
             path: /ready
             port: 3001
           periodSeconds: 1
+          initialDelaySeconds: 10
           successThreshold: 1
           failureThreshold: 1
         livenessProbe:
@@ -51,6 +52,7 @@ spec:
             path: /ready
             port: 3001
           periodSeconds: 10
+          initialDelaySeconds: 15
           successThreshold: 1
           failureThreshold: 1
         lifecycle:

@@ -8,14 +8,26 @@ spec:
   replicas: 2
   strategy:
     rollingUpdate:
-      maxSurge: 2
       maxUnavailable: 0
     type: RollingUpdate
   template:
     metadata:
       labels:
         app: nginx
+        nginx: bolagetio-nginx
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: nginx
+                  operator: In
+                  values:
+                  - bolagetio-nginx
+              topologyKey: kubernetes.io/hostname
       terminationGracePeriodSeconds: 60
       nodeSelector:
         cloud.google.com/gke-nodepool: default-pool
