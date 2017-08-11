@@ -72,9 +72,8 @@ system.use(router(r => {
     }
   })
 
-  r.get('/prestop', async ctx => {
+  r.get('/prestop', ctx => {
     status.ready = false
-    await new Promise(r => setTimeout(r, 3000))
     ctx.status = 200
   })
 }))
