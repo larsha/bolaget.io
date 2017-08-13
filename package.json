@@ -43,12 +43,14 @@
   },
   "dependencies": {
     "elasticsearch": "11.0.1",
+    "es6-promise": "4.1.1",
     "handlebars": "4.0.5",
     "koa": "2.0.0",
     "koa-bodyparser": "3.1.0",
     "koa-logger": "2.0.0",
     "koa-simple-router": "0.2.0",
     "koa-views": "5.0.2",
+    "stoppable": "1.0.4",
     "winston": "2.2.0",
     "xml2js": "0.4.16"
   }

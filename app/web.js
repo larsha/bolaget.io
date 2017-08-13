@@ -5,6 +5,7 @@ import logger from 'koa-logger'
 import parser from 'koa-bodyparser'
 import views from 'koa-views'
 import http from 'http'
+import stoppable from 'stoppable'
 
 import routes from './routes'
 import config from './config'
@@ -55,6 +56,7 @@ app.use(async ctx => {
 })
 
 const server = http.createServer(app.callback())
+stoppable(server)
 server.listen(config.PORT)
 
 // Start the system server for health checks and graceful shutdowns
@@ -83,8 +85,7 @@ system.use(router(r => {
 system.listen(config.SYSTEM_PORT)
 
 process.on('SIGTERM', async () => {
-  await sleep(5)
-  server.close(() => process.exit(0))
+  server.stop(() => process.exit(0))
 })
 
 status.ready = true
