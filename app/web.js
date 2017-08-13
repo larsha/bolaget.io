@@ -5,6 +5,7 @@ import logger from 'koa-logger'
 import parser from 'koa-bodyparser'
 import views from 'koa-views'
 import http from 'http'
+import addShutdown from 'http-shutdown'
 
 import routes from './routes'
 import config from './config'
@@ -54,7 +55,9 @@ app.use(async ctx => {
   ctx.body = error404
 })
 
-const server = http.createServer(app.callback()).listen(config.PORT)
+let server = http.createServer(app.callback())
+server = addShutdown(server)
+server.listen(config.PORT)
 
 // Start the system server for health checks and graceful shutdowns
 const system = new Koa()
@@ -81,7 +84,8 @@ system.use(router(r => {
 
 system.listen(config.SYSTEM_PORT)
 
-process.on('SIGTERM', () => server.close())
-server.on('close', () => process.exit(0))
+process.on('SIGTERM', () => {
+  server.shutdown(() => process.exit(0))
+})
 
 status.ready = true
