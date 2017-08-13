@@ -86,6 +86,4 @@ process.on('SIGTERM', () => {
   server.close()
 })
 
-server.on('close', () => process.exit(0))
-
 status.ready = true
