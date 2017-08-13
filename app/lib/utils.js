@@ -24,6 +24,10 @@ function listToArray (list) {
   return list.split(',')
 }
 
+function sleep (sec = 10) {
+  return new Promise(r => setTimeout(r, sec * 1000))
+}
+
 function fuzzyMatch (prop, query) {
   let match = {
     [prop]: {
@@ -49,4 +53,14 @@ function rangeMatch (prop, from, to) {
   return match
 }
 
-export { stringToBool, capitalize, empty, toNumber, numberToBool, fuzzyMatch, rangeMatch, listToArray }
+export {
+  stringToBool,
+  capitalize,
+  empty,
+  toNumber,
+  numberToBool,
+  fuzzyMatch,
+  rangeMatch,
+  listToArray,
+  sleep
+}

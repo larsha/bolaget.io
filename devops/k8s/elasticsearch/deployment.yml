@@ -5,7 +5,6 @@ metadata:
   namespace: bolagetio
 spec:
   revisionHistoryLimit: 2
-  minReadySeconds: 5
   replicas: 1
   strategy:
     rollingUpdate:

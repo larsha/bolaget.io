@@ -8,6 +8,7 @@ import http from 'http'
 
 import routes from './routes'
 import config from './config'
+import { sleep } from './lib/utils'
 
 // 404
 const error404 = {
@@ -53,8 +54,8 @@ app.use(async ctx => {
   ctx.body = error404
 })
 
-app.listen(config.PORT)
 const server = http.createServer(app.callback())
+server.listen(config.PORT)
 
 // Start the system server for health checks and graceful shutdowns
 const system = new Koa()
@@ -72,18 +73,18 @@ system.use(router(r => {
     }
   })
 
-  r.get('/prestop', ctx => {
+  r.get('/prestop', async ctx => {
     status.ready = false
+    await sleep(10)
     ctx.status = 200
   })
 }))
 
 system.listen(config.SYSTEM_PORT)
 
-process.on('SIGTERM', () => {
+process.on('SIGTERM', async () => {
+  await sleep(5)
   server.close(() => process.exit(0))
 })
 
 status.ready = true
-
-export default app
