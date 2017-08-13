@@ -5,7 +5,6 @@ import logger from 'koa-logger'
 import parser from 'koa-bodyparser'
 import views from 'koa-views'
 import http from 'http'
-import stoppable from 'stoppable'
 
 import routes from './routes'
 import config from './config'
