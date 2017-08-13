@@ -1,4 +1,3 @@
-FROM elasticsearch:2.3.3
+FROM elasticsearch:2.4.6
 
-ADD /elasticsearch/elasticsearch.yml /usr/share/elasticsearch/config/
 RUN /usr/share/elasticsearch/bin/plugin install analysis-icu
