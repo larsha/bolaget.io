@@ -6,6 +6,7 @@ metadata:
 spec:
   revisionHistoryLimit: 2
   replicas: 5
+  minReadySeconds: 5
   strategy:
     rollingUpdate:
       maxSurge: 50%
@@ -44,6 +45,7 @@ spec:
             path: /ready
             port: 3001
           periodSeconds: 1
+          initialDelaySeconds: 5
           successThreshold: 1
           failureThreshold: 1
         livenessProbe:
@@ -51,6 +53,7 @@ spec:
             path: /ready
             port: 3001
           periodSeconds: 10
+          initialDelaySeconds: 10
           successThreshold: 1
           failureThreshold: 1
         lifecycle:

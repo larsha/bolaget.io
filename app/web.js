@@ -55,9 +55,7 @@ app.use(async ctx => {
   ctx.body = error404
 })
 
-const server = http.createServer(app.callback())
-stoppable(server)
-server.listen(config.PORT)
+const server = http.createServer(app.callback()).listen(config.PORT)
 
 // Start the system server for health checks and graceful shutdowns
 const system = new Koa()
@@ -84,8 +82,11 @@ system.use(router(r => {
 
 system.listen(config.SYSTEM_PORT)
 
-process.on('SIGTERM', async () => {
-  server.stop(() => process.exit(0))
+process.on('SIGTERM', () => {
+  status.ready = false
+  server.close()
 })
+
+server.on('close', () => process.exit(0))
 
 status.ready = true
