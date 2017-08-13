@@ -81,9 +81,7 @@ system.use(router(r => {
 
 system.listen(config.SYSTEM_PORT)
 
-process.on('SIGTERM', () => {
-  status.ready = false
-  server.close()
-})
+process.on('SIGTERM', () => server.close())
+server.on('close', () => process.exit(0))
 
 status.ready = true
