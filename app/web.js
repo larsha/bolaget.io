@@ -62,21 +62,19 @@ server.listen(config.PORT)
 // Start the system server for health checks and graceful shutdowns
 const system = new Koa()
 
-let status = {
-  ready: false
-}
+let ready = false
 
 system.use(router(r => {
   r.get('/ready', ctx => {
-    if (status.ready) {
+    if (ready) {
       ctx.status = 200
     } else {
-      ctx.status = 500
+      ctx.status = 503
     }
   })
 
   r.get('/prestop', async ctx => {
-    status.ready = false
+    ready = false
     await sleep(10)
     ctx.status = 200
   })
@@ -84,8 +82,10 @@ system.use(router(r => {
 
 system.listen(config.SYSTEM_PORT)
 
-process.on('SIGTERM', () => {
+process.on('SIGTERM', async () => {
+  ready = false
+  await sleep(10)
   server.shutdown(() => process.exit(0))
 })
 
-status.ready = true
+ready = true
