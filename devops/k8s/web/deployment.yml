@@ -43,6 +43,7 @@ spec:
           httpGet:
             path: /ready
             port: 3001
+          initialDelaySeconds: 5
           periodSeconds: 1
           successThreshold: 1
           failureThreshold: 1
@@ -50,6 +51,7 @@ spec:
           httpGet:
             path: /ready
             port: 3001
+          initialDelaySeconds: 10
           periodSeconds: 10
           successThreshold: 1
           failureThreshold: 1
