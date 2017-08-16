@@ -15,8 +15,6 @@ spec:
       labels:
         app: elasticsearch
     spec:
-      nodeSelector:
-        cloud.google.com/gke-nodepool: default-pool
       volumes:
       - name: storage
         gcePersistentDisk:

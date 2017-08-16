@@ -29,8 +29,6 @@ spec:
                   - bolagetio-nginx
               topologyKey: kubernetes.io/hostname
       terminationGracePeriodSeconds: 60
-      nodeSelector:
-        cloud.google.com/gke-nodepool: default-pool
       containers:
       - name: nginx
         image: eu.gcr.io/brynn-145714/bolagetio/nginx:latest
