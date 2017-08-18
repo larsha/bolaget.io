@@ -20,7 +20,7 @@ deploy_nginx:
 	gcloud docker -- push $(registry)/nginx:$(date)
 	gcloud docker -- push $(registry)/nginx:latest
 
-	kubectl -n bolagetio set image deployment/nginx nginx=$(registry)/nginx:$(date)
+	kubectl -n bolagetio set image ds/nginx nginx=$(registry)/nginx:$(date)
 
 deploy_elasticsearch:
 	docker build \
