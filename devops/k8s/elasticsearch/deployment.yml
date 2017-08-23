@@ -17,9 +17,8 @@ spec:
     spec:
       volumes:
       - name: storage
-        gcePersistentDisk:
-          pdName: bolagetio-elasticsearch-storage
-          fsType: ext4
+        persistentVolumeClaim:
+          claimName: elasticsearch-storage
       containers:
       - name: elasticsearch
         volumeMounts:
