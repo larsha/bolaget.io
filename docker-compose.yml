@@ -5,6 +5,7 @@ services:
       file: docker-compose.base.yml
       service: base
     environment:
+      - COVERALLS_REPO_TOKEN=${COVERALLS_REPO_TOKEN}
       - ELASTIC_INDEX=bolaget_test
     command: npm run cover
     depends_on:
