@@ -1,38 +1,38 @@
 version: '2'
 services:
-  test:
-    build:
-      context: .
-      dockerfile: Dockerfile.web
-    command: npm test
+  cover:
+    extends:
+      file: docker-compose.base.yml
+      service: base
     environment:
       - ELASTIC_INDEX=bolaget_test
-    volumes:
-      - .:/web
-      - /web/node_modules
+    command: npm run cover
+    depends_on:
+      - elastic
+  test:
+    extends:
+      file: docker-compose.base.yml
+      service: base
+    environment:
+      - ELASTIC_INDEX=bolaget_test
+    command: npm test
     depends_on:
       - elastic
   worker:
-    build:
-      context: .
-      dockerfile: Dockerfile.web
+    extends:
+      file: docker-compose.base.yml
+      service: base
     command: npm run dev:worker
-    volumes:
-      - .:/web
-      - /web/node_modules
     depends_on:
       - elastic
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile.web
+    extends:
+      file: docker-compose.base.yml
+      service: base
     command: npm run dev
     ports:
       - "3000:3000"
       - "3001:3001"
-    volumes:
-      - .:/web
-      - /web/node_modules
     depends_on:
       - elastic
   elastic:

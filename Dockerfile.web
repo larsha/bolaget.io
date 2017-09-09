@@ -1,4 +1,4 @@
-FROM node:8.3.0
+FROM node:8.4.0
 
 ADD package.json package-lock.json /web/
 RUN cd /web && npm install

@@ -34,7 +34,7 @@ install:
 script:
   - docker-compose up -d elastic
   - sleep 10
-  - docker-compose run test
+  - docker-compose run cover
 
 deploy:
   - provider: script
