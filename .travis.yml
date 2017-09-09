@@ -34,7 +34,7 @@ install:
 script:
   - docker-compose up -d elastic
   - sleep 10
-  - docker-compose run cover
+  - docker-compose run travis
 
 deploy:
   - provider: script

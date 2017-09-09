@@ -1,13 +1,18 @@
 version: '2'
 services:
-  cover:
+  travis:
     extends:
       file: docker-compose.base.yml
       service: base
     environment:
       - COVERALLS_REPO_TOKEN=${COVERALLS_REPO_TOKEN}
       - ELASTIC_INDEX=bolaget_test
-    command: npm run cover
+      - CI_NAME=${CI_NAME}
+      - CI_BUILD_NUMBER=${CI_BUILD_NUMBER}
+      - CI_BUILD_URL=${CI_BUILD_URL}
+      - CI_BRANCH=${CI_BRANCH}
+      - CI_PULL_REQUEST=${CI_PULL_REQUEST}
+    command: npm run test:travis
     depends_on:
       - elastic
   test:
