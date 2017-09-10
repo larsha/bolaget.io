@@ -7,7 +7,7 @@ import ProductsTask from '../worker/tasks/products'
 import StoresTask from '../worker/tasks/stores'
 import Product from '../../models/v1/product'
 import Store from '../../models/v1/store'
-import { fuzzyMatch } from '../utils'
+import { fuzzyMatch, rangeMatch } from '../utils'
 
 chai.use(chaiAsPromised)
 chai.should()
@@ -146,7 +146,7 @@ describe('Elastic', function () {
           let query = {
             bool: {
               must: [
-                fuzzyMatch('name', 'Motzenbäcker')
+                rangeMatch('year', 2011, 2012)
               ]
             }
           }
@@ -161,7 +161,7 @@ describe('Elastic', function () {
                 expect(result).to.be.instanceof(Array)
                 expect(count).to.be.above(0)
                 expect(result[0]).to.be.an('object')
-                expect(result[0].name).to.equal('Motzenbäcker Marie')
+                expect(result[0].year).to.equal(2011)
               })
               .should.be.fulfilled.and.notify(done)
           }, 1000)
