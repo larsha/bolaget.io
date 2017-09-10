@@ -7,7 +7,7 @@ This API has nothing to do with Systembolaget, this app consumes a large XML API
 **Versions**
 --
 
-Please have a look at `CHANGELOG.md` for more information. Otherwise this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+Please have a look at [`CHANGELOG.md`](CHANGELOG.md) for more information. Otherwise this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 | Version       | Url                   |
 | ------------- |:---------------------:|

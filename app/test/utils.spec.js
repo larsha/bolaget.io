@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
-import { stringToBool, listToArray, sleep } from '../utils'
+import { stringToBool, listToArray, sleep } from '../lib/utils'
 
 chai.use(chaiAsPromised)
 chai.should()

@@ -2,12 +2,12 @@ import { expect } from 'chai'
 import chai from 'chai'
 import nock from 'nock'
 import chaiAsPromised from 'chai-as-promised'
-import Elastic from '../elastic'
-import ProductsTask from '../worker/tasks/products'
-import StoresTask from '../worker/tasks/stores'
-import Product from '../../models/v1/product'
-import Store from '../../models/v1/store'
-import { fuzzyMatch, rangeMatch } from '../utils'
+import Elastic from '../lib/elastic'
+import ProductsTask from '../lib/worker/tasks/products'
+import StoresTask from '../lib/worker/tasks/stores'
+import Product from '../models/v1/product'
+import Store from '../models/v1/store'
+import { fuzzyMatch, rangeMatch } from '../lib/utils'
 
 chai.use(chaiAsPromised)
 chai.should()
