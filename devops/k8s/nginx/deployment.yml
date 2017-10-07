@@ -1,13 +1,15 @@
 apiVersion: extensions/v1beta1
-kind: DaemonSet
+kind: Deployment
 metadata:
   name: nginx
   namespace: bolagetio
 spec:
   revisionHistoryLimit: 2
-  updateStrategy:
+  replicas: 2
+  strategy:
     rollingUpdate:
-      maxUnavailable: 1
+      maxSurge: 50%
+      maxUnavailable: 0
     type: RollingUpdate
   template:
     metadata:
@@ -15,6 +17,18 @@ spec:
         app: nginx
         nginx: bolagetio-nginx
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: nginx
+                  operator: In
+                  values:
+                  - bolagetio-nginx
+              topologyKey: kubernetes.io/hostname
       terminationGracePeriodSeconds: 60
       containers:
       - name: nginx
