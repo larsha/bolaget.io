@@ -12,12 +12,11 @@ env:
   global:
     - DOCKER_COMPOSE_VERSION=1.8.0
     - PROJECT_NAME=brynn-145714
-    - CLUSTER_NAME=cluster-1
-    - CLOUDSDK_COMPUTE_ZONE=europe-west1-b
+    - CLUSTER_NAME=bolagetio
+    - CLOUDSDK_COMPUTE_ZONE=europe-west1-c
     - DOCKER_IMAGE_NAME=bolagetio
     - K8S_NAMESPACE=bolagetio
     - K8S_DEPLOYMENT_NAME_WEB=web
-    - K8S_DEPLOYMENT_NAME_NGINX=nginx
     - COMMIT=${TRAVIS_COMMIT::7}
     - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 

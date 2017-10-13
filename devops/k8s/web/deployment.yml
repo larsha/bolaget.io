@@ -42,7 +42,7 @@ spec:
             memory: "150Mi"
         envFrom:
         - configMapRef:
-            name: web-v2
+            name: web
         ports:
         - containerPort: 3000
         - containerPort: 3001

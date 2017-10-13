@@ -26,6 +26,11 @@ spec:
           mountPath: /usr/share/elasticsearch/data
         image: eu.gcr.io/brynn-145714/bolagetio/elasticsearch:latest
         imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "512Mi"
+          limits:
+            memory: "1Gi"
         env:
         - name: ES_HEAP_SIZE
           value: "512m"
@@ -36,6 +41,3 @@ spec:
         - containerPort: 9300
           name: transport
           protocol: TCP
-        resources:
-          limits:
-            memory: 1Gi
