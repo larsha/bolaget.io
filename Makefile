@@ -1,7 +1,7 @@
 .PHONY: run loadtest
 
 date=$(shell date +%s)
-registry=eu.gcr.io/brynn-145714/brynnse
+registry=eu.gcr.io/brynn-145714/bolagetio
 
 run_job:
 	kubectl -n bolagetio delete job/worker

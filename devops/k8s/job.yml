@@ -4,7 +4,7 @@ metadata:
   name: worker
   namespace: bolagetio
 spec:
-  schedule: "30 01 * * *"
+  schedule: "00 03 * * *"
   jobTemplate:
     spec:
       template:

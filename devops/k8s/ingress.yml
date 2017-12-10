@@ -1,17 +1,18 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: bolagetio
+  name: ingress
   namespace: bolagetio
   annotations:
+    kubernetes.io/ingress.global-static-ip-name: "bolagetio-ipv4"
     kubernetes.io/tls-acme: "true"
     kubernetes.io/ingress.class: "gce"
 spec:
   tls:
   - secretName: bolagetio-tls
     hosts:
-      - bolaget.io
       - www.bolaget.io
+      - bolaget.io
   rules:
   - host: bolaget.io
     http:
@@ -19,11 +20,11 @@ spec:
       - path: /*
         backend:
           serviceName: nginx
-          servicePort: 80
+          servicePort: 8082
   - host: www.bolaget.io
     http:
       paths:
       - path: /*
         backend:
           serviceName: nginx
-          servicePort: 80
+          servicePort: 8082

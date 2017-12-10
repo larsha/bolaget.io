@@ -5,7 +5,7 @@ metadata:
   namespace: bolagetio
 spec:
   ports:
-  - port: 80
+  - port: 8082
     targetPort: 80
     protocol: TCP
   type: NodePort
