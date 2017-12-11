@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Bumping Node.js to 9.2.1
 - Bumping Nginx to 1.13.7
 - Changed Babel to new mono repo versions
+- Adding `CONTRIBUTING.md`
 
 ## [1.5.3] - 2017-10-07
 ### Changed
