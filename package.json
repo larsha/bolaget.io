@@ -9,7 +9,7 @@
     "worker": "npm run build && node .build/worker.js",
     "dev": "DEBUG=koa* nodemon app/web.js --exec babel-node",
     "dev:worker": "babel-node app/worker.js",
-    "test": "node ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --compilers js:babel-core/register --colors app/test/*.spec.js",
+    "test": "node ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --compilers js:@babel/register --colors app/test/*.spec.js",
     "test:travis": "npm test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "author": "Fredrik Lack <fredrik@fre.la>",
@@ -34,6 +34,7 @@
     "@babel/node": "7.0.0-beta.34",
     "@babel/plugin-transform-modules-commonjs": "7.0.0-beta.34",
     "@babel/preset-env": "7.0.0-beta.34",
+    "@babel/register": "7.0.0-beta.34",
     "chai": "3.5.0",
     "chai-as-promised": "6.0.0",
     "coveralls": "2.11.15",
