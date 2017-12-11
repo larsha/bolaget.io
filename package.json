@@ -1,6 +1,6 @@
 {
   "name": "bolaget.io",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "description": "RESTful JSON API for Swedish alcohol monopoly, Systembolaget",
   "main": "app/web.js",
   "scripts": {
@@ -13,7 +13,11 @@
     "test:travis": "npm test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "author": "Fredrik Lack <fredrik@fre.la>",
-  "url": "https://github.com/larsha/bolaget.io",
+  "url": "https://github.com/larsha/bolaget.io/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/larsha/bolaget.io"
+  },
   "license": "MIT",
   "standard": {
     "parser": "babel-eslint",
@@ -25,18 +29,20 @@
     ]
   },
   "devDependencies": {
-    "babel-cli": "6.10.1",
-    "babel-eslint": "6.0.5",
-    "babel-preset-node7": "1.3.0",
+    "@babel/cli": "7.0.0-beta.34",
+    "@babel/core": "7.0.0-beta.34",
+    "@babel/node": "7.0.0-beta.34",
+    "@babel/plugin-transform-modules-commonjs": "7.0.0-beta.34",
+    "@babel/preset-env": "7.0.0-beta.34",
     "chai": "3.5.0",
     "chai-as-promised": "6.0.0",
-    "mocha": "3.1.0",
-    "nodemon": "1.11.0",
-    "standard": "7.1.2",
     "coveralls": "2.11.15",
-    "mocha-lcov-reporter": "1.2.0",
     "istanbul": "1.0.0-alpha.2",
-    "nock": "9.0.2"
+    "mocha": "3.1.0",
+    "mocha-lcov-reporter": "1.2.0",
+    "nock": "9.0.2",
+    "nodemon": "1.11.0",
+    "standard": "7.1.2"
   },
   "dependencies": {
     "elasticsearch": "11.0.1",
