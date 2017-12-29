@@ -57,7 +57,7 @@ describe('Elastic', function () {
       return Elastic.getIndex(Date.now().toString()).should.be.rejected
     })
 
-    describe.skip('Entities', function () {
+    describe('Entities', function () {
       it('get and index products', function () {
         const productsTask = new ProductsTask()
 
@@ -94,7 +94,7 @@ describe('Elastic', function () {
           .should.be.fulfilled
       })
 
-      describe.skip('Store', function () {
+      describe('Store', function () {
         it('#getById()', function () {
           return Store.getById('0102')
             .then(data => {
@@ -131,7 +131,7 @@ describe('Elastic', function () {
         })
       })
 
-      describe.skip('Product', function () {
+      describe('Product', function () {
         it('#getById()', function () {
           return Product.getById('7599701')
             .then(data => {
