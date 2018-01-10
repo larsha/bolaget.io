@@ -27,7 +27,7 @@ install:
 script:
 - docker-compose up -d elastic
 - sleep 10
-- docker-compose run travis
+- docker-compose run --rm test
 deploy:
 - provider: script
   script: "./devops/script/deploy.sh"
