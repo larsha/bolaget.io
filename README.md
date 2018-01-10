@@ -83,12 +83,12 @@ Host: bolaget.io
 * **Error Response:**
 
   * **Code:** 500 INTERNAL SERVER ERROR <br />
-    **Content:** `{ error : e }`
+    **Content:** `{ error : "Ouch, an ugly error has occured!" }`
 
   OR
 
   * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ error : "Products doesn't exists" }`
+    **Content:** `{ error : "Move along, nothing to see here!" }`
 
 
 
@@ -108,12 +108,12 @@ Host: bolaget.io
 * **Error Response:**
 
   * **Code:** 500 INTERNAL SERVER ERROR <br />
-    **Content:** `{ error : e }`
+    **Content:** `{ error : "Ouch, an ugly error has occured!" }`
 
   OR
 
   * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ error : "Not Found" }`
+    **Content:** `{ error : "Move along, nothing to see here!" }`
 
 
 
@@ -161,12 +161,12 @@ Host: bolaget.io
 * **Error Response:**
 
   * **Code:** 500 Internal Server Error <br />
-    **Content:** `{ error : e }`
+    **Content:** `{ error : "Ouch, an ugly error has occured!" }`
 
   OR
 
   * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ error : "Not Found" }`
+    **Content:** `{ error : "Move along, nothing to see here!" }`
 
 
 **Store**
@@ -185,12 +185,12 @@ Host: bolaget.io
 * **Error Response:**
 
   * **Code:** 500 INTERNAL SERVER ERROR <br />
-    **Content:** `{ error : e }`
+    **Content:** `{ error : "Ouch, an ugly error has occured!" }`
 
   OR
 
   * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ error : "Not Found" }`
+    **Content:** `{ error : "Move along, nothing to see here!" }`
 
 
 **Development environment**
