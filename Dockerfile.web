@@ -1,12 +1,14 @@
-FROM node:9.2.1
+FROM node:9.3.0
 
-ADD package.json package-lock.json /web/
-RUN cd /web && npm install
+COPY . /home/node/web/
+WORKDIR /home/node/web
+RUN rm -rf node_modules
+RUN chown node --recursive .
 
-COPY . /web
-
-WORKDIR /web
-
+USER node
+RUN npm install
 RUN npm run build
+
+ENV NODE_ENV=production
 
 CMD ["node", ".build/web.js"]

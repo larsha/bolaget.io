@@ -1,6 +1,6 @@
 {
   "name": "bolaget.io",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "description": "RESTful JSON API for Swedish alcohol monopoly, Systembolaget",
   "main": "app/web.js",
   "scripts": {

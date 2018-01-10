@@ -5,5 +5,5 @@ services:
       context: .
       dockerfile: Dockerfile.web
     volumes:
-      - .:/web
-      - /web/node_modules
+      - .:/home/node/web
+      - /home/node/web/node_modules
