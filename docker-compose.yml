@@ -19,7 +19,7 @@ services:
       service: base
     environment:
       - ELASTIC_INDEX=bolaget_test
-    command: npm test
+    command: npm run test:pure
     depends_on:
       - elastic
   worker:
