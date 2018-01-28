@@ -5,14 +5,10 @@ metadata:
   namespace: bolagetio
   annotations:
     kubernetes.io/ingress.global-static-ip-name: "bolagetio-ipv4"
-    kubernetes.io/tls-acme: "true"
     kubernetes.io/ingress.class: "gce"
 spec:
   tls:
-  - secretName: bolagetio-tls
-    hosts:
-      - www.bolaget.io
-      - bolaget.io
+  - secretName: bolagetio-crt-secret-prod
   rules:
   - host: bolaget.io
     http:
