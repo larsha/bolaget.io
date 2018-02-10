@@ -12,7 +12,11 @@ const client = new elasticsearch.Client({
 // it must be extended by a Model class
 export default class Elastic {
   static async deleteIndexes (index) {
-    return client.indices.delete({ index })
+    if (index.length > 0) {
+      return client.indices.delete({ index })
+    }
+
+    return Promise.resolve()
   }
 
   static async getById (id) {
