@@ -21,8 +21,8 @@ export function capitalize (str) {
   return string ? `${string[0].toUpperCase()}${string.slice(1).toLowerCase()}` : ''
 }
 
-export function notEmpty (str = '') {
-  return str.trim().length > 0
+export function notEmpty (str) {
+  return Boolean(str)
 }
 
 export function numberToBool (value) {
