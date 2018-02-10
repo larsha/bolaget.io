@@ -1,6 +1,6 @@
 # bolaget.io (https://bolaget.io)
 
-[![Build Status](https://travis-ci.org/larsha/bolaget.io.svg?branch=master)](https://travis-ci.org/larsha/bolaget.io) [![Coverage Status](https://coveralls.io/repos/github/larsha/bolaget.io/badge.svg?branch=master)](https://coveralls.io/github/larsha/bolaget.io?branch=master)
+[![Build Status](https://travis-ci.org/larsha/bolaget.io.svg?branch=master)](https://travis-ci.org/larsha/bolaget.io)
 
 This API has nothing to do with Systembolaget, this app consumes a large XML API from Systembolaget and transforms it into a REST JSON API. More info can be found here: http://www.systembolaget.se/api
 
