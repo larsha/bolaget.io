@@ -27,7 +27,7 @@ install:
 - docker-compose build
 script:
 - docker-compose up -d elastic
-- sleep 10
+- sleep 20
 - docker-compose run --rm web npm test
 deploy:
 - provider: script

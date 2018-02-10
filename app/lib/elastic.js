@@ -86,7 +86,7 @@ export default class Elastic {
 
   async getIndexes () {
     return client.indices.get({ index: `${this.alias}-*` })
-      .then(indexes => Object.keys(indexes).join())
+      .then(indexes => indexes ? Object.keys(indexes).join() : '')
   }
 
   async putAlias () {
