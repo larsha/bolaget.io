@@ -1,6 +1,5 @@
 import Model from './model'
 import Request from '../../lib/request'
-import { sleep } from '../../lib/utils'
 
 export default class Task {
   async fetch () {

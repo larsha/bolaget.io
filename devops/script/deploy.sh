@@ -40,5 +40,7 @@ gcloud docker -- push $NGINX_IMAGE:$COMMIT
 gcloud docker -- push $NGINX_IMAGE:latest
 
 # Deploy
+kubectl -n ${K8S_NAMESPACE} delete cronjob web
+kubectl -n ${K8S_NAMESPACE} create -f devops/k8s/job.yml
 kubectl -n ${K8S_NAMESPACE} set image deployment/${K8S_DEPLOYMENT_NAME_NGINX} nginx=$NGINX_IMAGE:$COMMIT
 kubectl -n ${K8S_NAMESPACE} set image deployment/${K8S_DEPLOYMENT_NAME_WEB} web=$WEB_IMAGE:$COMMIT
