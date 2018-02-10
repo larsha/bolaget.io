@@ -85,7 +85,7 @@ export default class Model extends Elastic {
   }
 
   transformOpeningHours (str) {
-    const list = str ? str.split(/;;;0?\-?;/g) : []
+    const list = str ? str.split(/;;;0?-?;/g) : []
 
     return list
       .filter(notEmpty)
@@ -111,6 +111,6 @@ export default class Model extends Elastic {
   }
 
   transformPhone (str) {
-    return str.replace(/[\/\-]|\s/g, '')
+    return str.replace(/[/-]|\s/g, '')
   }
 }

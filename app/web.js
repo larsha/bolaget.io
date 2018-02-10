@@ -1,6 +1,5 @@
 import Koa from 'koa'
 import Router from 'koa-router'
-import path from 'path'
 import logger from 'koa-logger'
 import views from 'koa-views'
 import http from 'http'

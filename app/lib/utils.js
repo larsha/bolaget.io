@@ -39,7 +39,7 @@ export function listToArray (list) {
 }
 
 export async function sleep (sec = 10) {
-  return new Promise(r => setTimeout(r, sec * 1000))
+  return new Promise((resolve, reject) => setTimeout(resolve, sec * 1000))
 }
 
 export function fuzzyMatch (prop, query) {

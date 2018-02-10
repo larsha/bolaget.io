@@ -1,7 +1,7 @@
 import nock from 'nock'
 import Task from './task'
 import Model from './model'
-import { fuzzyMatch, rangeMatch, sleep } from '../../lib/utils'
+import { rangeMatch, sleep } from '../../lib/utils'
 
 describe('Products', () => {
   describe('Task', () => {

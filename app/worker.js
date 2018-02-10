@@ -1,4 +1,3 @@
-import Elastic from './lib/elastic'
 import logger from './lib/logger'
 import ProductsTask from './v1/products/task'
 import StoresTask from './v1/stores/task'
@@ -29,7 +28,7 @@ import StoresTask from './v1/stores/task'
       .catch(e => {
         logger.error('fetching stores', e)
         process.exit(1)
-      }),
+      })
   ])
 
   // Index new data

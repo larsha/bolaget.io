@@ -1,4 +1,5 @@
 import Model from './model'
+import logger from '../../lib/logger'
 import { fuzzyMatch, listToArray } from '../../lib/utils'
 
 export async function store (ctx, next) {
