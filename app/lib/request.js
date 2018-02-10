@@ -1,12 +1,12 @@
 import https from 'https'
 import xml2js from 'xml2js'
 
-class Request {
+export default class Request {
   constructor (endpoint) {
     this.endpoint = endpoint
   }
 
-  async get () {
+  async fetch () {
     return new Promise((resolve, reject) => {
       var req = https.get(this.endpoint, res => {
         let xml = ''
@@ -24,9 +24,8 @@ class Request {
   }
 
   async parse (xml) {
-    let parse = xml2js.parseString
     return new Promise((resolve, reject) => {
-      parse(xml, {
+      xml2js.parseString(xml, {
         strict: false,
         parseNumbers: true,
         parseBooleans: true,
@@ -43,5 +42,3 @@ class Request {
     })
   }
 }
-
-export default Request

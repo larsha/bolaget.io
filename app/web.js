@@ -1,12 +1,10 @@
 import Koa from 'koa'
-import router from 'koa-simple-router'
+import Router from 'koa-router'
 import path from 'path'
 import logger from 'koa-logger'
-import parser from 'koa-bodyparser'
 import views from 'koa-views'
 import http from 'http'
 import addShutdown from 'http-shutdown'
-
 import routes from './routes'
 import config from './config'
 import { sleep } from './lib/utils'
@@ -26,10 +24,7 @@ const app = new Koa()
 // Logs information
 app.use(logger())
 
-// Parses json body requests
-app.use(parser())
-
-app.use(views(path.join(__dirname, 'views'), {
+app.use(views(__dirname, {
   extension: 'hbs',
   map: {
     hbs: 'handlebars'
@@ -47,7 +42,9 @@ app.use(async (ctx, next) => {
 })
 
 // Setup routes
-app.use(routes())
+app
+  .use(routes.routes())
+  .use(routes.allowedMethods())
 
 // 404
 app.use(async ctx => {
@@ -61,26 +58,27 @@ server.listen(config.PORT)
 
 // Start the system server for health checks and graceful shutdowns
 const system = new Koa()
-
+const router = new Router()
 let ready = false
 
-system.use(router(r => {
-  r.get('/ready', ctx => {
-    if (ready) {
-      ctx.status = 200
-    } else {
-      ctx.status = 503
-    }
-  })
-
-  r.get('/prestop', async ctx => {
-    ready = false
-    await sleep(10)
+router.get('/ready', ctx => {
+  if (ready) {
     ctx.status = 200
-  })
-}))
+  } else {
+    ctx.status = 503
+  }
+})
 
-system.listen(config.SYSTEM_PORT)
+router.get('/prestop', async ctx => {
+  ready = false
+  await sleep(10)
+  ctx.status = 200
+})
+
+system
+  .use(router.routes())
+  .use(router.allowedMethods())
+  .listen(config.SYSTEM_PORT)
 
 process.on('SIGTERM', async () => {
   ready = false

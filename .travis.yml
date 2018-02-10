@@ -7,13 +7,14 @@ cache:
   - node_modules
 env:
   global:
-  - DOCKER_COMPOSE_VERSION=1.8.0
+  - DOCKER_COMPOSE_VERSION=1.17.1
   - PROJECT_NAME=brynn-145714
   - CLUSTER_NAME=d6658a9defae77f1757cb09d67b818757cd24486
   - CLOUDSDK_COMPUTE_ZONE=europe-west3-c
   - DOCKER_IMAGE_NAME=bolagetio
   - K8S_NAMESPACE=bolagetio
-  - K8S_DEPLOYMENT_NAME_WEB=web
+  - K8S_DEPLOYMENT_NAME_WEB=web-deployment
+  - K8S_DEPLOYMENT_NAME_NGINX=nginx-deployment
   - COMMIT=${TRAVIS_COMMIT::7}
   - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 before_install:
@@ -27,13 +28,18 @@ install:
 script:
 - docker-compose up -d elastic
 - sleep 10
-- docker-compose run --rm test
+- docker-compose run --rm web npm test
 deploy:
 - provider: script
   script: "./devops/script/deploy.sh"
   skip_cleanup: true
   on:
     branch: master
+- provider: script
+  script: "./devops/script/deploy.sh"
+  skip_cleanup: true
+  on:
+    branch: feature/elasticsearch-6.1.2-and-refactoring
 notifications:
   email: false
   slack:

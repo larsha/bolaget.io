@@ -15,12 +15,12 @@ spec:
       paths:
       - path: /*
         backend:
-          serviceName: nginx
-          servicePort: 8082
+          serviceName: nginx-svc
+          servicePort: 80
   - host: www.bolaget.io
     http:
       paths:
       - path: /*
         backend:
-          serviceName: nginx
-          servicePort: 8082
+          serviceName: nginx-svc
+          servicePort: 80

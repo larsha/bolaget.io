@@ -1,34 +1,48 @@
-function toNumber (value) {
-  return parseInt(value, 10) || null
+export function toNumber (value) {
+  const parsed = parseInt(value, 10)
+  if (isNaN(parsed)) {
+    return null
+  }
+
+  return parsed
 }
 
-function stringToBool (str) {
+export function randomString () {
+  return Math.random().toString(36).substring(2, 15)
+}
+
+export function stringToBool (str) {
   return str === 'true'
 }
 
-function capitalize (str) {
+export function capitalize (str) {
   let string = str.trim()
 
   return string ? `${string[0].toUpperCase()}${string.slice(1).toLowerCase()}` : ''
 }
 
-function empty (str) {
-  return Boolean(str)
+export function notEmpty (str = '') {
+  return str.trim().length > 0
 }
 
-function numberToBool (value) {
-  return !!parseInt(value, 10)
+export function numberToBool (value) {
+  const parsed = parseInt(value, 0)
+  if (isNaN(parsed)) {
+    return null
+  }
+
+  return !!parsed
 }
 
-function listToArray (list) {
+export function listToArray (list) {
   return list.split(',')
 }
 
-function sleep (sec = 10) {
+export async function sleep (sec = 10) {
   return new Promise(r => setTimeout(r, sec * 1000))
 }
 
-function fuzzyMatch (prop, query) {
+export function fuzzyMatch (prop, query) {
   let match = {
     [prop]: {
       query,
@@ -39,7 +53,7 @@ function fuzzyMatch (prop, query) {
   return { match }
 }
 
-function rangeMatch (prop, from, to) {
+export function rangeMatch (prop, from, to) {
   let match = { range: { [prop]: {} } }
 
   if (from) {
@@ -51,16 +65,4 @@ function rangeMatch (prop, from, to) {
   }
 
   return match
-}
-
-export {
-  stringToBool,
-  capitalize,
-  empty,
-  toNumber,
-  numberToBool,
-  fuzzyMatch,
-  rangeMatch,
-  listToArray,
-  sleep
 }

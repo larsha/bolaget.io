@@ -3,6 +3,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.6.0] - 2018-02-10
+### Changed
+- Bumping Node.js to 9.5.0
+- Bumping Nginx to 1.13.8
+- Changed from ElasticSearch 2.4.6 to 6.1.2
+- Changes ElasticSearch from k8s Deployment to a StatefulSet
+- Refactored/rewrote parts of code base mainly due to ElasticSearch upgrade
+- Changed file structure
+- Changed test lib/assertion from Mocha/Chai to Jest
+
+### Removed
+- Coveralls.io
+
 ## [1.5.5] - 2018-01-10
 ### Changed
 - Bumping Node.js to 9.3.0

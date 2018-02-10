@@ -207,8 +207,8 @@ Host: bolaget.io
 
 **Start worker**
 
-- ```docker-compose run --rm worker```
+- ```docker-compose run --rm web npm run dev:worker```
 
 **Run tests**
 
-- ```docker-compose run --rm test```
+- ```docker-compose run --rm web npm test```

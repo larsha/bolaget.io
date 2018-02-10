@@ -1,13 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx
+  name: nginx-svc
   namespace: bolagetio
 spec:
   ports:
-  - port: 8082
-    targetPort: 80
+  - port: 80
     protocol: TCP
   type: NodePort
   selector:
-    app: nginx
+    app: nginx-deployment

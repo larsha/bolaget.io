@@ -1,38 +1,20 @@
-version: '2'
+version: '3'
 services:
-  travis:
-    extends:
-      file: docker-compose.base.yml
-      service: base
-    environment:
-      - COVERALLS_REPO_TOKEN=${COVERALLS_REPO_TOKEN}
-      - TRAVIS=${TRAVIS}
-      - TRAVIS_BRANCH=${TRAVIS_BRANCH}
-      - TRAVIS_JOB_ID=${TRAVIS_JOB_ID}
-      - ELASTIC_INDEX=bolaget_test
-    command: npm run test:travis
-    depends_on:
-      - elastic
-  test:
-    extends:
-      file: docker-compose.base.yml
-      service: base
-    environment:
-      - ELASTIC_INDEX=bolaget_test
-    command: npm run test:pure
-    depends_on:
-      - elastic
-  worker:
-    extends:
-      file: docker-compose.base.yml
-      service: base
-    command: npm run dev:worker
-    depends_on:
-      - elastic
   web:
-    extends:
-      file: docker-compose.base.yml
-      service: base
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    environment:
+      - NODE_ENV=development
+      - ELASTIC_HOST=http://elastic:9200
+      - ELASTIC_INDEX_SHARDS=1
+      - ELASTIC_INDEX_REPLICAS=0
+      - ELASTIC_REQUEST_TIMEOUT=15000
+      - PORT=3000
+      - SYSTEM_PORT=3001
+    volumes:
+      - .:/home/node/web
+      - /home/node/web/node_modules # prevent node_modules from being overwritten by above line
     command: npm run dev
     ports:
       - "3000:3000"
@@ -40,10 +22,8 @@ services:
     depends_on:
       - elastic
   elastic:
-    build:
-      context: .
-      dockerfile: Dockerfile.elasticsearch
+    image: quay.io/pires/docker-elasticsearch-kubernetes:6.1.2
     environment:
-      - ES_HEAP_SIZE=256m
+      - ES_PLUGINS_INSTALL=analysis-icu
     ports:
       - "9200:9200"

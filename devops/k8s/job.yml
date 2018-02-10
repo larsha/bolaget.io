@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: worker
+  name: job
   namespace: bolagetio
 spec:
   schedule: "00 03 * * *"
@@ -10,11 +10,11 @@ spec:
       template:
         spec:
           containers:
-          - name: worker
-            image: eu.gcr.io/brynn-145714/bolagetio/web:latest
+          - name: job
+            image: eu.gcr.io/brynn-145714/bolagetio/web-deployment:latest
             imagePullPolicy: Always
             envFrom:
             - configMapRef:
-                name: web
-            command: ["npm", "run", "worker"]
+                name: web-config
+            command: ["node", ".build/worker.js"]
           restartPolicy: OnFailure

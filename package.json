@@ -1,17 +1,14 @@
 {
   "name": "bolaget.io",
-  "version": "1.5.5",
-  "description": "RESTful JSON API for Swedish alcohol monopoly, Systembolaget",
+  "version": "1.6.0",
+  "description": "RESTful(ish) JSON API for Swedish alcohol monopoly, Systembolaget",
   "main": "app/web.js",
   "scripts": {
+    "test": "jest",
+    "test:coverage": "jest --coverage",
     "build": "rm -rf .build && cp -rf app .build && babel app -d .build",
-    "start": "node .build/web.js",
-    "worker": "npm run build && node .build/worker.js",
     "dev": "DEBUG=koa* nodemon app/web.js --exec babel-node",
-    "dev:worker": "babel-node app/worker.js",
-    "test:pure": "mocha --compilers js:@babel/register --colors app/test/*.spec.js",
-    "test": "node ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --compilers js:@babel/register --colors app/test/*.spec.js",
-    "test:travis": "npm test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "dev:worker": "babel-node app/worker.js"
   },
   "author": "Fredrik Lack <fredrik@fre.la>",
   "url": "https://github.com/larsha/bolaget.io/issues",
@@ -21,42 +18,31 @@
   },
   "license": "MIT",
   "standard": {
-    "parser": "babel-eslint",
-    "globals": [
-      "describe",
-      "it",
-      "before",
-      "after"
-    ]
+    "parser": "babel-eslint"
   },
   "devDependencies": {
-    "@babel/cli": "7.0.0-beta.34",
-    "@babel/core": "7.0.0-beta.34",
-    "@babel/node": "7.0.0-beta.34",
-    "@babel/plugin-transform-modules-commonjs": "7.0.0-beta.34",
-    "@babel/preset-env": "7.0.0-beta.34",
-    "@babel/register": "7.0.0-beta.34",
-    "chai": "3.5.0",
-    "chai-as-promised": "6.0.0",
-    "coveralls": "2.11.15",
-    "istanbul": "1.0.0-alpha.2",
-    "mocha": "3.1.0",
-    "mocha-lcov-reporter": "1.2.0",
+    "@babel/cli": "7.0.0-beta.39",
+    "@babel/core": "7.0.0-beta.39",
+    "@babel/node": "7.0.0-beta.39",
+    "@babel/plugin-transform-modules-commonjs": "7.0.0-beta.39",
+    "@babel/preset-env": "7.0.0-beta.39",
+    "@babel/register": "7.0.0-beta.39",
+    "jest": "22.2.2",
+    "babel-jest": "22.2.2",
+    "babel-core": "^7.0.0-0",
     "nock": "9.1.5",
-    "nodemon": "1.11.0",
-    "standard": "7.1.2"
+    "nodemon": "1.14.12"
   },
   "dependencies": {
-    "elasticsearch": "11.0.1",
-    "es6-promise": "4.1.1",
-    "handlebars": "4.0.5",
+    "elasticsearch": "14.0.0",
+    "es6-promise": "4.2.4",
+    "handlebars": "4.0.11",
     "http-shutdown": "1.2.0",
-    "koa": "2.0.0",
-    "koa-bodyparser": "3.1.0",
-    "koa-logger": "2.0.0",
-    "koa-simple-router": "0.2.0",
+    "koa": "2.4.1",
+    "koa-logger": "3.1.0",
+    "koa-router": "7.4.0",
     "koa-views": "5.0.2",
     "winston": "2.2.0",
-    "xml2js": "0.4.16"
+    "xml2js": "0.4.19"
   }
 }

@@ -1,7 +1,17 @@
-import Product from '../../models/v1/product'
+import Model from './model'
+import logger from '../../lib/logger'
 import { stringToBool, fuzzyMatch, rangeMatch } from '../../lib/utils'
 
-export default async (ctx, next) => {
+export async function product (ctx, next) {
+  const id = ctx.params.id || null
+
+  const product = await Model.getById(id)
+    .catch(e => logger.error(e))
+
+  ctx.body = product
+}
+
+export async function products (ctx, next) {
   const maxLimit = 100
   const ecological = ctx.query.ecological
   const ethical = ctx.query.ethical
@@ -116,9 +126,7 @@ export default async (ctx, next) => {
       multi_match: {
         query: search,
         fields: [ 'name^2', 'additional_name', 'type^2', 'style^2', 'provider', 'producer', 'origin', 'origin_country', 'sealing', 'product_group', 'packaging' ],
-        type: 'phrase',
-        fuzziness: 'AUTO',
-        prefix_length: 0
+        type: 'phrase'
       }
     }
   }
@@ -142,8 +150,9 @@ export default async (ctx, next) => {
       sort = { 'name.sort': { order: 'asc' } }
   }
 
-  const { result, count } = await Product.find(query, offset, limit, sort)
+  const { result, count } = await Model.find(query, offset, limit, sort)
+    .catch(e => logger.error(e))
 
-  ctx.set('X-Total-Count', count)
+  ctx.set('x-total-count', count)
   ctx.body = result
 }
