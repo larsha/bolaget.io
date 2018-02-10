@@ -10,13 +10,13 @@ export default class Task {
 
   async index (data) {
     const model = new Model(data)
-
     const indexes = await model.getIndexes()
+    
     await model.createIndex()
     await model.bulkIndex()
     await model.updateIndex()
-    await Model.deleteIndexes(indexes)
+    await model.putAlias()
 
-    return model.putAlias()
+    return Model.deleteIndexes(indexes)
   }
 }
