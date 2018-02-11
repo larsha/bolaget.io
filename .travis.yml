@@ -35,11 +35,6 @@ deploy:
   skip_cleanup: true
   on:
     branch: master
-- provider: script
-  script: "./devops/script/deploy.sh"
-  skip_cleanup: true
-  on:
-    branch: feature/elasticsearch-6.1.2-and-refactoring
 notifications:
   email: false
   slack:
