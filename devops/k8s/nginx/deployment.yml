@@ -1,29 +1,45 @@
 apiVersion: extensions/v1beta1
-kind: DaemonSet
+kind: Deployment
 metadata:
-  name: nginx
+  name: nginx-deployment
   namespace: bolagetio
 spec:
   revisionHistoryLimit: 2
-  updateStrategy:
+  replicas: 1
+  strategy:
     rollingUpdate:
-      maxUnavailable: 1
+      maxSurge: 50%
+      maxUnavailable: 0
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: nginx
-        nginx: bolagetio-nginx
+        app: nginx-deployment
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - nginx-deployment
+              topologyKey: kubernetes.io/hostname
       terminationGracePeriodSeconds: 60
       containers:
       - name: nginx
-        image: eu.gcr.io/brynn-145714/bolagetio/nginx:latest
+        image: eu.gcr.io/brynn-145714/bolagetio/nginx-deployment:latest
         lifecycle:
           preStop:
             exec:
               command: ["sleep", "30"]
         imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "100Mi"
         ports:
         - containerPort: 80
         readinessProbe:

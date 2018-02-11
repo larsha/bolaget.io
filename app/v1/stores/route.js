@@ -1,7 +1,17 @@
-import Store from '../../models/v1/store'
+import Model from './model'
+import logger from '../../lib/logger'
 import { fuzzyMatch, listToArray } from '../../lib/utils'
 
-export default async (ctx, next) => {
+export async function store (ctx, next) {
+  const id = ctx.params.id || null
+
+  const store = await Model.getById(id)
+    .catch(e => logger.error(e))
+
+  ctx.body = store
+}
+
+export async function stores (ctx, next) {
   const maxLimit = 100
   const offset = parseInt(ctx.query.offset, 10) || 0
   const type = ctx.query.type
@@ -46,7 +56,7 @@ export default async (ctx, next) => {
   }
 
   if (labels) {
-    let list = listToArray(labels)
+    const list = listToArray(labels)
 
     list.forEach(str => {
       query.bool.must.push({
@@ -65,9 +75,7 @@ export default async (ctx, next) => {
       multi_match: {
         query: search,
         fields: [ 'name^2', 'address', 'additional_address', 'city', 'county', 'labels' ],
-        type: 'phrase',
-        fuzziness: 'AUTO',
-        prefix_length: 0
+        type: 'phrase'
       }
     }
   }
@@ -93,8 +101,9 @@ export default async (ctx, next) => {
       sort = { 'zip_code': { order: 'asc' } }
   }
 
-  const { result, count } = await Store.find(query, offset, limit, sort)
+  const { result, count } = await Model.find(query, offset, limit, sort)
+    .catch(e => logger.error(e))
 
-  ctx.set('X-Total-Count', count)
+  ctx.set('x-total-count', count)
   ctx.body = result
 }

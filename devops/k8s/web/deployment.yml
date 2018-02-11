@@ -1,11 +1,11 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: web
+  name: web-deployment
   namespace: bolagetio
 spec:
   revisionHistoryLimit: 2
-  replicas: 4
+  replicas: 1
   strategy:
     rollingUpdate:
       maxSurge: 50%
@@ -14,8 +14,7 @@ spec:
   template:
     metadata:
       labels:
-        app: web
-        web: bolagetio-web
+        app: web-deployment
     spec:
       affinity:
         podAntiAffinity:
@@ -24,25 +23,21 @@ spec:
             podAffinityTerm:
               labelSelector:
                 matchExpressions:
-                - key: web
+                - key: app
                   operator: In
                   values:
-                  - bolagetio-web
+                  - web-deployment
               topologyKey: kubernetes.io/hostname
       containers:
       - name: web
-        image: eu.gcr.io/brynn-145714/bolagetio/web:latest
+        image: eu.gcr.io/brynn-145714/bolagetio/web-deployment:latest
         imagePullPolicy: Always
         resources:
-          requests:
-            cpu: "100m"
-            memory: "50Mi"
           limits:
-            cpu: "200m"
-            memory: "150Mi"
+            memory: "200Mi"
         envFrom:
         - configMapRef:
-            name: web
+            name: web-config
         ports:
         - containerPort: 3000
         - containerPort: 3001

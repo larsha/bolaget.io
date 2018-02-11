@@ -17,8 +17,6 @@ gcloud --quiet config set container/cluster $CLUSTER_NAME
 gcloud --quiet config set compute/zone ${CLOUDSDK_COMPUTE_ZONE}
 gcloud --quiet container clusters get-credentials $CLUSTER_NAME
 
-# Build
-
 # Web
 WEB_IMAGE=eu.gcr.io/${PROJECT_NAME}/${DOCKER_IMAGE_NAME}/${K8S_DEPLOYMENT_NAME_WEB}
 
@@ -30,4 +28,19 @@ docker build \
 gcloud docker -- push $WEB_IMAGE:$COMMIT
 gcloud docker -- push $WEB_IMAGE:latest
 
-kubectl -n ${K8S_NAMESPACE} set image deployment/${K8S_DEPLOYMENT_NAME_WEB} ${K8S_DEPLOYMENT_NAME_WEB}=$WEB_IMAGE:$COMMIT
+# Nginx
+NGINX_IMAGE=eu.gcr.io/${PROJECT_NAME}/${DOCKER_IMAGE_NAME}/${K8S_DEPLOYMENT_NAME_NGINX}
+
+docker build \
+  -t $NGINX_IMAGE:$COMMIT \
+  -t $NGINX_IMAGE:latest \
+  -f Dockerfile.nginx .
+
+gcloud docker -- push $NGINX_IMAGE:$COMMIT
+gcloud docker -- push $NGINX_IMAGE:latest
+
+# Deploy
+kubectl -n ${K8S_NAMESPACE} delete cronjob job
+kubectl -n ${K8S_NAMESPACE} create -f devops/k8s/job.yml
+kubectl -n ${K8S_NAMESPACE} set image deployment/${K8S_DEPLOYMENT_NAME_NGINX} nginx=$NGINX_IMAGE:$COMMIT
+kubectl -n ${K8S_NAMESPACE} set image deployment/${K8S_DEPLOYMENT_NAME_WEB} web=$WEB_IMAGE:$COMMIT

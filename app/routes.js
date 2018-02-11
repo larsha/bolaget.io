@@ -1,23 +1,30 @@
-import router from 'koa-simple-router'
+import Router from 'koa-router'
 
-// v1
-import v1Products from './routes/v1/products'
-import v1Product from './routes/v1/product'
-import v1Stores from './routes/v1/stores'
-import v1Store from './routes/v1/store'
+import {
+  product as v1Product,
+  products as v1Products
+} from './v1/products/route'
 
-export default () => {
-  return router(r => {
-    r.get('/', async ctx => await ctx.render('index'))
+import {
+  store as v1Store,
+  stores as v1Stores
+} from './v1/stores/route'
 
-    r.get('/products/:id', v1Product)
-    r.get('/products', v1Products)
-    r.get('/stores/:id', v1Store)
-    r.get('/stores', v1Stores)
+const router = new Router()
 
-    r.get('/v1/products/:id', v1Product)
-    r.get('/v1/products', v1Products)
-    r.get('/v1/stores/:id', v1Store)
-    r.get('/v1/stores', v1Stores)
-  })
-}
+// Index
+router.get('/', ctx => ctx.render('index'))
+
+// Latest API
+router.get('/products/:id', v1Product)
+router.get('/products', v1Products)
+router.get('/stores/:id', v1Store)
+router.get('/stores', v1Stores)
+
+// v1 API
+router.get('/v1/products/:id', v1Product)
+router.get('/v1/products', v1Products)
+router.get('/v1/stores/:id', v1Store)
+router.get('/v1/stores', v1Stores)
+
+export default router

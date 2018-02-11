@@ -1,9 +1,0 @@
-version: '2'
-services:
-  base:
-    build:
-      context: .
-      dockerfile: Dockerfile.web
-    volumes:
-      - .:/home/node/web
-      - /home/node/web/node_modules

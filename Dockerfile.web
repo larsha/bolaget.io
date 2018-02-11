@@ -1,8 +1,7 @@
-FROM node:9.3.0
+FROM node:9.5.0
 
 COPY . /home/node/web/
 WORKDIR /home/node/web
-RUN rm -rf node_modules
 RUN chown node --recursive .
 
 USER node

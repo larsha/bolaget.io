@@ -1,51 +1,52 @@
-import Elastic from './lib/elastic'
-import logger from 'winston'
-import ProductsTask from './lib/worker/tasks/products'
-import StoresTask from './lib/worker/tasks/stores'
+import logger from './lib/logger'
+import ProductsTask from './v1/products/task'
+import StoresTask from './v1/stores/task'
 
-async function worker (i = 0) {
-  try {
-    const productsTask = new ProductsTask()
-    const storesTask = new StoresTask()
+(async () => {
+  let timer = logger.startTimer()
+  logger.info('starting worker...')
 
-    const [products, stores] = await Promise.all([
-      productsTask.get(),
-      storesTask.get()
-    ])
+  const productsTask = new ProductsTask()
+  const storesTask = new StoresTask()
 
-    // setup new index
-    const newIndex = new Date().getTime().toString()
-    await Elastic.createIndex(newIndex)
+  // Fetch data
+  var [ products, stores ] = await Promise.all([
+    productsTask.fetch()
+      .then(p => {
+        logger.info(`fetched products`)
+        return p
+      })
+      .catch(e => {
+        logger.error('fetching products', e)
+        process.exit(1)
+      }),
+    storesTask.fetch()
+      .then(s => {
+        logger.info(`fetched stores`)
+        return s
+      })
+      .catch(e => {
+        logger.error('fetching stores', e)
+        process.exit(1)
+      })
+  ])
 
-    await Promise.all([
-      productsTask.index(products, newIndex),
-      storesTask.index(stores, newIndex)
-    ])
+  // Index new data
+  await Promise.all([
+    productsTask.index(products)
+      .then(() => logger.info('indexed products'))
+      .catch(e => {
+        logger.error('indexing products', e)
+        process.exit(1)
+      }),
+    storesTask.index(stores)
+      .then(() => logger.info('indexed stores'))
+      .catch(e => {
+        logger.error('indexing stores', e)
+        process.exit(1)
+      })
+  ])
 
-    await Elastic.putAlias(newIndex)
-
-    // remove old ones
-    const indexes = await Elastic.getIndex()
-    const oldIndexes = Object.keys(indexes)
-      .filter(o => o !== newIndex)
-      .join()
-
-    await Elastic.deleteIndex(oldIndexes)
-
-    logger.info(`${new Date()}: worker done!`)
-    process.exit()
-  } catch (e) {
-    if (i < 5) {
-      i++
-      setTimeout(() => {
-        logger.info(`retrying...`)
-        worker(i)
-      }, 10000)
-    } else {
-      logger.info(`${new Date()}: ${e.stack}`)
-      process.exit(1)
-    }
-  }
-}
-
-worker()
+  timer.done('complete')
+  process.exit()
+})()
