@@ -42,17 +42,18 @@ spec:
             memory: "100Mi"
         ports:
         - containerPort: 80
+        - containerPort: 8080
         readinessProbe:
           httpGet:
             path: /ready
-            port: 80
+            port: 8080
           periodSeconds: 1
           successThreshold: 1
           failureThreshold: 1
         livenessProbe:
           httpGet:
             path: /ready
-            port: 80
+            port: 8080
           periodSeconds: 10
           successThreshold: 1
           failureThreshold: 1

@@ -41,8 +41,6 @@ spec:
               - IPC_LOCK
         image: quay.io/pires/docker-elasticsearch-kubernetes:6.1.2
         resources:
-          requests:
-            memory: "256Mi"
           limits:
             memory: "512Mi"
         env:
