@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.6.3] - 2018-03-18
+### Changed
+- Bumping Node.js to 9.8.0
+- Nginx config - security update with proper redirect and HSTS header
+
 ## [1.6.2] - 2018-03-07
 ### Changed
 - Bumping Node.js to 9.7.1
