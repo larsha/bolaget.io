@@ -10,7 +10,7 @@ import StoresTask from './v1/stores/task'
   const storesTask = new StoresTask()
 
   // Fetch data
-  var [ products, stores ] = await Promise.all([
+  const [ products, stores ] = await Promise.all([
     productsTask.fetch()
       .then(p => {
         logger.info(`fetched products`)
