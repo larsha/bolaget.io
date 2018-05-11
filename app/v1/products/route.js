@@ -8,7 +8,11 @@ export async function product (ctx, next) {
   const product = await Model.getById(id)
     .catch(e => logger.error(e))
 
-  ctx.body = product
+  if (product) {
+    ctx.body = product
+  } else {
+    ctx.throw(404)
+  }
 }
 
 export async function products (ctx, next) {
@@ -154,5 +158,10 @@ export async function products (ctx, next) {
     .catch(e => logger.error(e))
 
   ctx.set('x-total-count', count)
-  ctx.body = result
+
+  if (result) {
+    ctx.body = result
+  } else {
+    ctx.throw(404)
+  }
 }

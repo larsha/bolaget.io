@@ -8,7 +8,11 @@ export async function store (ctx, next) {
   const store = await Model.getById(id)
     .catch(e => logger.error(e))
 
-  ctx.body = store
+  if (store) {
+    ctx.body = store
+  } else {
+    ctx.throw(404)
+  }
 }
 
 export async function stores (ctx, next) {
@@ -105,5 +109,10 @@ export async function stores (ctx, next) {
     .catch(e => logger.error(e))
 
   ctx.set('x-total-count', count)
-  ctx.body = result
+
+  if (result) {
+    ctx.body = result
+  } else {
+    ctx.throw(404)
+  }
 }
