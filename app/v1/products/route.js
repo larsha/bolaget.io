@@ -2,11 +2,16 @@ import Model from './model'
 import logger from '../../lib/logger'
 import { stringToBool, fuzzyMatch, rangeMatch } from '../../lib/utils'
 
-export async function product (ctx, next) {
+export async function product (ctx) {
   const id = ctx.params.id || null
 
   const product = await Model.getById(id)
-    .catch(e => logger.error(e))
+    .catch(e => {
+      if (e.status !== 404) {
+        ctx.throw(500)
+        logger.error(e)
+      }
+    })
 
   if (product) {
     ctx.body = product
@@ -15,7 +20,7 @@ export async function product (ctx, next) {
   }
 }
 
-export async function products (ctx, next) {
+export async function products (ctx) {
   const maxLimit = 100
   const ecological = ctx.query.ecological
   const ethical = ctx.query.ethical
@@ -155,11 +160,15 @@ export async function products (ctx, next) {
   }
 
   const { result, count } = await Model.find(query, offset, limit, sort)
-    .catch(e => logger.error(e))
-
-  ctx.set('x-total-count', count)
+    .catch(e => {
+      if (e.status !== 404) {
+        ctx.throw(500)
+        logger.error(e)
+      }
+    })
 
   if (result) {
+    ctx.set('x-total-count', count)
     ctx.body = result
   } else {
     ctx.throw(404)

@@ -6,7 +6,12 @@ export async function store (ctx, next) {
   const id = ctx.params.id || null
 
   const store = await Model.getById(id)
-    .catch(e => logger.error(e))
+    .catch(e => {
+      if (e.status !== 404) {
+        ctx.throw(500)
+        logger.error(e)
+      }
+    })
 
   if (store) {
     ctx.body = store
@@ -106,11 +111,15 @@ export async function stores (ctx, next) {
   }
 
   const { result, count } = await Model.find(query, offset, limit, sort)
-    .catch(e => logger.error(e))
-
-  ctx.set('x-total-count', count)
+    .catch(e => {
+      if (e.status !== 404) {
+        ctx.throw(500)
+        logger.error(e)
+      }
+    })
 
   if (result) {
+    ctx.set('x-total-count', count)
     ctx.body = result
   } else {
     ctx.throw(404)

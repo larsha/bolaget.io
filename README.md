@@ -77,18 +77,13 @@ Host: bolaget.io
 * **Success Response:**
 
   * **Code:** 200 <br />
-    **Content:** `[{ name: '117 Grythyttan' ... }]`
+    **Content:** `[{ name: '117 Grythyttan' ... }]` or `[]`
 
 
 * **Error Response:**
 
   * **Code:** 500 INTERNAL SERVER ERROR <br />
     **Content:** `{ error : "Ouch, an ugly error has occured!" }`
-
-  OR
-
-  * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ error : "Move along, nothing to see here!" }`
 
 
 
@@ -155,18 +150,13 @@ Host: bolaget.io
 * **Success Response:**
 
   * **Code:** 200 <br />
-    **Content:** `[{ adress_1: 'Kungsholmstorg 11 A' ... }]`
+    **Content:** `[{ adress_1: 'Kungsholmstorg 11 A' ... }]` or `[]`
 
 
 * **Error Response:**
 
   * **Code:** 500 Internal Server Error <br />
     **Content:** `{ error : "Ouch, an ugly error has occured!" }`
-
-  OR
-
-  * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ error : "Move along, nothing to see here!" }`
 
 
 **Store**
