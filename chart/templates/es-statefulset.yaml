@@ -1,17 +1,16 @@
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
-  name: es
+  name: elasticsearch
   namespace: bolagetio
-  labels:
-    component: elasticsearch
 spec:
-  serviceName: es
-  replicas: 3
+  serviceName: elasticsearch-service
+  replicas: {{ .Values.elasticsearch.replicas }}
   template:
     metadata:
       labels:
-        component: elasticsearch
+        app: bolagetio
+        service: elasticsearch-statefulset
     spec:
       affinity:
         podAntiAffinity:
@@ -20,10 +19,10 @@ spec:
             podAffinityTerm:
               labelSelector:
                 matchExpressions:
-                - key: component
+                - key: service
                   operator: In
                   values:
-                  - elasticsearch
+                  - elasticsearch-statefulset
               topologyKey: kubernetes.io/hostname
       serviceAccount: elasticsearch
       initContainers:
@@ -34,7 +33,7 @@ spec:
         securityContext:
           privileged: true
       containers:
-      - name: es
+      - name: elasticsearch
         securityContext:
           capabilities:
             add:
@@ -51,9 +50,9 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         - name: CLUSTER_NAME
-          value: "es"
+          value: "elasticsearch"
         - name: DISCOVERY_SERVICE
-          value: "es"
+          value: "elasticsearch-service"
         - name: NODE_MASTER
           value: "true"
         - name: NODE_DATA
@@ -65,7 +64,7 @@ spec:
         - name: ES_JAVA_OPTS
           value: "-Xms256m -Xmx256m"
         - name: NUMBER_OF_MASTERS
-          value: "2"
+          value: "{{ .Values.elasticsearch.numberOfMasters }}"
         ports:
         - containerPort: 9200
           name: http
@@ -85,7 +84,9 @@ spec:
   - metadata:
       name: storage
     spec:
+{{ if .Values.elasticsearch.storageClassName }}
       storageClassName: ssd
+{{ end }}
       accessModes: [ ReadWriteOnce ]
       resources:
         requests:

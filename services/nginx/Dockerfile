@@ -1,5 +1,8 @@
 FROM nginx:1.15.4-alpine
+
+ARG CONF=0
+
 RUN rm /etc/nginx/nginx.conf
-COPY /nginx/nginx.conf /etc/nginx/nginx.conf
+COPY /src/${CONF} /etc/nginx/nginx.conf
 
 EXPOSE 80

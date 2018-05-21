@@ -17,30 +17,18 @@ gcloud --quiet config set container/cluster $CLUSTER_NAME
 gcloud --quiet config set compute/zone ${CLOUDSDK_COMPUTE_ZONE}
 gcloud --quiet container clusters get-credentials $CLUSTER_NAME
 
-# Web
-WEB_IMAGE=eu.gcr.io/${PROJECT_NAME}/${DOCKER_IMAGE_NAME}/${K8S_DEPLOYMENT_NAME_WEB}
+# Install Helm
+curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_helm.sh
+chmod 700 get_helm.sh
+sudo ./get_helm.sh
+helm init --client-only
 
-docker build \
-  -t $WEB_IMAGE:$COMMIT \
-  -t $WEB_IMAGE:latest \
-  -f Dockerfile.web .
-
+# Push images
 gcloud docker -- push $WEB_IMAGE:$COMMIT
 gcloud docker -- push $WEB_IMAGE:latest
-
-# Nginx
-NGINX_IMAGE=eu.gcr.io/${PROJECT_NAME}/${DOCKER_IMAGE_NAME}/${K8S_DEPLOYMENT_NAME_NGINX}
-
-docker build \
-  -t $NGINX_IMAGE:$COMMIT \
-  -t $NGINX_IMAGE:latest \
-  -f Dockerfile.nginx .
-
 gcloud docker -- push $NGINX_IMAGE:$COMMIT
 gcloud docker -- push $NGINX_IMAGE:latest
 
 # Deploy
-kubectl -n ${K8S_NAMESPACE} delete cronjob job
-kubectl -n ${K8S_NAMESPACE} create -f devops/k8s/job.yml
-kubectl -n ${K8S_NAMESPACE} set image deployment/${K8S_DEPLOYMENT_NAME_NGINX} nginx=$NGINX_IMAGE:$COMMIT
-kubectl -n ${K8S_NAMESPACE} set image deployment/${K8S_DEPLOYMENT_NAME_WEB} web=$WEB_IMAGE:$COMMIT
+kubectl config set-context $(kubectl config current-context) --namespace=bolagetio
+helm upgrade -f chart/values.production.yaml bolagetio ../chart

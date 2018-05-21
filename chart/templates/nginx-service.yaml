@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  namespace: bolagetio
+  labels:
+    app: bolagetio
+spec:
+  ports:
+  - port: {{ .Values.nginx.service.port }}
+    protocol: TCP
+  type: {{ .Values.nginx.service.type | quote }}
+  selector:
+    service: nginx-deployment

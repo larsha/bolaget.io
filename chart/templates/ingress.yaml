@@ -1,3 +1,4 @@
+{{ if .Values.ingress.enabled }}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -15,12 +16,13 @@ spec:
       paths:
       - path: /*
         backend:
-          serviceName: nginx-svc
+          serviceName: nginx-service
           servicePort: 80
   - host: www.bolaget.io
     http:
       paths:
       - path: /*
         backend:
-          serviceName: nginx-svc
+          serviceName: nginx-service
           servicePort: 80
+{{ end }}

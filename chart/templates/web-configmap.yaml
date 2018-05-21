@@ -1,0 +1,13 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: web-config
+  namespace: bolagetio
+data:
+  PORT: "3000"
+  SYSTEM_PORT: "3001"
+  NODE_ENV: "{{ .Values.web.configmap.nodeEnv }}"
+  ELASTIC_HOST: "elasticsearch-service.bolagetio.svc.cluster.local:9200"
+  ELASTIC_INDEX_REPLICAS: "{{ .Values.web.configmap.elasticIndexReplicas }}"
+  ELASTIC_INDEX_SHARDS: "{{ .Values.web.configmap.elasticIndexShards }}"
+  ELASTIC_REQUEST_TIMEOUT: "10000"

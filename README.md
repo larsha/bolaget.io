@@ -189,20 +189,9 @@ Host: bolaget.io
 
 **Development environment**
 ----
-  Using Docker and Docker Compose (https://www.docker.com/)
-
-**Build**
-
-- ```docker-compose build```
-
-**Start**
-
-- ```docker-compose up web```
-
-**Start worker**
-
-- ```docker-compose run --rm web npm run dev:worker```
-
-**Run tests**
-
-- ```docker-compose run --rm web npm test```
+  * Install Kubernetes
+  * Install `kubectl`
+  * Install `helm`
+  
+ Copy [`chart/values.yaml`](chart/values.yaml) to `chart/values.local.yaml` file to match your local Kubernetes cluster and set commented lines accordingly.
+ See [`Makefile`](Makefile) for more instructions. 

@@ -5,7 +5,7 @@ metadata:
   namespace: bolagetio
 spec:
   revisionHistoryLimit: 2
-  replicas: 3
+  replicas: {{ .Values.web.replicas }}
   strategy:
     rollingUpdate:
       maxSurge: 50%
@@ -16,8 +16,11 @@ spec:
       app: web-deployment
   template:
     metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/web-configmap.yaml") . | sha256sum }}
       labels:
-        app: web-deployment
+        app: bolagetio
+        service: web-deployment
     spec:
       affinity:
         podAntiAffinity:
@@ -26,15 +29,18 @@ spec:
             podAffinityTerm:
               labelSelector:
                 matchExpressions:
-                - key: app
+                - key: service
                   operator: In
                   values:
                   - web-deployment
               topologyKey: kubernetes.io/hostname
       containers:
       - name: web
-        image: eu.gcr.io/brynn-145714/bolagetio/web-deployment:latest
-        imagePullPolicy: Always
+        image: "{{ .Values.web.image.repository }}:{{ .Values.web.image.tag }}"
+        imagePullPolicy: {{ .Values.web.image.pullPolicy | quote }}
+{{ if .Values.web.development }}
+        command: ["npm", "run", "dev"]
+{{ end }}
         resources:
           requests:
             cpu: 50m
