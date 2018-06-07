@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.6.8] - 2018-06-07
+### Changed
+- Bumping Node.js to 10.4.0
+- Bumping Nginx to 1.15.0
+
 ## [1.6.7] - 2018-05-13
 ### Changed
 - Fixing README to show correct response data not found for `/stores` and `/products`
