@@ -4,6 +4,10 @@
 
 This API has nothing to do with Systembolaget, this app consumes a large XML API from Systembolaget and transforms it into a REST JSON API. More info can be found here: http://www.systembolaget.se/api
 
+**Flowchart**
+--
+![Flowchart](./flowchart.png)
+
 **Versions**
 --
 
