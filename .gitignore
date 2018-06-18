@@ -43,3 +43,4 @@ jspm_packages
 locustfile.pyc
 
 .idea/
+.DS_Store

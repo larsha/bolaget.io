@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.6.9] - 2018-06-18
+### Changed
+- Bumping Node.js to 10.4.1
+- Changing to `npm ci`
+
 ## [1.6.8] - 2018-06-07
 ### Changed
 - Bumping Node.js to 10.4.0

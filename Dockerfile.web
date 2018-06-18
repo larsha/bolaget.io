@@ -1,11 +1,11 @@
-FROM node:10.4.0
+FROM node:10.4.1
 
 COPY . /home/node/web/
 WORKDIR /home/node/web
 RUN chown node --recursive .
 
 USER node
-RUN npm install
+RUN npm ci
 RUN npm run build
 
 ENV NODE_ENV=production
