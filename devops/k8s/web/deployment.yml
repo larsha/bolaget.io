@@ -1,16 +1,19 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web-deployment
   namespace: bolagetio
 spec:
   revisionHistoryLimit: 2
-  replicas: 1
+  replicas: 3
   strategy:
     rollingUpdate:
       maxSurge: 50%
       maxUnavailable: 0
     type: RollingUpdate
+  selector:
+    matchLabels:
+      app: web-deployment
   template:
     metadata:
       labels:
@@ -33,8 +36,12 @@ spec:
         image: eu.gcr.io/brynn-145714/bolagetio/web-deployment:latest
         imagePullPolicy: Always
         resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
           limits:
-            memory: "200Mi"
+            cpu: 100m
+            memory: 128Mi
         envFrom:
         - configMapRef:
             name: web-config

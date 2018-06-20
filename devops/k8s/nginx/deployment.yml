@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-deployment
@@ -11,6 +11,9 @@ spec:
       maxSurge: 50%
       maxUnavailable: 0
     type: RollingUpdate
+  selector:
+    matchLabels:
+      app: nginx-deployment
   template:
     metadata:
       labels:
