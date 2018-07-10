@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.6.10] - 2018-07-10
+### Changed
+- Bumping Node.js to 10.6.0
+- Bumping Nginx to 1.15.1
+- Bumping deps:
+  - `elasticsearch` from `14.0.0` to `15.1.1`
+  - `koa` from `2.4.1` to `2.5.1`
+  - `koa-logger` from `3.1.0` to `3.2.0`
+  - `koa-views` from `5.0.2` to `6.1.4`
+
 ## [1.6.9] - 2018-06-18
 ### Changed
 - Bumping Node.js to 10.4.1

@@ -1,6 +1,6 @@
 {
   "name": "bolaget.io",
-  "version": "1.6.9",
+  "version": "1.6.10",
   "description": "RESTful(ish) JSON API for Swedish alcohol monopoly, Systembolaget",
   "main": "app/web.js",
   "scripts": {
@@ -9,7 +9,6 @@
     "build": "rm -rf .build && cp -rf app .build && babel app -d .build",
     "dev": "DEBUG=koa* nodemon app/web.js --exec babel-node",
     "dev:worker": "babel-node app/worker.js",
-    "precommit": "lint-staged",
     "standard": "standard"
   },
   "author": "Fredrik Lack <fredrik@fre.la>",
@@ -18,6 +17,11 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/larsha/bolaget.io"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.js": [
@@ -31,30 +35,30 @@
     ]
   },
   "devDependencies": {
-    "@babel/cli": "7.0.0-beta.39",
-    "@babel/core": "7.0.0-beta.39",
-    "@babel/node": "7.0.0-beta.39",
-    "@babel/plugin-transform-modules-commonjs": "7.0.0-beta.39",
-    "@babel/preset-env": "7.0.0-beta.39",
-    "@babel/register": "7.0.0-beta.39",
-    "jest": "22.2.2",
-    "babel-jest": "22.2.2",
+    "@babel/cli": "7.0.0-beta.52",
+    "@babel/core": "7.0.0-beta.52",
+    "@babel/node": "7.0.0-beta.52",
+    "@babel/plugin-transform-modules-commonjs": "7.0.0-beta.52",
+    "@babel/preset-env": "7.0.0-beta.52",
+    "@babel/register": "7.0.0-beta.52",
     "babel-core": "^7.0.0-0",
-    "nock": "9.1.5",
-    "nodemon": "1.14.12",
-    "standard": "10.0.3",
+    "babel-jest": "23.4.0",
+    "husky": "1.0.0-rc.13",
+    "jest": "23.4.0",
     "lint-staged": "6.1.0",
-    "husky": "0.14.3"
+    "nock": "9.4.2",
+    "nodemon": "1.18.0",
+    "standard": "11.0.1"
   },
   "dependencies": {
-    "elasticsearch": "14.0.0",
+    "elasticsearch": "15.1.1",
     "es6-promise": "4.2.4",
     "handlebars": "4.0.11",
     "http-shutdown": "1.2.0",
-    "koa": "2.4.1",
-    "koa-logger": "3.1.0",
+    "koa": "2.5.1",
+    "koa-logger": "3.2.0",
     "koa-router": "7.4.0",
-    "koa-views": "5.0.2",
+    "koa-views": "6.1.4",
     "winston": "2.2.0",
     "xml2js": "0.4.19"
   }
