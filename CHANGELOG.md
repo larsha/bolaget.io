@@ -3,6 +3,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.6.13] - 2018-09-28
+### Changed
+- Bumping Node.js to 10.11.0
+- Bumping Nginx to 1.15.4
+- Bumping deps:
+  - `@babel/cli`, `@babel/core`, `@babel/plugin-transform-modules-commonjs`, `@babel/preset-env` from `7.0.0-rc.1` to `7.1.0`
+  - `@babel/node`, `@babel/register` from `7.0.0-rc.1` to `7.0.0`
+  - `babel-jest` from `23.4.2` to `23.6.0` 
+  - `es6-promise` from `4.2.4` to `4.2.5` 
+  - `handlebars` from `4.0.11` to `4.0.12` 
+  - `husky` from `1.0.0-rc.13` to `1.0.1` 
+  - `jest` from `23.5.0` to `23.6.0` 
+  - `lint-staged` from `7.2.0` to `7.3.0` 
+  - `nock` from `9.6.0` to `10.0.0` 
+  - `nodemon` from `1.18.3` to `1.18.4` 
+  - `koa` from `2.5.2` to `2.5.3` 
+  - `standard` from `11.0.1` to `12.0.1` 
+
 ## [1.6.12] - 2018-08-10
 ### Changed
 - Bumping Node.js to 10.8.0
