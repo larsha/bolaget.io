@@ -13,9 +13,8 @@ nginx:
 
   image:
     repository: eu.gcr.io/brynn-145714/bolagetio/nginx-deployment
-#    repository: docker.for.mac.localhost:5000/bolagetio/nginx-deployment
-    tag: latest
-    pullPolicy: Always
+    tag: local
+    pullPolicy: Never
 
   service:
     type: ClusterIP
@@ -26,9 +25,8 @@ web:
 
   image:
     repository: eu.gcr.io/brynn-145714/bolagetio/web-deployment
-#    repository: docker.for.mac.localhost:5000/bolagetio/web-deployment
-    tag: latest
-    pullPolicy: Always
+    tag: local
+    pullPolicy: Never
 
   job:
     schedule: 00 03 * * *
@@ -39,11 +37,3 @@ web:
     elasticIndexShards: 1
 
   development: true
-
-#  # Mount project files in container to allow sync and changes to
-#  # take affect without rebuilding docker image while developing
-#  volumeMounts:
-#    mountPath: /home/node/web/src
-#  volumes:
-#    hostPath:
-#      path: PATH/TO/THIS/REPO/bolaget.io/services/web/src

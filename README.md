@@ -189,9 +189,34 @@ Host: bolaget.io
 
 **Development environment**
 ----
-  * Install Kubernetes
-  * Install `kubectl`
-  * Install `helm`
-  
- Copy [`chart/values.yaml`](chart/values.yaml) to `chart/values.local.yaml` file to match your local Kubernetes cluster and set commented lines accordingly.
- See [`Makefile`](Makefile) for more instructions. 
+#### Kubernetes
+You need a local Kubernetes cluster (minikube, docker-for-mac etc.) with `helm` installed.
+
+Build:
+```bash
+make build
+```
+
+Install:
+```bash
+helm install --name bolagetio ./chart
+```
+ 
+ #### Docker Compose
+Using Docker and Docker Compose (https://www.docker.com/)
+ 
+ **Build**
+ 
+ - ```docker-compose build```
+ 
+ **Start**
+ 
+ - ```docker-compose up web```
+ 
+ **Start worker**
+ 
+ - ```docker-compose run --rm web npm run dev:worker```
+ 
+ **Run tests**
+ 
+ - ```docker-compose run --rm web npm test```

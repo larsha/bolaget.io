@@ -8,15 +8,15 @@ spec:
   secretName: bolagetio-crt-secret-prod
   commonName: bolaget.io
   dnsNames:
-  - bolaget.io
-  - www.bolaget.io
+    - bolaget.io
+    - www.bolaget.io
   acme:
     config:
     - dns01:
         provider: clouddns
       domains:
-      - bolaget.io
-      - www.bolaget.io
+        - bolaget.io
+        - www.bolaget.io
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer

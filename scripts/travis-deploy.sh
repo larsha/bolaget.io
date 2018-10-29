@@ -31,4 +31,11 @@ gcloud docker -- push $NGINX_IMAGE:latest
 
 # Deploy
 kubectl config set-context $(kubectl config current-context) --namespace=bolagetio
-helm upgrade -f chart/values.production.yaml bolagetio ../chart
+helm upgrade \
+  --tiller-namespace tiller \
+  --namespace bolagetio \
+  -f chart/values.production.yaml \
+  --install \
+	--wait \
+	--timeout 300 \
+  bolagetio ./chart

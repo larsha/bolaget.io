@@ -1,4 +1,4 @@
-FROM nginx:1.15.4-alpine
+FROM nginx:1.15.5-alpine
 
 ARG CONF=0
 

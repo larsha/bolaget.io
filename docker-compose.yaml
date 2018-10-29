@@ -1,0 +1,28 @@
+version: '3'
+services:
+  web:
+    build:
+      context: services/web
+    environment:
+      - NODE_ENV=development
+      - ELASTIC_HOST=http://elastic:9200
+      - ELASTIC_INDEX_SHARDS=1
+      - ELASTIC_INDEX_REPLICAS=0
+      - ELASTIC_REQUEST_TIMEOUT=15000
+      - PORT=3000
+      - SYSTEM_PORT=3001
+    volumes:
+      - .:/home/node/web
+      - /home/node/web/node_modules # prevent node_modules from being overwritten by above line
+    command: npm run dev
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+    depends_on:
+      - elastic
+  elastic:
+    image: quay.io/pires/docker-elasticsearch-kubernetes:6.1.2
+    environment:
+      - ES_PLUGINS_INSTALL=analysis-icu
+    ports:
+      - "9200:9200"
