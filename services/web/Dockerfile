@@ -1,6 +1,9 @@
 FROM node:10.12.0
 
-COPY . /home/node/web/
+COPY src /home/node/web/src
+COPY package.json /home/node/web/package.json
+COPY package-lock.json /home/node/web/package-lock.json
+COPY nodemon.json /home/node/web/nodemon.json
 WORKDIR /home/node/web
 RUN chown node --recursive .
 

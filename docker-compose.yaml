@@ -12,7 +12,7 @@ services:
       - PORT=3000
       - SYSTEM_PORT=3001
     volumes:
-      - .:/home/node/web
+      - ./services/web:/home/node/web
       - /home/node/web/node_modules # prevent node_modules from being overwritten by above line
     command: npm run dev
     ports:
