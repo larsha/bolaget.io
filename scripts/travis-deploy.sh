@@ -18,7 +18,7 @@ gcloud --quiet container clusters get-credentials $CLUSTER_NAME
 # Helm (version here must match Helm/Tiller in cluster)
 curl -o /tmp/helm.tar.gz https://storage.googleapis.com/kubernetes-helm/helm-v2.11.0-linux-amd64.tar.gz
 tar -xvf /tmp/helm.tar.gz -C /tmp/
-mv /tmp/linux-amd64/helm /usr/local/bin/helm
+sudo mv /tmp/linux-amd64/helm /usr/local/bin/helm
 helm init \
 	--client-only \
 	--service-account tiller
