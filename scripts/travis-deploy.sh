@@ -23,10 +23,10 @@ helm init --client-only
 
 # Push images
 gcloud auth configure-docker --quiet
-docker push $WEB_IMAGE:$COMMIT
-docker push $WEB_IMAGE:latest
-docker push $NGINX_IMAGE:$COMMIT
-docker push $NGINX_IMAGE:latest
+docker push eu.gcr.io/${PROJECT_NAME}/${DOCKER_IMAGE_NAME}/${K8S_DEPLOYMENT_NAME_WEB}:$COMMIT
+docker push eu.gcr.io/${PROJECT_NAME}/${DOCKER_IMAGE_NAME}/${K8S_DEPLOYMENT_NAME_WEB}:latest
+docker push eu.gcr.io/${PROJECT_NAME}/${DOCKER_IMAGE_NAME}/${K8S_DEPLOYMENT_NAME_NGINX}:$COMMIT
+docker push eu.gcr.io/${PROJECT_NAME}/${DOCKER_IMAGE_NAME}/${K8S_DEPLOYMENT_NAME_NGINX}:latest
 
 # Deploy
 helm upgrade \
