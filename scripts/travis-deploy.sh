@@ -11,10 +11,6 @@ helm init --client-only
 # Deploy
 kubectl config set-context $(kubectl config current-context) --namespace=bolagetio
 
-helm dependency build \
-  --tiller-namespace tiller \
-  ./chart
-
 helm upgrade \
   --tiller-namespace tiller \
   --namespace bolagetio \
