@@ -21,8 +21,6 @@ env:
 
 script:
   - ./scripts/travis-build.sh
-
-after_script:
   - ./scripts/travis-test.sh
 
 deploy:

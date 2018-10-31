@@ -15,11 +15,13 @@ gcloud --quiet config set project $PROJECT_NAME
 gcloud --quiet config set container/cluster $CLUSTER_NAME
 gcloud --quiet container clusters get-credentials $CLUSTER_NAME
 
-# Install Helm
-curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_helm.sh
-chmod 700 get_helm.sh
-sudo ./get_helm.sh
-helm init --client-only
+# Helm (version here must match Helm/Tiller in cluster)
+curl -o /tmp/helm.tar.gz https://storage.googleapis.com/kubernetes-helm/helm-v2.11.0-linux-amd64.tar.gz
+tar -xvf /tmp/helm.tar.gz -C /tmp/
+mv /tmp/linux-amd64/helm /usr/local/bin/helm
+helm init \
+	--client-only \
+	--service-account tiller
 
 # Push images
 gcloud auth configure-docker --quiet
