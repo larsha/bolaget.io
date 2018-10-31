@@ -9,5 +9,5 @@ data:
   ELASTIC_REQUEST_TIMEOUT: "10000"
   ELASTIC_HOST: "elasticsearch-service.bolagetio.svc.cluster.local:9200"
   NODE_ENV: {{ .Values.web.configmap.nodeEnv | quote }}
-  ELASTIC_INDEX_REPLICAS: {{ .Values.web.configmap.elasticIndexReplicas | quote }}
-  ELASTIC_INDEX_SHARDS: { .Values.web.configmap.elasticIndexShards | quote }}
+  ELASTIC_INDEX_REPLICAS: {{ .Values.web.configmap.elasticIndexReplicas }}
+  ELASTIC_INDEX_SHARDS: {{ .Values.web.configmap.elasticIndexShards }}
