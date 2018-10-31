@@ -1,31 +1,37 @@
 sudo: required
 services:
-- docker
+  - docker
+
 cache:
   directories:
-  - "$HOME/google-cloud-sdk/"
-  - services/web/node_modules
+    - "$HOME/google-cloud-sdk/"
+    - services/web/node_modules
+
 env:
   global:
-  - PROJECT_NAME=brynn-145714
-  - CLUSTER_NAME=production
-  - CLOUDSDK_COMPUTE_ZONE=europe-north1-a
-  - DOCKER_IMAGE_NAME=bolagetio
-  - K8S_NAMESPACE=bolagetio
-  - K8S_DEPLOYMENT_NAME_WEB=web-deployment
-  - K8S_DEPLOYMENT_NAME_NGINX=nginx-deployment
-  - COMMIT=${TRAVIS_COMMIT::7}
-  - CLOUDSDK_CORE_DISABLE_PROMPTS=1
-before_install:
-- ./scripts/travis-build.sh
+    - PROJECT_NAME=brynn-145714
+    - CLUSTER_NAME=production
+    - CLOUDSDK_COMPUTE_ZONE=europe-north1-a
+    - DOCKER_IMAGE_NAME=bolagetio
+    - K8S_NAMESPACE=bolagetio
+    - K8S_DEPLOYMENT_NAME_WEB=web-deployment
+    - K8S_DEPLOYMENT_NAME_NGINX=nginx-deployment
+    - COMMIT=${TRAVIS_COMMIT::7}
+    - CLOUDSDK_CORE_DISABLE_PROMPTS=1
+
 script:
-- ./scripts/travis-test.sh
+  - ./scripts/travis-build.sh
+
+after_script:
+  - ./scripts/travis-test.sh
+
 deploy:
-- provider: script
-  script: "./scripts/travis-deploy.sh"
-  skip_cleanup: true
-  on:
-    branch: feature/helm
+  - provider: script
+    script: "./scripts/travis-deploy.sh"
+    skip_cleanup: true
+    on:
+      branch: feature/helm
+
 notifications:
   email: false
   slack:
