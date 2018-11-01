@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.7.0] - 2018-10-31
+### Changed
+- Bumping Node.js to 10.12.0
+- Bumping Nginx to 1.15.5
+- Upgrade to new Kubernetes cluster in `europe-north1` with `helm` deploy flow.
+
 ## [1.6.13] - 2018-09-28
 ### Changed
 - Bumping Node.js to 10.11.0
