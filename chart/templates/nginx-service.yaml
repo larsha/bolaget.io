@@ -11,4 +11,4 @@ spec:
     protocol: TCP
   type: {{ .Values.nginx.service.type | quote }}
   selector:
-    service: nginx-deployment
+    app: nginx-deployment

@@ -19,8 +19,7 @@ spec:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/web-configmap.yaml") . | sha256sum }}
       labels:
-        app: bolagetio
-        service: web-deployment
+        app: web-deployment
     spec:
       affinity:
         podAntiAffinity:
@@ -29,10 +28,10 @@ spec:
             podAffinityTerm:
               labelSelector:
                 matchExpressions:
-                - key: service
+                - key: app
                   operator: In
                   values:
-                  - web-deployment
+                    - web-deployment
               topologyKey: kubernetes.io/hostname
       containers:
       - name: web

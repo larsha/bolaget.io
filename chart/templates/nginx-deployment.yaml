@@ -17,8 +17,7 @@ spec:
   template:
     metadata:
       labels:
-        app: bolagetio
-        service: nginx-deployment
+        app: nginx-deployment
     spec:
       affinity:
         podAntiAffinity:
@@ -27,10 +26,10 @@ spec:
             podAffinityTerm:
               labelSelector:
                 matchExpressions:
-                - key: service
+                - key: app
                   operator: In
                   values:
-                  - nginx-deployment
+                    - nginx-deployment
               topologyKey: kubernetes.io/hostname
       terminationGracePeriodSeconds: 60
       containers:
