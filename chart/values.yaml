@@ -2,7 +2,7 @@ ingress:
   enabled: true
 
 certificate:
-  enabled: false
+  enabled: true
 
 elasticsearch:
   replicas: 3
