@@ -34,7 +34,6 @@ docker push eu.gcr.io/${PROJECT_NAME}/${DOCKER_IMAGE_NAME}/${K8S_DEPLOYMENT_NAME
 helm upgrade \
   --tiller-namespace tiller \
   --namespace bolagetio \
-  -f chart/values.production.yaml \
   --install \
 	--wait \
 	--timeout 300 \

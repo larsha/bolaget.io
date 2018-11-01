@@ -1,39 +1,38 @@
 ingress:
-  enabled: false
+  enabled: true
 
 certificate:
   enabled: false
 
 elasticsearch:
-  replicas: 1
-  numberOfMasters: 1
+  replicas: 3
+  numberOfMasters: 2
+  storageClassName: ssd
 
 nginx:
-  replicas: 1
+  replicas: 3
 
   image:
     repository: eu.gcr.io/brynn-145714/bolagetio/nginx-deployment
-    tag: local
-    pullPolicy: Never
+    tag: latest
+    pullPolicy: Always
 
   service:
-    type: ClusterIP
+    type: NodePort
     port: 80
 
 web:
-  replicas: 1
+  replicas: 3
 
   image:
     repository: eu.gcr.io/brynn-145714/bolagetio/web-deployment
-    tag: local
-    pullPolicy: Never
+    tag: latest
+    pullPolicy: Always
 
   job:
     schedule: 00 03 * * *
 
   configmap:
-    nodeEnv: development
-    elasticIndexReplicas: 0
-    elasticIndexShards: 1
-
-  development: true
+    nodeEnv: production
+    elasticIndexReplicas: 2
+    elasticIndexShards: 3

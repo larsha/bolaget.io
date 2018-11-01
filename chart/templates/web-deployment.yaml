@@ -36,9 +36,6 @@ spec:
       - name: web
         image: "{{ .Values.web.image.repository }}:{{ .Values.web.image.tag }}"
         imagePullPolicy: {{ .Values.web.image.pullPolicy | quote }}
-{{ if .Values.web.development }}
-        command: ["npm", "run", "dev"]
-{{ end }}
         resources:
           requests:
             cpu: 50m
