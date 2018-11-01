@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "build": "rm -rf .build && babel src --out-dir .build --ignore 'src/**/*.spec.js'",
+    "build": "rm -rf .build && cp -rf src .build && babel src -d .build",
     "dev": "DEBUG=koa* nodemon src/web.js --exec babel-node",
     "dev:worker": "babel-node src/worker.js",
     "precommit": "lint-staged",
@@ -33,6 +33,12 @@
   "standard": {
     "env": [
       "jest"
+    ]
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/.build/"
     ]
   },
   "devDependencies": {
