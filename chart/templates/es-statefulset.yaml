@@ -5,6 +5,9 @@ metadata:
 spec:
   serviceName: elasticsearch-service
   replicas: {{ .Values.elasticsearch.replicas }}
+  selector:
+    matchLabels:
+      app: elasticsearch-statefulset
   template:
     metadata:
       labels:
@@ -20,7 +23,7 @@ spec:
                 - key: app
                   operator: In
                   values:
-                  - elasticsearch-statefulset
+                    - elasticsearch-statefulset
               topologyKey: kubernetes.io/hostname
       serviceAccount: elasticsearch
       initContainers:
