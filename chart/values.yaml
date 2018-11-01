@@ -15,7 +15,7 @@ nginx:
   image:
     repository: eu.gcr.io/brynn-145714/bolagetio/nginx-deployment
     tag: latest
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
 
   service:
     type: NodePort
@@ -27,7 +27,7 @@ web:
   image:
     repository: eu.gcr.io/brynn-145714/bolagetio/web-deployment
     tag: latest
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
 
   job:
     schedule: 00 03 * * *

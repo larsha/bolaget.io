@@ -34,8 +34,8 @@ docker push eu.gcr.io/${PROJECT_NAME}/${DOCKER_IMAGE_NAME}/${K8S_DEPLOYMENT_NAME
 helm upgrade \
   --tiller-namespace tiller \
   --namespace bolagetio \
-  --set web.image.repository.tag=$COMMIT \
-  --set nginx.image.repository.tag=$COMMIT \
+  --set web.image.tag=$COMMIT \
+  --set nginx.image.tag=$COMMIT \
   --install \
 	--wait \
 	--timeout 300 \
