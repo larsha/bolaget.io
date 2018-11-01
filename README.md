@@ -199,7 +199,13 @@ make build
 
 Install:
 ```bash
-helm install --name bolagetio ./chart
+helm install \
+  --set nginx.image.tag=local \
+  --set nginx.image.pullPolicy=Never \
+  --set web.image.tag=local \
+  --set web.image.pullPolicy=Never \
+  --name bolagetio \
+  ./chart
 ```
  
  #### Docker Compose
