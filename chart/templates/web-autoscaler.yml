@@ -2,7 +2,6 @@ apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
   name: web-autoscaler
-  namespace: bolagetio
 spec:
   scaleTargetRef:
     apiVersion: apps/v1

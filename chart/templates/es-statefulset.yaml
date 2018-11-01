@@ -2,15 +2,13 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: elasticsearch
-  namespace: bolagetio
 spec:
   serviceName: elasticsearch-service
   replicas: {{ .Values.elasticsearch.replicas }}
   template:
     metadata:
       labels:
-        app: bolagetio
-        service: elasticsearch-statefulset
+        app: elasticsearch-statefulset
     spec:
       affinity:
         podAntiAffinity:
@@ -19,7 +17,7 @@ spec:
             podAffinityTerm:
               labelSelector:
                 matchExpressions:
-                - key: service
+                - key: app
                   operator: In
                   values:
                   - elasticsearch-statefulset

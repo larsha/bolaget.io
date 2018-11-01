@@ -2,7 +2,6 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: job
-  namespace: bolagetio
 spec:
   schedule: {{ .Values.web.job.schedule | quote }}
   jobTemplate:
@@ -12,8 +11,7 @@ spec:
           annotations:
             checksum/config: {{ include (print $.Template.BasePath "/web-configmap.yaml") . | sha256sum }}
           labels:
-            app: bolagetio
-            service: job
+            app: job
         spec:
           containers:
           - name: job
