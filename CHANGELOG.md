@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.7.1] - 2018-12-14
+### Changed
+- Bumping Node.js to 11.4.0
+- Bumping Nginx to 1.15.7
+- Bumping `nodemon` from `1.18.4` to `1.18.9` to fix security vulnerabilities
+
 ## [1.7.0] - 2018-10-31
 ### Changed
 - Bumping Node.js to 10.12.0

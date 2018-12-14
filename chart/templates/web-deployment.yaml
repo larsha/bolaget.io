@@ -39,10 +39,10 @@ spec:
         resources:
           requests:
             cpu: 50m
-            memory: 64Mi
+            memory: 100Mi
           limits:
             cpu: 100m
-            memory: 128Mi
+            memory: 200Mi
         envFrom:
         - configMapRef:
             name: web-config
