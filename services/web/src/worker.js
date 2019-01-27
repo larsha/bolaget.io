@@ -18,7 +18,7 @@ import StoresTask from './v1/stores/task'
       })
       .catch(e => {
         logger.error('fetching products', e)
-        process.exit(1)
+        return []
       }),
     storesTask.fetch()
       .then(s => {
@@ -27,7 +27,7 @@ import StoresTask from './v1/stores/task'
       })
       .catch(e => {
         logger.error('fetching stores', e)
-        process.exit(1)
+        return []
       })
   ])
 
@@ -37,13 +37,11 @@ import StoresTask from './v1/stores/task'
       .then(() => logger.info('indexed products'))
       .catch(e => {
         logger.error('indexing products', e)
-        process.exit(1)
       }),
     storesTask.index(stores)
       .then(() => logger.info('indexed stores'))
       .catch(e => {
         logger.error('indexing stores', e)
-        process.exit(1)
       })
   ])
 
