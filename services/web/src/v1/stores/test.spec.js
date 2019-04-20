@@ -5,6 +5,10 @@ import { fuzzyMatch, sleep } from '../../lib/utils'
 
 describe('Stores', () => {
   describe('Task', () => {
+    afterAll(async () => {
+      await sleep(3)
+    })
+
     it('fetch and index', () => {
       const task = new Task()
 
@@ -17,10 +21,6 @@ describe('Stores', () => {
   })
 
   describe('Model', () => {
-    beforeEach(async () => {
-      await sleep(1)
-    })
-
     it('#getById()', () => {
       return Model.getById('0102')
         .then(data => expect(data.nr).toBe('0102'))

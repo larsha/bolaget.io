@@ -5,6 +5,10 @@ import { rangeMatch, sleep } from '../../lib/utils'
 
 describe('Products', () => {
   describe('Task', () => {
+    afterAll(async () => {
+      await sleep(3)
+    })
+
     it('fetch and index', () => {
       const task = new Task()
 
@@ -17,10 +21,6 @@ describe('Products', () => {
   })
 
   describe('Model', () => {
-    beforeEach(async () => {
-      await sleep(1)
-    })
-
     it('#find() - single product by `nr`', () => {
       const query = {
         multi_match: {
