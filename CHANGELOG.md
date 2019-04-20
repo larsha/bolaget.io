@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.7.3] - 2019-04-20
+### Changed
+- Allowing single product query with `nr` or `article_nr`, solving issue [#11](https://github.com/larsha/bolaget.io/issues/11).
+- Bumping Node.js to `11.14.0`
+- Bumping Nginx to `1.15.12`
+
+
 ## [1.7.2] - 2019-01-27
 ### Changed
 - Fixed `worker.js` error handling

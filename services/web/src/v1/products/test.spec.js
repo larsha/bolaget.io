@@ -21,12 +21,31 @@ describe('Products', () => {
       await sleep(1)
     })
 
-    it('#getById()', () => {
-      return Model.getById('7599701')
-        .then(data => expect(data.nr).toBe('7599701'))
+    it('#find() - single product by `nr`', () => {
+      const query = {
+        multi_match: {
+          query: '7599701',
+          fields: ['nr', 'article_nr']
+        }
+      }
+
+      return Model.find(query, 0, 1)
+        .then(({ result }) => expect(result[0].nr).toBe('7599701'))
     })
 
-    it('#find()', () => {
+    it('#find() - single product by `article_nr`', () => {
+      const query = {
+        multi_match: {
+          query: '75997',
+          fields: ['nr', 'article_nr']
+        }
+      }
+
+      return Model.find(query, 0, 1)
+        .then(({ result }) => expect(result[0].article_nr).toBe(75997))
+    })
+
+    it('#find() - products', () => {
       let query = {
         bool: {
           must: [

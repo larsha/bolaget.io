@@ -5,7 +5,14 @@ import { stringToBool, fuzzyMatch, rangeMatch } from '../../lib/utils'
 export async function product (ctx) {
   const id = ctx.params.id || null
 
-  const product = await Model.getById(id)
+  const query = {
+    multi_match: {
+      query: id,
+      fields: ['nr', 'article_nr']
+    }
+  }
+
+  const product = await Model.find(query, 0, 1)
     .catch(e => {
       if (e.status !== 404) {
         ctx.throw(500)
@@ -13,8 +20,8 @@ export async function product (ctx) {
       }
     })
 
-  if (product) {
-    ctx.body = product
+  if (product && Array.isArray(product.result) && product.result.length === 1) {
+    ctx.body = product.result[0]
   } else {
     ctx.throw(404)
   }
