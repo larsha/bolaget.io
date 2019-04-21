@@ -95,6 +95,7 @@ Host: bolaget.io
 ----
 ```http
 GET /products/:nr
+GET /products/:article_nr
 Host: bolaget.io
 ```
 

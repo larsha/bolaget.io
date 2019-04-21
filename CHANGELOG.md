@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.7.4] - 2019-04-21
+### Changed
+- Bumping deps
+- Solving security vulnerabilities in deps
+
 ## [1.7.3] - 2019-04-20
 ### Changed
 - Allowing single product query with `nr` or `article_nr`, solving issue [#11](https://github.com/larsha/bolaget.io/issues/11).
