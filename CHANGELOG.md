@@ -3,6 +3,26 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.7.5] - 2019-06-06
+### Changed
+- Bumping Node.js to `12.4.0`
+- Bumping Nginx to `1.17.0`
+- Solving security vulnerabilities in deps
+- Bumping deps:
+  - `@babel/cli` from `7.4.3` to `7.4.4`
+  - `@babel/core` from `7.4.3` to `7.4.5`
+  - `@babel/node` from `7.2.2` to `7.4.5`
+  - `@babel/plugin-transform-modules-commonjs` from `7.4.3` to `7.4.4`  
+  - `@babel/preset-env` from `7.4.3` to `7.4.5`  
+  - `@babel/register` from `7.4.0` to `7.4.4`  
+  - `babel-jest` from `24.7.1` to `24.8.0`  
+  - `jest` from `24.7.1` to `24.8.0`  
+  - `es6-promise` from `4.2.6` to `4.2.8`  
+  - `http-shutdown` from `1.2.0` to `1.2.1`  
+  - `husky` from `1.3.1` to `2.4.0`  
+  - `lint-staged` from `8.1.5` to `8.2.0`  
+  - `nodemon` from `1.18.11` to `1.19.1`  
+
 ## [1.7.4] - 2019-04-21
 ### Changed
 - Bumping deps
@@ -13,7 +33,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Allowing single product query with `nr` or `article_nr`, solving issue [#11](https://github.com/larsha/bolaget.io/issues/11).
 - Bumping Node.js to `11.14.0`
 - Bumping Nginx to `1.15.12`
-
 
 ## [1.7.2] - 2019-01-27
 ### Changed
