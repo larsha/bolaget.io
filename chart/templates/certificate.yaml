@@ -9,13 +9,6 @@ spec:
   dnsNames:
     - bolaget.io
     - www.bolaget.io
-  acme:
-    config:
-    - dns01:
-        provider: clouddns
-      domains:
-        - bolaget.io
-        - www.bolaget.io
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer

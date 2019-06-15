@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.7.6] - 2019-06-15
+### Changed
+- Updated cert-manager in cluster and adjusting resources accordingly.
+
 ## [1.7.5] - 2019-06-06
 ### Changed
 - Bumping Node.js to `12.4.0`
