@@ -5,12 +5,12 @@ certificate:
   enabled: true
 
 elasticsearch:
-  replicas: 3
+  replicas: 2
   numberOfMasters: 2
   storageClassName: ssd
 
 nginx:
-  replicas: 3
+  replicas: 2
 
   image:
     repository: eu.gcr.io/brynn-145714/bolagetio/nginx-deployment
@@ -22,7 +22,7 @@ nginx:
     port: 80
 
 web:
-  replicas: 3
+  replicas: 2
 
   image:
     repository: eu.gcr.io/brynn-145714/bolagetio/web-deployment
