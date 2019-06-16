@@ -4,7 +4,6 @@ metadata:
   name: web-deployment
 spec:
   revisionHistoryLimit: 2
-  replicas: {{ .Values.web.replicas }}
   strategy:
     rollingUpdate:
       maxSurge: 50%
