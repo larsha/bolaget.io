@@ -25,11 +25,6 @@ elastic:
       requests:
         storage: 10Gi
 
-elasticsearch:
-  replicas: 3
-  numberOfMasters: 2
-  storageClassName: ssd
-
 nginx:
   replicas: 3
 
