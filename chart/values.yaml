@@ -4,6 +4,27 @@ ingress:
 certificate:
   enabled: true
 
+elastic:
+  image: eu.gcr.io/brynn-145714/bolagetio/elasticsearch
+  imageTag: 7.1.1
+  esJavaOpts: "-Xms512m -Xmx512m"
+  terminationGracePeriod: 20
+
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "1Gi"
+    limits:
+      cpu: "1000m"
+      memory: "1Gi"
+
+  volumeClaimTemplate:
+    storageClassName: "ssd"
+    accessModes: [ "ReadWriteOnce" ]
+    resources:
+      requests:
+        storage: 10Gi
+
 elasticsearch:
   replicas: 3
   numberOfMasters: 2

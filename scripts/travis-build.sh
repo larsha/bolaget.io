@@ -4,6 +4,7 @@ set -e
 
 WEB_IMAGE=eu.gcr.io/${PROJECT_NAME}/${DOCKER_IMAGE_NAME}/${K8S_DEPLOYMENT_NAME_WEB}
 NGINX_IMAGE=eu.gcr.io/${PROJECT_NAME}/${DOCKER_IMAGE_NAME}/${K8S_DEPLOYMENT_NAME_NGINX}
+ELASTICSEARCH_IMAGE=eu.gcr.io/${PROJECT_NAME}/${DOCKER_IMAGE_NAME}/elasticsearch
 
 # Build web
 docker build \
@@ -19,3 +20,10 @@ docker build \
   -t $NGINX_IMAGE:$COMMIT \
   -t $NGINX_IMAGE:latest \
   -f services/nginx/Dockerfile services/nginx
+
+# Build elasticsearch
+docker build \
+  -t elasticsearch \
+  -t $ELASTICSEARCH_IMAGE:7.1.1 \
+  -t $ELASTICSEARCH_IMAGE:latest \
+  -f services/elasticsearch/Dockerfile services/elasticsearch
