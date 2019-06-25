@@ -6,7 +6,7 @@ certificate:
 
 elastic:
   image: eu.gcr.io/brynn-145714/bolagetio/elasticsearch
-  imageTag: 7.1.1
+  imageTag: 7.2.0
   esJavaOpts: "-Xms512m -Xmx512m"
   terminationGracePeriod: 20
 

@@ -8,12 +8,12 @@ services:
       - ELASTIC_HOST=http://elastic:9200
       - ELASTIC_INDEX_SHARDS=1
       - ELASTIC_INDEX_REPLICAS=0
-      - ELASTIC_REQUEST_TIMEOUT=15000
+      - ELASTIC_REQUEST_TIMEOUT=10000
       - PORT=3000
       - SYSTEM_PORT=3001
     volumes:
       - ./services/web:/home/node/web
-      - /home/node/web/node_modules # prevent node_modules from being overwritten by above line
+      - /home/node/web/node_modules
     command: npm run dev
     ports:
       - "3000:3000"
@@ -21,8 +21,13 @@ services:
     depends_on:
       - elastic
   elastic:
-    image: eu.gcr.io/brynn-145714/bolagetio/elasticsearch:7.1.1
+    image: eu.gcr.io/brynn-145714/bolagetio/elasticsearch:7.2.0
     environment:
-      - ES_PLUGINS_INSTALL=analysis-icu
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
     ports:
       - "9200:9200"

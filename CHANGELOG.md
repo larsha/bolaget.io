@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.7.7] - 2019-06-25
+### Changed
+- Upgrading from Elasticsearch `6.1.2` to `7.2.0`
+
 ## [1.7.6] - 2019-06-15
 ### Changed
 - Updated cert-manager in cluster and adjusting resources accordingly.

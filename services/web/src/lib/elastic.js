@@ -21,20 +21,20 @@ export default class Elastic {
 
   static async getById (id) {
     return client.get({
-      type: this.alias,
+      type: '_all',
       index: this.alias,
       id
     })
-    .then(r => r._source)
+      .then(r => r._source)
   }
 
   static async find (query = null, offset = 0, limit = 1, sort = null) {
     let filter = {
       index: this.alias,
-      type: this.alias,
       body: {
         from: offset,
         size: limit,
+        track_total_hits: true,
         query: {
           match_all: {}
         }
@@ -52,7 +52,7 @@ export default class Elastic {
     return client.search(filter)
       .then(data => {
         const result = data.hits.hits.map(o => o._source)
-        const count = data.hits.total
+        const count = data.hits.total.value
         return { result, count }
       })
   }
@@ -114,9 +114,7 @@ export default class Elastic {
     const options = {
       index: this.index,
       body: {
-        mappings: {
-          [this.alias]: this.mapping
-        },
+        mappings: this.mapping,
         settings: {
           index: {
             refresh_interval: '-1',
@@ -174,7 +172,6 @@ export default class Elastic {
       batch.push({
         index: {
           _index: this.index,
-          _type: this.alias,
           _id: obj.nr
         }
       })

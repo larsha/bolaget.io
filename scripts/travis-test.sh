@@ -7,12 +7,12 @@ docker network create test
 
 # Start ElasticSearch
 docker run \
-  -e ES_PLUGINS_INSTALL=analysis-icu \
   --name elasticsearch \
   --network test \
   --rm \
   -d \
-  quay.io/pires/docker-elasticsearch-kubernetes:6.1.2
+  --env discovery.type=single-node \
+  eu.gcr.io/brynn-145714/bolagetio/elasticsearch:7.2.0
 
 sleep 20
 
@@ -22,7 +22,7 @@ docker run \
   -e ELASTIC_HOST=http://elasticsearch:9200 \
   -e ELASTIC_INDEX_SHARDS=1 \
   -e ELASTIC_INDEX_REPLICAS=0 \
-  -e ELASTIC_REQUEST_TIMEOUT=15000 \
+  -e ELASTIC_REQUEST_TIMEOUT=10000 \
   -e PORT=3000 \
   -e SYSTEM_PORT=3001 \
   --network test \
