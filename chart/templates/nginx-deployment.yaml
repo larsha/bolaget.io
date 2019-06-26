@@ -37,7 +37,7 @@ spec:
         lifecycle:
           preStop:
             exec:
-              command: ["sleep", "30"]
+              command: ["sleep", "10"]
         imagePullPolicy: Always
         resources:
           limits:
