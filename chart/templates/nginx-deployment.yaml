@@ -30,7 +30,7 @@ spec:
                   values:
                     - nginx-deployment
               topologyKey: kubernetes.io/hostname
-      terminationGracePeriodSeconds: 60
+      terminationGracePeriodSeconds: 20
       containers:
       - name: nginx
         image: "{{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag }}"
