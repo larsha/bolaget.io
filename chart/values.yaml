@@ -9,7 +9,6 @@ elastic:
   imageTag: 7.2.0
   esJavaOpts: "-Xms512m -Xmx512m"
   terminationGracePeriod: 20
-  clusterHealthCheckParams: wait_for_status=yellow&timeout=20s
 
   resources:
     requests:
@@ -51,5 +50,5 @@ web:
 
   configmap:
     nodeEnv: production
-    elasticIndexReplicas: 2
-    elasticIndexShards: 3
+    elasticIndexReplicas: 1
+    elasticIndexShards: 1
