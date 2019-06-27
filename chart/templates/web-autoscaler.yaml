@@ -8,7 +8,7 @@ spec:
     kind: Deployment
     name: web-deployment
   minReplicas: {{ .Values.web.replicas }}
-  maxReplicas: 10
+  maxReplicas: 12
   metrics:
   - type: Resource
     resource:

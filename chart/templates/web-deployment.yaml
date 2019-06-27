@@ -6,7 +6,7 @@ spec:
   revisionHistoryLimit: 2
   strategy:
     rollingUpdate:
-      maxSurge: 50%
+      maxSurge: 25%
       maxUnavailable: 0
     type: RollingUpdate
   selector:
