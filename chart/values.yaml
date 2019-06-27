@@ -5,6 +5,7 @@ certificate:
   enabled: true
 
 elastic:
+  replicas: 3
   image: eu.gcr.io/brynn-145714/bolagetio/elasticsearch-oss
   imageTag: 7.2.0
   esJavaOpts: "-Xms512m -Xmx512m"
@@ -46,7 +47,7 @@ web:
     pullPolicy: IfNotPresent
 
   job:
-    schedule: 00 03 * * *
+    schedule: 0 * * * * # @hourly
 
   configmap:
     nodeEnv: production
