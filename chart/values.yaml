@@ -5,7 +5,8 @@ certificate:
   enabled: true
 
 elastic:
-  replicas: 3
+  replicas: 5
+  maxUnavailable: 2
   image: eu.gcr.io/brynn-145714/bolagetio/elasticsearch-oss
   imageTag: 7.2.0
   esJavaOpts: "-Xms512m -Xmx512m"
@@ -27,7 +28,7 @@ elastic:
         storage: 10Gi
 
 nginx:
-  replicas: 4
+  replicas: 5
 
   image:
     repository: eu.gcr.io/brynn-145714/bolagetio/nginx-deployment
@@ -39,7 +40,7 @@ nginx:
     port: 80
 
 web:
-  replicas: 7
+  replicas: 10
 
   image:
     repository: eu.gcr.io/brynn-145714/bolagetio/web-deployment
@@ -51,5 +52,5 @@ web:
 
   configmap:
     nodeEnv: production
-    elasticIndexReplicas: 1
+    elasticIndexReplicas: 4
     elasticIndexShards: 1
