@@ -41,4 +41,5 @@ helm upgrade \
   --set web.image.tag=$COMMIT \
   --set nginx.image.tag=$COMMIT \
   --install \
+  --force \
   bolagetio ./chart
