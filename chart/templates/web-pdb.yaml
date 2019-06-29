@@ -3,7 +3,7 @@ kind: PodDisruptionBudget
 metadata:
   name: web-pdb
 spec:
-  minAvailable: 2
+  minAvailable: 3
   selector:
     matchLabels:
       app: web-deployment

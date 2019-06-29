@@ -3,7 +3,7 @@ kind: PodDisruptionBudget
 metadata:
   name: nginx-pdb
 spec:
-  minAvailable: 1
+  minAvailable: 2
   selector:
     matchLabels:
       app: nginx-deployment
