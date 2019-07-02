@@ -35,11 +35,12 @@ spec:
       containers:
       - name: web
         image: "{{ .Values.web.image.repository }}:{{ .Values.web.image.tag }}"
+        args: ["--max-old-space-size=128"]
         imagePullPolicy: {{ .Values.web.image.pullPolicy | quote }}
         resources:
           requests:
             cpu: 50m
-            memory: 100Mi
+            memory: 128Mi
           limits:
             cpu: 100m
             memory: 200Mi
