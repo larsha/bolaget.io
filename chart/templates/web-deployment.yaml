@@ -35,7 +35,7 @@ spec:
       containers:
       - name: web
         image: "{{ .Values.web.image.repository }}:{{ .Values.web.image.tag }}"
-        args: ["--max-old-space-size=128"]
+        command: ["node", "--max-old-space-size=128", ".build/web.js"]
         imagePullPolicy: {{ .Values.web.image.pullPolicy | quote }}
         resources:
           requests:
