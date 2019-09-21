@@ -1,4 +1,4 @@
-FROM node:12.9.1
+FROM node:12.10.0
 
 COPY . /home/node/web
 WORKDIR /home/node/web

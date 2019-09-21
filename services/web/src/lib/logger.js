@@ -1,10 +1,10 @@
-import winston from 'winston'
+import { createLogger, format, transports } from 'winston'
 
-export default new winston.Logger({
-  transports: [
-    new winston.transports.Console({
-      timestamp: true,
-      colorize: true
-    })
-  ]
+export default createLogger({
+  format: format.combine(
+    format.prettyPrint(),
+    format.colorize(),
+    format.simple()
+  ),
+  transports: [new transports.Console()]
 })

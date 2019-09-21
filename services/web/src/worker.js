@@ -3,17 +3,17 @@ import ProductsTask from './v1/products/task'
 import StoresTask from './v1/stores/task'
 
 (async () => {
-  let timer = logger.startTimer()
+  const timer = logger.startTimer()
   logger.info('starting worker...')
 
   const productsTask = new ProductsTask()
   const storesTask = new StoresTask()
 
   // Fetch data
-  const [ products, stores ] = await Promise.all([
+  const [products, stores] = await Promise.all([
     productsTask.fetch()
       .then(p => {
-        logger.info(`fetched products`)
+        logger.info('fetched products')
         return p
       })
       .catch(e => {
@@ -22,7 +22,7 @@ import StoresTask from './v1/stores/task'
       }),
     storesTask.fetch()
       .then(s => {
-        logger.info(`fetched stores`)
+        logger.info('fetched stores')
         return s
       })
       .catch(e => {
@@ -45,6 +45,6 @@ import StoresTask from './v1/stores/task'
       })
   ])
 
-  timer.done('complete')
+  timer.done({ message: 'complete' })
   process.exit()
 })()
