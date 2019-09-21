@@ -35,6 +35,8 @@ docker push eu.gcr.io/${PROJECT_NAME}/${DOCKER_IMAGE_NAME}/elasticsearch-oss:lat
 helm repo add elastic https://helm.elastic.co
 
 # Deploy
+sed -i "s/appVersion:/appVersion: $COMMIT/" chart/Chart.yaml
+
 helm upgrade \
   --tiller-namespace tiller \
   --namespace bolagetio \

@@ -1,9 +1,9 @@
-import elasticsearch from 'elasticsearch'
 import config from '../config'
 import { randomString } from './utils'
 
-const client = new elasticsearch.Client({
-  host: config.ELASTIC_HOST,
+const { Client } = require('@elastic/elasticsearch')
+const client = new Client({
+  node: config.ELASTIC_HOST,
   log: config.ELASTIC_LOG,
   requestTimeout: config.ELASTIC_REQUEST_TIMEOUT
 })
@@ -25,11 +25,11 @@ export default class Elastic {
       index: this.alias,
       id
     })
-      .then(r => r._source)
+      .then(({ body }) => body._source)
   }
 
   static async find (query = null, offset = 0, limit = 1, sort = null) {
-    let filter = {
+    const filter = {
       index: this.alias,
       body: {
         from: offset,
@@ -50,9 +50,9 @@ export default class Elastic {
     }
 
     return client.search(filter)
-      .then(data => {
-        const result = data.hits.hits.map(o => o._source)
-        const count = data.hits.total.value
+      .then(({ body }) => {
+        const result = body.hits.hits.map(o => o._source)
+        const count = body.hits.total.value
         return { result, count }
       })
   }
@@ -65,11 +65,11 @@ export default class Elastic {
 
   get mapped () {
     return this.data.map(o => {
-      let mapped = {}
+      const mapped = {}
 
-      for (let prop in o) {
-        if (o.hasOwnProperty(prop)) {
-          if (this.model.hasOwnProperty(prop)) {
+      for (const prop in o) {
+        if (Object.prototype.hasOwnProperty.call(o, prop)) {
+          if (Object.prototype.hasOwnProperty.call(this.model, prop)) {
             const obj = this.model[prop]
             try {
               mapped[obj.value] = obj.transform(o[prop])
@@ -86,7 +86,7 @@ export default class Elastic {
 
   async getIndexes () {
     return client.indices.get({ index: `${this.alias}-*` })
-      .then(indexes => indexes ? Object.keys(indexes).join() : '')
+      .then(({ body }) => body ? Object.keys(body).join() : '')
   }
 
   async putAlias () {
@@ -166,19 +166,7 @@ export default class Elastic {
   }
 
   async bulkIndex () {
-    let batch = []
-
-    this.mapped.forEach(obj => {
-      batch.push({
-        index: {
-          _index: this.index,
-          _id: obj.nr
-        }
-      })
-
-      batch.push(obj)
-    })
-
-    return client.bulk({ body: batch })
+    const body = this.mapped.flatMap(doc => [{ index: { _index: this.index, _id: doc.nr } }, doc])
+    return client.bulk({ body })
   }
 }

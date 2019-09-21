@@ -1,6 +1,6 @@
 {
   "name": "bolaget.io",
-  "version": "1.7.10",
+  "version": "1.7.11",
   "description": "RESTful(ish) JSON API for Swedish alcohol monopoly, Systembolaget",
   "main": "src/web.js",
   "scripts": {
@@ -58,7 +58,7 @@
     "standard": "14.3.1"
   },
   "dependencies": {
-    "elasticsearch": "16.4.0",
+    "@elastic/elasticsearch": "7.3.0",
     "es6-promise": "4.2.8",
     "handlebars": "4.2.1",
     "http-shutdown": "1.2.1",
