@@ -1,5 +1,5 @@
 version: 1
 update_configs:
-  package_manager: javascript
-  update_schedule: live
-  directory: "/services/web"
+  - package_manager: "javascript"
+    directory: "/services/web"
+    update_schedule: "live"
