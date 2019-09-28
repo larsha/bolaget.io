@@ -62,7 +62,7 @@
     "es6-promise": "4.2.8",
     "handlebars": "4.3.1",
     "http-shutdown": "1.2.1",
-    "koa": "2.8.1",
+    "koa": "2.8.2",
     "koa-logger": "3.2.1",
     "koa-router": "7.4.0",
     "koa-views": "6.2.1",
