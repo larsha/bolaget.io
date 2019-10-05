@@ -23,8 +23,8 @@ docker build \
 
 # Build elasticsearch
 docker build \
-  --build-arg elasticsearch_version=7.2.0 \
+  --build-arg elasticsearch_version=$ELASTICSEARCH_VERSION \
   -t elasticsearch \
-  -t $ELASTICSEARCH_IMAGE:7.2.0 \
+  -t $ELASTICSEARCH_IMAGE:$ELASTICSEARCH_VERSION \
   -t $ELASTICSEARCH_IMAGE:latest \
   -f services/elasticsearch/Dockerfile services/elasticsearch

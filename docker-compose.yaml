@@ -21,7 +21,7 @@ services:
     depends_on:
       - elastic
   elastic:
-    image: eu.gcr.io/brynn-145714/bolagetio/elasticsearch-oss:7.2.0
+    image: eu.gcr.io/brynn-145714/bolagetio/elasticsearch-oss:7.4.0
     environment:
       - discovery.type=single-node
       - ES_JAVA_OPTS=-Xms512m -Xmx512m

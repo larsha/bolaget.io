@@ -12,7 +12,7 @@ docker run \
   --rm \
   -d \
   --env discovery.type=single-node \
-  eu.gcr.io/brynn-145714/bolagetio/elasticsearch-oss:7.2.0
+  eu.gcr.io/brynn-145714/bolagetio/elasticsearch-oss:$ELASTICSEARCH_VERSION
 
 sleep 20
 
