@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.8.0] - 2019-10-05
+### Changed
+- Upgrading Elasticsearch service to `7.4.0`
+- Bumping Node.js to `12.11.1`
+- Bumping Nginx to `1.17.4`
+
 ## [1.7.11] - 2019-09-21
 ### Changed
 - Replacing deprecated lib `elasticsearch` with new `@elastic/elasticsearch`
