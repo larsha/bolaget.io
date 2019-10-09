@@ -73,7 +73,7 @@ spec:
             value: /home/vault
           - name: VAULT_ADDR
             value: https://vault.sthlm.io
-        args: ["-config=/etc/consul-template/consul-template-config.hcl"]
+        args: ["-config=/etc/consul-template/consul-template-config.hcl", "-once"]
       containers:
       - name: web
         image: "{{ .Values.web.image.repository }}:{{ .Values.web.image.tag }}"
