@@ -1,12 +1,13 @@
 import Koa from 'koa'
 import Router from 'koa-router'
-import logger from 'koa-logger'
+import koaLogger from 'koa-logger'
 import views from 'koa-views'
 import http from 'http'
 import addShutdown from 'http-shutdown'
 import routes from './routes'
 import config from './config'
 import { sleep } from './lib/utils'
+import logger from './lib/logger'
 
 // 404
 const error404 = {
@@ -21,7 +22,7 @@ const error500 = {
 const app = new Koa()
 
 // Logs information
-app.use(logger())
+app.use(koaLogger())
 
 app.use(views(__dirname, {
   extension: 'hbs',
@@ -86,3 +87,4 @@ process.on('SIGTERM', async () => {
 })
 
 ready = true
+logger.info(process.env.VAULT_TEST)

@@ -19,6 +19,20 @@ spec:
       labels:
         app: web-deployment
     spec:
+      volumes:
+        - name: vault-token
+          emptyDir:
+            medium: Memory
+        - name: config
+          configMap:
+            name: vault-agent-config
+            items:
+              - key: vault-agent-config.hcl
+                path: vault-agent-config.hcl
+              - key: consul-template-config.hcl
+                path: consul-template-config.hcl
+        - name: secrets
+          emptyDir: {}
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -32,11 +46,53 @@ spec:
                     - web-deployment
               topologyKey: kubernetes.io/hostname
       terminationGracePeriodSeconds: 20
+      initContainers:
+      - name: vault-agent-auth
+        image: vault
+        volumeMounts:
+          - name: config
+            mountPath: /etc/vault
+          - name: vault-token
+            mountPath: /home/vault
+        env:
+          - name: VAULT_ADDR
+            value: https://vault.sthlm.io
+        args:
+          [
+            "agent",
+            "-config=/etc/vault/vault-agent-config.hcl",
+            #"-log-level=debug",
+          ]
       containers:
+      - name: consul-template
+        image: hashicorp/consul-template:alpine
+        imagePullPolicy: Always
+        volumeMounts:
+          - name: vault-token
+            mountPath: /home/vault
+          - name: config
+            mountPath: /etc/consul-template
+          - name: secrets
+            mountPath: /etc/secrets
+        env:
+          - name: HOME
+            value: /home/vault
+          - name: VAULT_ADDR
+            value: https://vault.sthlm.io
+        args:
+          [
+            "-config=/etc/consul-template/consul-template-config.hcl",
+            #"-log-level=debug",
+          ]
       - name: web
         image: "{{ .Values.web.image.repository }}:{{ .Values.web.image.tag }}"
         command: ["node", "--max-old-space-size=128", ".build/web.js"]
         imagePullPolicy: {{ .Values.web.image.pullPolicy | quote }}
+        volumeMounts:
+          - name: secrets
+            mountPath: /home/node/web/.env
+            subPath: .env
+            readOnly: true
         resources:
           requests:
             cpu: 50m

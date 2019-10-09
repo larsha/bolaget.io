@@ -1,0 +1,40 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: vault-agent-config
+data:
+  vault-agent-config.hcl: |
+    exit_after_auth = true
+    pid_file = "/home/vault/pidfile"
+
+    auto_auth {
+        method "kubernetes" {
+            mount_path = "auth/kubernetes"
+            config = {
+                role = "bolagetio-role"
+            }
+        }
+
+        sink "file" {
+            config = {
+                path = "/home/vault/.vault-token"
+            }
+        }
+    }
+  consul-template-config.hcl: |
+    vault {
+      renew_token = false
+      vault_agent_token_file = "/home/vault/.vault-token"
+      retry {
+        backoff = "1s"
+      }
+    }
+
+    template {
+      destination = "/etc/secrets/.env"
+      contents = <<EOH
+      {{- with secret "secret/data/bolagetio/VAULT_TEST?version=1" }}
+      VAULT_TEST: {{ .Data.data.VAULT_TEST }}
+      {{ end }}
+      EOH
+    }

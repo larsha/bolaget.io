@@ -4,7 +4,6 @@ import { randomString } from './utils'
 const { Client } = require('@elastic/elasticsearch')
 const client = new Client({
   node: config.ELASTIC_HOST,
-  log: config.ELASTIC_LOG,
   requestTimeout: config.ELASTIC_REQUEST_TIMEOUT
 })
 

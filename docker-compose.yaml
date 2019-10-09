@@ -13,7 +13,6 @@ services:
       - SYSTEM_PORT=3001
     volumes:
       - ./services/web:/home/node/web
-      - /home/node/web/node_modules
     command: npm run dev
     ports:
       - "3000:3000"
