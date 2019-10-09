@@ -57,12 +57,7 @@ spec:
         env:
           - name: VAULT_ADDR
             value: https://vault.sthlm.io
-        args:
-          [
-            "agent",
-            "-config=/etc/vault/vault-agent-config.hcl",
-            #"-log-level=debug",
-          ]
+        args: ["agent", "-config=/etc/vault/vault-agent-config.hcl"]
       containers:
       - name: consul-template
         image: hashicorp/consul-template:alpine
@@ -79,11 +74,7 @@ spec:
             value: /home/vault
           - name: VAULT_ADDR
             value: https://vault.sthlm.io
-        args:
-          [
-            "-config=/etc/consul-template/consul-template-config.hcl",
-            #"-log-level=debug",
-          ]
+        args: ["-config=/etc/consul-template/consul-template-config.hcl"]
       - name: web
         image: "{{ .Values.web.image.repository }}:{{ .Values.web.image.tag }}"
         command: ["node", "--max-old-space-size=128", ".build/web.js"]
