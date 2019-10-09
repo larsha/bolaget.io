@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 import logger from './lib/logger'
 
-const { parsed, error } = dotenv.config()
+const { parsed, error } = dotenv.config({ path: '/home/node/web' })
 
 if (error) {
   logger.error('error loading dotenv')

@@ -87,4 +87,4 @@ process.on('SIGTERM', async () => {
 })
 
 ready = true
-logger.info(process.env.VAULT_TEST)
+logger.info(config.VAULT_TEST)
