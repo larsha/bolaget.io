@@ -9,8 +9,8 @@ vault {
 template {
   destination = "/etc/secrets/.env"
   contents = <<EOH
-  {{- with secret "secret/data/bolagetio/VAULT_TEST?version=1" -}}
-  VAULT_TEST={{ .Data.data.VAULT_TEST }}
+  {{- with secret "secret/data/bolagetio/ELASTIC_HOST?version=1" -}}
+  ELASTIC_HOST={{ .Data.data.ELASTIC_HOST }}
   {{- end }}
   EOH
 }

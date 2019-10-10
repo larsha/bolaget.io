@@ -7,7 +7,6 @@ import addShutdown from 'http-shutdown'
 import routes from './routes'
 import config from './config'
 import { sleep } from './lib/utils'
-import logger from './lib/logger'
 
 // 404
 const error404 = {
@@ -87,4 +86,3 @@ process.on('SIGTERM', async () => {
 })
 
 ready = true
-logger.info(config.VAULT_TEST)
