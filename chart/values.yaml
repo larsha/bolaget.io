@@ -4,6 +4,13 @@ ingress:
 certificate:
   enabled: true
 
+vault:
+  image: vault:1.2.3
+  uri: https://vault.sthlm.io
+
+consul:
+  image: hashicorp/consul-template:0.22.0-alpine
+
 elastic:
   replicas: 4
   maxUnavailable: 2

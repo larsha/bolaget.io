@@ -16,6 +16,7 @@ spec:
     metadata:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/web-configmap.yaml") . | sha256sum }}
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
       labels:
         app: web-deployment
     spec:
@@ -48,7 +49,7 @@ spec:
       terminationGracePeriodSeconds: 20
       initContainers:
       - name: vault-agent-auth
-        image: vault
+        image: {{ .Values.vault.image }}
         volumeMounts:
           - name: config
             mountPath: /etc/vault
@@ -56,10 +57,10 @@ spec:
             mountPath: /home/vault
         env:
           - name: VAULT_ADDR
-            value: https://vault.sthlm.io
+            value: {{ .Values.vault.uri }}
         args: ["agent", "-config=/etc/vault/vault-agent-config.hcl"]
       - name: consul-template
-        image: hashicorp/consul-template:alpine
+        image: {{ .Values.consul.image }}
         imagePullPolicy: Always
         volumeMounts:
           - name: vault-token
@@ -72,7 +73,7 @@ spec:
           - name: HOME
             value: /home/vault
           - name: VAULT_ADDR
-            value: https://vault.sthlm.io
+            value: {{ .Values.vault.uri }}
         args: ["-config=/etc/consul-template/consul-template-config.hcl", "-once"]
       containers:
       - name: web
