@@ -54,7 +54,7 @@
     "jest": "24.9.0",
     "lint-staged": "9.4.2",
     "nock": "11.4.0",
-    "nodemon": "1.19.3",
+    "nodemon": "1.19.4",
     "standard": "14.3.1"
   },
   "dependencies": {
