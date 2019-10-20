@@ -61,7 +61,7 @@
     "@elastic/elasticsearch": "7.4.0",
     "dotenv": "8.2.0",
     "es6-promise": "4.2.8",
-    "handlebars": "4.4.3",
+    "handlebars": "4.4.4",
     "http-shutdown": "1.2.1",
     "koa": "2.10.0",
     "koa-logger": "3.2.1",
