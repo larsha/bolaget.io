@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.8.1] - 2019-10-20
+### Changed
+- Bumping Node.js to `12.12.0`
+
 ## [1.8.0] - 2019-10-05
 ### Changed
 - Upgrading Elasticsearch service to `7.4.0`

@@ -55,7 +55,7 @@ web:
     pullPolicy: IfNotPresent
 
   job:
-    schedule: 0 * * * * # @hourly
+    schedule: @hourly
 
   configmap:
     nodeEnv: production
