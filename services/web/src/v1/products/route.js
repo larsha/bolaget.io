@@ -61,7 +61,7 @@ export async function products (ctx) {
     limit = maxLimit
   }
 
-  let query = {}
+  const query = {}
 
   query.bool = {
     must: [
@@ -141,7 +141,7 @@ export async function products (ctx) {
     query.bool.filter = {
       multi_match: {
         query: search,
-        fields: [ 'name^2', 'additional_name', 'type^2', 'style^2', 'provider', 'producer', 'origin', 'origin_country', 'sealing', 'product_group', 'packaging' ],
+        fields: ['name^2', 'additional_name', 'type^2', 'style^2', 'provider', 'producer', 'origin', 'origin_country', 'sealing', 'product_group', 'packaging'],
         type: 'phrase'
       }
     }

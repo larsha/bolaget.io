@@ -27,7 +27,7 @@ describe('Stores', () => {
     })
 
     it('#find()', () => {
-      let query = {
+      const query = {
         bool: {
           must: [
             fuzzyMatch('city', 'Stockho')
@@ -35,7 +35,7 @@ describe('Stores', () => {
         }
       }
 
-      let sort = { 'city.sort': { 'order': 'asc' } }
+      const sort = { 'city.sort': { order: 'asc' } }
 
       Model.find(query, 0, 1, sort)
         .then(({ result, count }) => expect(result[0].city).toBe('Stockholm'))

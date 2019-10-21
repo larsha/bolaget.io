@@ -7,7 +7,7 @@ export default class Model extends Elastic {
   }
 
   constructor (data) {
-    super(data['BUTIKEROMBUD']['BUTIKOMBUD'])
+    super(data.BUTIKEROMBUD.BUTIKOMBUD)
   }
 
   get model () {
@@ -90,7 +90,7 @@ export default class Model extends Elastic {
     return list
       .filter(notEmpty)
       .map(str => {
-        let opening = str.replace('_*', '').split(';')
+        const opening = str.replace('_*', '').split(';')
         const [day, openingHours, closingHours] = opening
 
         if ((parseInt(closingHours, 10) - parseInt(openingHours, 10)) <= 0) {

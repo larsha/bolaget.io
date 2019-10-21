@@ -3,8 +3,10 @@ import logger from './lib/logger'
 
 const { parsed, error } = dotenv.config()
 
-if (error) {
-  logger.error('error loading dotenv')
+if (error && process.env.NODE_ENV === 'production') {
+  const error = 'Error loading dotenv'
+  logger.error(error)
+  throw new Error(error)
 }
 
 export default {

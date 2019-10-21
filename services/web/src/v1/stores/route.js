@@ -38,7 +38,7 @@ export async function stores (ctx, next) {
     limit = maxLimit
   }
 
-  let query = {
+  const query = {
     bool: {
       must: []
     }
@@ -83,7 +83,7 @@ export async function stores (ctx, next) {
     query.bool.filter = {
       multi_match: {
         query: search,
-        fields: [ 'name^2', 'address', 'additional_address', 'city', 'county', 'labels' ],
+        fields: ['name^2', 'address', 'additional_address', 'city', 'county', 'labels'],
         type: 'phrase'
       }
     }
@@ -107,7 +107,7 @@ export async function stores (ctx, next) {
       sort = { 'city.sort': { order } }
       break
     default:
-      sort = { 'zip_code': { order: 'asc' } }
+      sort = { zip_code: { order: 'asc' } }
   }
 
   const { result, count } = await Model.find(query, offset, limit, sort)

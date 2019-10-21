@@ -46,7 +46,7 @@ describe('Products', () => {
     })
 
     it('#find() - products', () => {
-      let query = {
+      const query = {
         bool: {
           must: [
             rangeMatch('year', 2011, 2012)
@@ -54,7 +54,7 @@ describe('Products', () => {
         }
       }
 
-      let sort = { 'name.sort': { 'order': 'asc' } }
+      const sort = { 'name.sort': { order: 'asc' } }
 
       return Model.find(query, 0, 1, sort)
         .then(({ result, count }) => expect(result[0].year).toBe(2011))

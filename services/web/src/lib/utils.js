@@ -16,7 +16,7 @@ export function stringToBool (str) {
 }
 
 export function capitalize (str) {
-  let string = str.trim()
+  const string = str.trim()
 
   return string ? `${string[0].toUpperCase()}${string.slice(1).toLowerCase()}` : ''
 }
@@ -43,7 +43,7 @@ export async function sleep (sec = 10) {
 }
 
 export function fuzzyMatch (prop, query) {
-  let match = {
+  const match = {
     [prop]: {
       query,
       fuzziness: 'AUTO'
@@ -54,7 +54,7 @@ export function fuzzyMatch (prop, query) {
 }
 
 export function rangeMatch (prop, from, to) {
-  let match = { range: { [prop]: {} } }
+  const match = { range: { [prop]: {} } }
 
   if (from) {
     match.range[prop].gte = from

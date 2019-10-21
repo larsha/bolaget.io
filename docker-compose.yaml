@@ -1,4 +1,6 @@
 version: '3'
+volumes:
+  node_modules:
 services:
   web:
     build:
@@ -13,6 +15,7 @@ services:
       - SYSTEM_PORT=3001
     volumes:
       - ./services/web:/home/node/web
+      - node_modules:/home/node/web/node_modules
     command: npm run dev
     ports:
       - "3000:3000"
