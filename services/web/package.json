@@ -8,9 +8,7 @@
     "test:coverage": "NODE_ENV=test jest --coverage",
     "build": "rm -rf .build && cp -rf src .build && babel src -d .build",
     "dev": "DEBUG=koa* nodemon src/web.js --exec babel-node",
-    "dev:worker": "babel-node src/worker.js",
-    "precommit": "lint-staged",
-    "standard": "standard"
+    "dev:worker": "babel-node src/worker.js"
   },
   "author": "Fredrik Lack <fredrik@sthlm.io>",
   "url": "https://github.com/larsha/bolaget.io/issues",
@@ -18,17 +16,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/larsha/bolaget.io"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "standard --fix",
-      "git add"
-    ]
   },
   "standard": {
     "env": [
@@ -47,9 +34,7 @@
     "@babel/node": "7.6.3",
     "@babel/preset-env": "7.6.3",
     "babel-jest": "24.9.0",
-    "husky": "3.0.9",
     "jest": "24.9.0",
-    "lint-staged": "9.4.2",
     "nock": "11.4.0",
     "nodemon": "1.19.4",
     "standard": "14.3.1"
