@@ -201,8 +201,8 @@ make build
 Install:
 ```bash
 helm install \
-  --set nginx.image.tag=local \
-  --set nginx.image.pullPolicy=Never \
+  -f chart/values.yaml \
+  -f chart/values-dev.yaml \
   --set web.image.tag=local \
   --set web.image.pullPolicy=Never \
   --name bolagetio \

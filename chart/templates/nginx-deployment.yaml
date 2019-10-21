@@ -15,9 +15,16 @@ spec:
       app: nginx-deployment
   template:
     metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+        checksum/nginx-config: {{ include (print $.Template.BasePath "/nginx-configmap.yaml") . | sha256sum }}
       labels:
         app: nginx-deployment
     spec:
+      volumes:
+        - name: nginx-volume
+          configMap:
+            name: nginx-configmap
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -34,6 +41,10 @@ spec:
       containers:
       - name: nginx
         image: "{{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag }}"
+        volumeMounts:
+          - name: nginx-volume
+            mountPath: /etc/nginx
+            readOnly: true
         lifecycle:
           preStop:
             exec:

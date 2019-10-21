@@ -18,7 +18,7 @@ sleep 20
 
 # Start Node.js
 docker run \
-  -e NODE_ENV=development \
+  -e NODE_ENV=test \
   -e ELASTIC_HOST=http://elasticsearch:9200 \
   -e ELASTIC_INDEX_SHARDS=1 \
   -e ELASTIC_INDEX_REPLICAS=0 \

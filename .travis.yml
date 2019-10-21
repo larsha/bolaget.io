@@ -15,7 +15,6 @@ env:
     - DOCKER_IMAGE_NAME=bolagetio
     - K8S_NAMESPACE=bolagetio
     - K8S_DEPLOYMENT_NAME_WEB=web-deployment
-    - K8S_DEPLOYMENT_NAME_NGINX=nginx-deployment
     - COMMIT=${TRAVIS_COMMIT::7}
     - CLOUDSDK_CORE_DISABLE_PROMPTS=1
     - ELASTICSEARCH_VERSION=7.4.0
