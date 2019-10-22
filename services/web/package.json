@@ -35,7 +35,7 @@
     "@babel/preset-env": "7.6.3",
     "babel-jest": "24.9.0",
     "jest": "24.9.0",
-    "nock": "11.4.0",
+    "nock": "11.5.0",
     "nodemon": "1.19.4",
     "standard": "14.3.1"
   },
