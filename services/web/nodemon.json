@@ -5,10 +5,12 @@
   ],
   "verbose": true,
   "watch": [
-    "app"
+    "src"
   ],
   "env": {
+    "DEBUG": "koa*",
     "NODE_ENV": "development"
   },
-  "ext": "js json"
+  "ext": "js json",
+  "exec": "babel-node"
 }

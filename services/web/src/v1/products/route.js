@@ -12,7 +12,7 @@ export async function product (ctx) {
     }
   }
 
-  const product = await Model.find(query, 0, 1)
+  const result = await Model.findOne(query)
     .catch(e => {
       if (e.status !== 404) {
         ctx.throw(500)
@@ -20,8 +20,8 @@ export async function product (ctx) {
       }
     })
 
-  if (product && Array.isArray(product.result) && product.result.length === 1) {
-    ctx.body = product.result[0]
+  if (result) {
+    ctx.body = result
   } else {
     ctx.throw(404)
   }

@@ -7,7 +7,8 @@
     "test": "NODE_ENV=test && jest",
     "test:coverage": "NODE_ENV=test jest --coverage",
     "build": "rm -rf .build && cp -rf src .build && babel src -d .build",
-    "dev": "DEBUG=koa* nodemon src/web.js --exec babel-node",
+    "dev": "babel-node src/web.js",
+    "dev:watch": "nodemon src/web.js",
     "dev:worker": "babel-node src/worker.js"
   },
   "author": "Fredrik Lack <fredrik@sthlm.io>",
@@ -18,6 +19,7 @@
     "url": "https://github.com/larsha/bolaget.io"
   },
   "standard": {
+    "parser": "babel-eslint",
     "env": [
       "jest"
     ]
@@ -32,7 +34,9 @@
     "@babel/cli": "7.7.0",
     "@babel/core": "7.7.2",
     "@babel/node": "7.7.0",
+    "@babel/plugin-proposal-optional-chaining": "7.6.0",
     "@babel/preset-env": "7.7.1",
+    "babel-eslint": "10.0.3",
     "babel-jest": "24.9.0",
     "jest": "24.9.0",
     "nock": "11.7.0",

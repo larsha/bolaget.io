@@ -44,3 +44,4 @@ locustfile.pyc
 
 .idea/
 .DS_Store
+.env

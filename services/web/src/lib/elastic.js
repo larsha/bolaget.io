@@ -27,6 +27,13 @@ export default class Elastic {
       .then(({ body }) => body._source)
   }
 
+  static async findOne (query = null) {
+    const { result } = await Elastic.find(query)
+    if (result?.length > 0) {
+      return result.pop()
+    }
+  }
+
   static async find (query = null, offset = 0, limit = 1, sort = null) {
     const filter = {
       index: this.alias,

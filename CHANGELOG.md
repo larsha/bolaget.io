@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.8.3] - 2019-11-21
+### Changed
+- Bumping Node.js to `13.1.0`
+- Bumping Nginx to `1.17.6`
+- Using `@babel/plugin-proposal-optional-chaining`
+
 ## [1.8.2] - 2019-10-24
 ### Changed
 - Bumping Node.js to `13.0.1`
