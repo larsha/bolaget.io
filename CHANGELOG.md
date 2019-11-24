@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.8.4] - 2019-11-24
+### Changed
+- Bumping deps
+
 ## [1.8.3] - 2019-11-21
 ### Changed
 - Bumping Node.js to `13.1.0`
