@@ -44,7 +44,7 @@
     "standard": "14.3.1"
   },
   "dependencies": {
-    "@elastic/elasticsearch": "7.4.0",
+    "@elastic/elasticsearch": "7.5.0",
     "dotenv": "8.2.0",
     "handlebars": "4.5.3",
     "http-shutdown": "1.2.1",
