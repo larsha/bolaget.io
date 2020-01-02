@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.8.6] - 2020-01-02
+### Changed
+- Bumping deps
+- Bumping Elasticsearch to `7.5.1`
+- Bumping Node.js to `13.5.0`
+
 ## [1.8.5] - 2019-12-08
 ### Changed
 - Bumping deps

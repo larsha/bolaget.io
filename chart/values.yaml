@@ -15,7 +15,7 @@ elastic:
   replicas: 4
   maxUnavailable: 2
   image: eu.gcr.io/brynn-145714/bolagetio/elasticsearch-oss
-  imageTag: 7.4.0
+  imageTag: 7.5.1
   esJavaOpts: "-Xms512m -Xmx512m"
   terminationGracePeriod: 20
 
