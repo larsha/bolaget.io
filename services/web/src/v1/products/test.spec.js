@@ -12,8 +12,8 @@ describe('Products', () => {
     it('fetch and index', () => {
       const task = new Task()
 
-      nock('https://www.systembolaget.se/api/assortment/products/xml')
-        .get(/\w*/)
+      nock('https://www.systembolaget.se')
+        .get('/api/assortment/products/xml')
         .replyWithFile(200, `${__dirname}/mock.xml`)
 
       return task.fetch().then(products => task.index(products))
@@ -57,7 +57,10 @@ describe('Products', () => {
       const sort = { 'name.sort': { order: 'asc' } }
 
       return Model.find(query, 0, 1, sort)
-        .then(({ result, count }) => expect(result[0].year).toBe(2011))
+        .then(({ result, count }) => {
+          expect(count).toBe(1)
+          expect(result[0].year).toBe(2011)
+        })
     })
   })
 })
