@@ -27,5 +27,5 @@ docker run \
   -e SYSTEM_PORT=3001 \
   --network test \
   --rm \
-  web \
+  eu.gcr.io/brynn-145714/bolagetio/web-deployment:$COMMIT \
   npm test
