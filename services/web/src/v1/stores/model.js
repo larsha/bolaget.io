@@ -7,7 +7,7 @@ export default class Model extends Elastic {
   }
 
   constructor (data) {
-    super(data.BUTIKEROMBUD.BUTIKOMBUD)
+    super(data?.BUTIKEROMBUD?.BUTIKOMBUD)
   }
 
   get model () {

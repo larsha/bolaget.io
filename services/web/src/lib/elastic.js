@@ -64,6 +64,10 @@ export default class Elastic {
   }
 
   constructor (data) {
+    if (data === undefined) {
+      throw new Error('No data object')
+    }
+
     this.alias = this.constructor.alias
     this.index = `${this.alias}-${randomString()}`
     this.data = data
