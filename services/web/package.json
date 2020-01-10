@@ -47,7 +47,7 @@
     "@elastic/elasticsearch": "7.5.0",
     "dotenv": "8.2.0",
     "handlebars": "4.5.3",
-    "http-shutdown": "1.2.1",
+    "http-shutdown": "1.2.2",
     "koa": "2.11.0",
     "koa-logger": "3.2.1",
     "koa-router": "7.4.0",
