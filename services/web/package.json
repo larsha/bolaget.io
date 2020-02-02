@@ -31,14 +31,14 @@
     ]
   },
   "devDependencies": {
-    "@babel/cli": "7.8.0",
-    "@babel/core": "7.8.0",
-    "@babel/node": "7.8.0",
-    "@babel/plugin-proposal-optional-chaining": "7.8.0",
-    "@babel/preset-env": "7.8.2",
+    "@babel/cli": "7.8.4",
+    "@babel/core": "7.8.4",
+    "@babel/node": "7.8.4",
+    "@babel/plugin-proposal-optional-chaining": "7.8.3",
+    "@babel/preset-env": "7.8.4",
     "babel-eslint": "10.0.3",
-    "babel-jest": "24.9.0",
-    "jest": "24.9.0",
+    "babel-jest": "25.1.0",
+    "jest": "25.1.0",
     "nock": "11.7.2",
     "nodemon": "2.0.2",
     "standard": "14.3.1"
@@ -46,11 +46,11 @@
   "dependencies": {
     "@elastic/elasticsearch": "7.5.0",
     "dotenv": "8.2.0",
-    "handlebars": "4.7.1",
+    "handlebars": "4.7.2",
     "http-shutdown": "1.2.2",
     "koa": "2.11.0",
     "koa-logger": "3.2.1",
-    "koa-router": "7.4.0",
+    "koa-router": "8.0.6",
     "koa-views": "6.2.1",
     "winston": "3.2.1",
     "xml2js": "0.4.23"

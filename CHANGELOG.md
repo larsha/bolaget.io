@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.8.8] - 2020-02-02
+### Changed
+- Bumping deps
+- Bumping Nginx to `1.17.8`
+- Bumping Node.js to `13.7.0`
+
 ## [1.8.7] - 2020-01-12
 ### Changed
 - Bumping deps
