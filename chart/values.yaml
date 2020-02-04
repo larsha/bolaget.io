@@ -32,7 +32,7 @@ elastic:
     accessModes: [ "ReadWriteOnce" ]
     resources:
       requests:
-        storage: 5Gi
+        storage: 10Gi
 
 nginx:
   replicas: 6
