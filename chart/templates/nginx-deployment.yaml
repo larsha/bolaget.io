@@ -7,8 +7,8 @@ spec:
   replicas: {{ .Values.nginx.replicas }}
   strategy:
     rollingUpdate:
-      maxSurge: 0
-      maxUnavailable: 25%
+      maxSurge: 25%
+      maxUnavailable: 50%
     type: RollingUpdate
   selector:
     matchLabels:
