@@ -118,5 +118,5 @@ web:
 
   configmap:
     nodeEnv: production
-    elasticIndexReplicas: 3
+    elasticIndexReplicas: 4
     elasticIndexShards: 1
