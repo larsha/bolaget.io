@@ -36,7 +36,7 @@ elastic:
         storage: 10Gi
 
 nginx:
-  replicas: 6
+  replicas: 5
 
   image:
     repository: nginx
@@ -106,7 +106,7 @@ nginx:
     }
 
 web:
-  replicas: 6
+  replicas: 5
 
   image:
     repository: eu.gcr.io/brynn-145714/bolagetio/web-deployment
