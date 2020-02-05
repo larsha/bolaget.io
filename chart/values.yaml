@@ -12,7 +12,9 @@ consul:
   image: hashicorp/consul-template:0.22.0-alpine
 
 elastic:
-  replicas: 3
+  replicas: 5
+  minimumMasterNodes: 3
+  maxUnavailable: 2
   image: eu.gcr.io/brynn-145714/bolagetio/elasticsearch-oss
   imageTag: 7.5.1
   esJavaOpts: "-Xms512m -Xmx512m"
