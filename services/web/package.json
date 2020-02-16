@@ -39,7 +39,7 @@
     "babel-eslint": "10.0.3",
     "babel-jest": "25.1.0",
     "jest": "25.1.0",
-    "nock": "11.7.2",
+    "nock": "11.9.1",
     "nodemon": "2.0.2",
     "standard": "14.3.1"
   },
