@@ -1,4 +1,4 @@
-FROM node:13.9.0
+FROM node:13.8.0
 
 USER node
 
