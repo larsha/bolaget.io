@@ -26,7 +26,7 @@ script:
 
 deploy:
   - provider: script
-    script: "./scripts/travis-deploy.sh"
+    script: ./scripts/travis-gcloud.sh && ./scripts/travis-deploy.sh
     skip_cleanup: true
     on:
       branch: master
