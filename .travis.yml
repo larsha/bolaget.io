@@ -20,6 +20,7 @@ env:
     - ELASTICSEARCH_VERSION=7.5.1
 
 script:
+  - ./scripts/travis-gcloud.sh
   - ./scripts/travis-build.sh
   - ./scripts/travis-test.sh
 
