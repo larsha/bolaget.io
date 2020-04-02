@@ -46,7 +46,7 @@
   "dependencies": {
     "@elastic/elasticsearch": "7.5.1",
     "dotenv": "8.2.0",
-    "handlebars": "4.7.3",
+    "handlebars": "4.7.5",
     "http-shutdown": "1.2.2",
     "koa": "2.11.0",
     "koa-logger": "3.2.1",
