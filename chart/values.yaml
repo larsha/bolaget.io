@@ -40,7 +40,7 @@ nginx:
 
   image:
     repository: nginx
-    tag: 1.17.8-alpine
+    tag: 1.17.9-alpine
     pullPolicy: IfNotPresent
 
   service:
