@@ -2,7 +2,7 @@ import Model from './model'
 import logger from '../../lib/logger'
 import { stringToBool, fuzzyMatch, rangeMatch } from '../../lib/utils'
 
-export async function product (ctx) {
+export async function product(ctx) {
   const id = ctx.params.id || null
 
   const query = {
@@ -27,7 +27,7 @@ export async function product (ctx) {
   }
 }
 
-export async function products (ctx) {
+export async function products(ctx) {
   const maxLimit = 100
   const ecological = ctx.query.ecological
   const ethical = ctx.query.ethical
@@ -141,8 +141,9 @@ export async function products (ctx) {
     query.bool.filter = {
       multi_match: {
         query: search,
-        fields: ['name^2', 'additional_name', 'type^2', 'style^2', 'provider', 'producer', 'origin', 'origin_country', 'sealing', 'product_group', 'packaging'],
-        type: 'phrase'
+        fields: ['name^2', 'additional_name^2', 'type^2', 'style^2', 'provider', 'producer', 'origin', 'origin_country', 'sealing', 'product_group', 'packaging'],
+        type: 'cross_fields',
+        operator: 'and',
       }
     }
   }
