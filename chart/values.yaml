@@ -30,7 +30,7 @@ elastic:
 
   volumeClaimTemplate:
     storageClassName: "ssd"
-    accessModes: [ "ReadWriteOnce" ]
+    accessModes: ["ReadWriteOnce"]
     resources:
       requests:
         storage: 10Gi
@@ -40,7 +40,7 @@ nginx:
 
   image:
     repository: nginx
-    tag: 1.17.9-alpine
+    tag: 1.18.0-alpine
     pullPolicy: IfNotPresent
 
   service:
