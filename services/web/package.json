@@ -48,7 +48,7 @@
     "dotenv": "8.2.0",
     "handlebars": "4.7.6",
     "http-shutdown": "1.2.2",
-    "koa": "2.11.0",
+    "koa": "2.12.0",
     "koa-logger": "3.2.1",
     "koa-router": "8.0.8",
     "koa-views": "6.2.1",
