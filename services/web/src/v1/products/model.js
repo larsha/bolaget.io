@@ -2,15 +2,15 @@ import Elastic from '../../lib/elastic'
 import { toNumber, numberToBool } from '../../lib/utils'
 
 export default class Model extends Elastic {
-  static get alias () {
+  static get alias() {
     return 'products'
   }
 
-  constructor (data) {
+  constructor(data) {
     super(data?.ARTIKLAR?.ARTIKEL)
   }
 
-  get model () {
+  get model() {
     return {
       NR: { value: 'nr' },
       ARTIKELID: { value: 'article_id', transform: toNumber },
@@ -28,7 +28,7 @@ export default class Model extends Elastic {
       FORPACKNING: { value: 'packaging' },
       FORSLUTNING: { value: 'sealing' },
       URSPRUNG: { value: 'origin' },
-      URSPRUNGLAND: { value: 'origin_country' },
+      URSPRUNGLANDNAMN: { value: 'origin_country' },
       PRODUCENT: { value: 'producer' },
       LEVERANTOR: { value: 'provider' },
       ARGANG: { value: 'year', transform: toNumber },
@@ -41,7 +41,7 @@ export default class Model extends Elastic {
     }
   }
 
-  get mapping () {
+  get mapping() {
     return {
       properties: {
         nr: { type: 'keyword', index: true },
@@ -90,7 +90,7 @@ export default class Model extends Elastic {
     }
   }
 
-  transformPrice (price) {
+  transformPrice(price) {
     return {
       amount: parseFloat(price),
       currency: 'SEK'

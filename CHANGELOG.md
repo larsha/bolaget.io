@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.8.14] - 2020-05-28
+
+### Changed
+
+- Bumping deps
+- Bumping Node.js to `14.3.0`
+- Fixing bug with `origin_country` not populating
+
+## [1.8.13] - 2020-05-21
+
+### Changed
+
+- Fixing bug with search matching both stores and products, solving issue [#168](https://github.com/larsha/bolaget.io/issues/168).
+
 ## [1.8.12] - 2020-04-27
 
 ### Changed
