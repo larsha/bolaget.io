@@ -8,17 +8,16 @@ export async function product(ctx) {
   const query = {
     multi_match: {
       query: id,
-      fields: ['nr', 'article_nr']
-    }
+      fields: ['nr', 'article_nr'],
+    },
   }
 
-  const { result } = await Model.find(query)
-    .catch(e => {
-      if (e.status !== 404) {
-        ctx.throw(500)
-        logger.error(e)
-      }
-    })
+  const { result } = await Model.find(query).catch((e) => {
+    if (e.status !== 404) {
+      ctx.throw(500)
+      logger.error(e)
+    }
+  })
 
   if (result?.length > 0) {
     ctx.body = result.pop()
@@ -45,6 +44,8 @@ export async function products(ctx) {
   const productGroup = ctx.query.product_group
   const sealing = ctx.query.sealing
   const assortment = ctx.query.assortment
+  const assortmentText = ctx.query.assortment_text
+  const commodities = ctx.query.commodities
   const yearFrom = parseInt(ctx.query.year_from, 10) || 0
   const yearTo = parseInt(ctx.query.year_to, 10) || 0
   const salesStartFrom = ctx.query.sales_start_from
@@ -67,8 +68,8 @@ export async function products(ctx) {
     must: [
       { term: { ecological: stringToBool(ecological) } },
       { term: { ethical: stringToBool(ethical) } },
-      { term: { koscher: stringToBool(koscher) } }
-    ]
+      { term: { koscher: stringToBool(koscher) } },
+    ],
   }
 
   if (name) {
@@ -111,13 +112,21 @@ export async function products(ctx) {
     query.bool.must.push(fuzzyMatch('sealing', sealing))
   }
 
+  if (commodities) {
+    query.bool.must.push(fuzzyMatch('commodities', commodities))
+  }
+
+  if (assortmentText) {
+    query.bool.must.push(fuzzyMatch('assortment_text', assortmentText))
+  }
+
   if (assortment) {
     query.bool.must.push({
       match: {
         assortment: {
-          query: assortment
-        }
-      }
+          query: assortment,
+        },
+      },
     })
   }
 
@@ -126,7 +135,9 @@ export async function products(ctx) {
   }
 
   if (salesStartFrom || salesStartTo) {
-    query.bool.must.push(rangeMatch('sales_start', salesStartFrom, salesStartTo))
+    query.bool.must.push(
+      rangeMatch('sales_start', salesStartFrom, salesStartTo),
+    )
   }
 
   if (priceFrom || priceTo) {
@@ -134,17 +145,31 @@ export async function products(ctx) {
   }
 
   if (volumeFrom || volumeTo) {
-    query.bool.must.push(rangeMatch('volume_in_milliliter', volumeFrom, volumeTo))
+    query.bool.must.push(
+      rangeMatch('volume_in_milliliter', volumeFrom, volumeTo),
+    )
   }
 
   if (search) {
     query.bool.filter = {
       multi_match: {
         query: search,
-        fields: ['name^2', 'additional_name^2', 'type^2', 'style^2', 'provider', 'producer', 'origin', 'origin_country', 'sealing', 'product_group', 'packaging'],
+        fields: [
+          'name^2',
+          'additional_name^2',
+          'type^2',
+          'style^2',
+          'provider',
+          'producer',
+          'origin',
+          'origin_country',
+          'sealing',
+          'product_group',
+          'packaging',
+        ],
         type: 'cross_fields',
         operator: 'and',
-      }
+      },
     }
   }
 
@@ -167,13 +192,14 @@ export async function products(ctx) {
       sort = { 'name.sort': { order: 'asc' } }
   }
 
-  const { result, count } = await Model.find(query, offset, limit, sort)
-    .catch(e => {
+  const { result, count } = await Model.find(query, offset, limit, sort).catch(
+    (e) => {
       if (e.status !== 404) {
         ctx.throw(500)
         logger.error(e)
       }
-    })
+    },
+  )
 
   if (result) {
     ctx.set('x-total-count', count)

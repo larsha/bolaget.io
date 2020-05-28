@@ -189,17 +189,21 @@
         <Varugrupp>Öl</Varugrupp>
         <Typ>Ale brittisk-amerikansk stil</Typ>
         <Stil>Strong ale</Stil>
-        <Forpackning>Flaska</Forpackning><Forslutning/><Ursprung/>
+        <Forpackning>Flaska</Forpackning>
+        <Forslutning>Kork</Forslutning>
+        <Ursprung>Stockholm</Ursprung>
         <Ursprunglandnamn>Sverige</Ursprunglandnamn>
         <Producent>Imperiebryggeriet AB</Producent>
         <Leverantor>Imperiebryggeriet AB</Leverantor>
-        <Argang>2015</Argang><Provadargang/>
+        <Argang>2015</Argang>
+        <Provadargang>2016</Provadargang>
         <Alkoholhalt>7.50%</Alkoholhalt>
         <Sortiment>BS</Sortiment>
         <SortimentText>Övrigt sortiment</SortimentText>
         <Ekologisk>0</Ekologisk>
         <Etiskt>0</Etiskt>
         <Koscher>0</Koscher>
+        <RavarorBeskrivning>Säd.</RavarorBeskrivning>
     </artikel>
     <artikel>
         <nr>7785701</nr>

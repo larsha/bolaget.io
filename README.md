@@ -4,201 +4,191 @@
 
 This API has nothing to do with Systembolaget, this app consumes a large XML API from Systembolaget and transforms it into a REST JSON API. More info can be found here: http://www.systembolaget.se/api
 
-**Flowchart**
---
+## **Flowchart**
+
 ![Flowchart](./flowchart.png)
 
-**Versions**
---
+## **Versions**
 
 Please have a look at [`CHANGELOG.md`](CHANGELOG.md) for more information. Otherwise this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-| Version       | Url                   |
-| ------------- |:---------------------:|
-| `v1`          | https://bolaget.io/v1 |
+| Version |          Url          |
+| ------- | :-------------------: |
+| `v1`    | https://bolaget.io/v1 |
 
 _All resources will be available without versioning in the url and be an alias for the latest API version._
 
-**Products**
----
+## **Products**
 
 ```http
 GET /products
 Host: bolaget.io
 ```
 
-*  **URL Params**
+- **URL Params**
 
-   ***Optional:***
+  **_Optional:_**
 
-   `limit=[number]` - Default limit is 10, max limit is 100
+  `limit=[number]` - Default limit is 10, max limit is 100
 
-   `offset=[number]`
+  `offset=[number]`
 
-   `ecological=[bool]`
+  `ecological=[bool]`
 
-   `koscher=[bool]`
+  `koscher=[bool]`
 
-   `ethical=[bool]`
+  `ethical=[bool]`
 
-   `year_from=[number]`
+  `year_from=[number]`
 
-   `year_to=[number]`
+  `year_to=[number]`
 
-   `sales_start_from=[date]` - YYYY-MM-DD
+  `sales_start_from=[date]` - YYYY-MM-DD
 
-   `sales_start_to=[date]` - YYYY-MM-DD
+  `sales_start_to=[date]` - YYYY-MM-DD
 
-   `price_from=[number]`
+  `price_from=[number]`
 
-   `price_to=[integer]`
+  `price_to=[integer]`
 
-   `volume_from=[integer]`
+  `volume_from=[integer]`
 
-   `volume_to=[number]`
+  `volume_to=[number]`
 
-   `assortment=[alphanumeric]` - BS = Reservation assortment, TS = Temporary assortment, FS	= Regular assortment and FSN = Regular assortment (new product)
+  `assortment=[alphanumeric]` - BS = Reservation assortment, TSE = Temporary assortment, FS = Regular assortment and FSN = Regular assortment (new product)
 
-   `sort=[alphanumeric]` - Property to sort by, accepting:
-      - `price:asc|desc`
-      - `price_per_liter:asc|desc`
-      - `volume_in_milliliter:asc|desc`
-      - `sales_start:asc|desc`
-      - `year:asc|desc`
-      - `zip_code:asc|desc`
-      - `name:asc|desc`<br><br>
+  `assortment_text=[alphanumeric]` - Ordervaror = BS, Fast sortiment = FS, Tillfälligt sortiment = TSE, Fast sortiment = FS/FSE
 
-   `name|type|style|provider|producer|origin|origin_country|packaging|product_group|sealing=[alphanumeric]` - Fuzzy match
+  `sort=[alphanumeric]` - Property to sort by, accepting:
 
-   `search=[alphanumeric]` - Fuzzy search in several fields
+  - `price:asc|desc`
+  - `price_per_liter:asc|desc`
+  - `volume_in_milliliter:asc|desc`
+  - `sales_start:asc|desc`
+  - `year:asc|desc`
+  - `zip_code:asc|desc`
+  - `name:asc|desc`<br><br>
 
+  `name|type|style|provider|producer|origin|origin_country|packaging|product_group|sealing|commodities=[alphanumeric]` - Fuzzy match
+
+  `search=[alphanumeric]` - Fuzzy search in several fields
 
 * **Response headers:**
 
-    `X-Total-Count=[number]` - Total count of products based on filtering used for pagination
+  `X-Total-Count=[number]` - Total count of products based on filtering used for pagination
 
+- **Success Response:**
 
-* **Success Response:**
-
-  * **Code:** 200 <br />
+  - **Code:** 200 <br />
     **Content:** `[{ name: '117 Grythyttan' ... }]` or `[]`
-
 
 * **Error Response:**
 
-  * **Code:** 500 INTERNAL SERVER ERROR <br />
+  - **Code:** 500 INTERNAL SERVER ERROR <br />
     **Content:** `{ error : "Ouch, an ugly error has occured!" }`
 
+## **Product**
 
-
-**Product**
-----
 ```http
 GET /products/:nr
 GET /products/:article_nr
 Host: bolaget.io
 ```
 
-* **Success Response:**
+- **Success Response:**
 
-  * **Code:** 200 <br />
+  - **Code:** 200 <br />
     **Content:** `{ nr: 12, name: "117 Grythyttan" ... }`
-
 
 * **Error Response:**
 
-  * **Code:** 500 INTERNAL SERVER ERROR <br />
+  - **Code:** 500 INTERNAL SERVER ERROR <br />
     **Content:** `{ error : "Ouch, an ugly error has occured!" }`
 
   OR
 
-  * **Code:** 404 NOT FOUND <br />
+  - **Code:** 404 NOT FOUND <br />
     **Content:** `{ error : "Move along, nothing to see here!" }`
 
+## **Stores**
 
-
-
-**Stores**
-----
 ```http
 GET /stores
 Host: bolaget.io
 ```
 
-*  **URL Params**
+- **URL Params**
 
-   ***Optional:***
+  **_Optional:_**
 
-   `limit=[number]` - Default limit is 10, max limit is 100
+  `limit=[number]` - Default limit is 10, max limit is 100
 
-   `offset=[number]`
+  `offset=[number]`
 
-   `labels=[alphanumeric]` - Takes a comma separated list, eg. norrbotten,jämtland, returns documents containing all labels matched (fuzzy)
+  `labels=[alphanumeric]` - Takes a comma separated list, eg. norrbotten,jämtland, returns documents containing all labels matched (fuzzy)
 
-   `sort=[alphanumeric]` - Property to sort by, accepting:
-      - `RT90x:asc|desc`
-      - `RT90y:asc|desc`
-      - `address:asc|desc`
-      - `city:asc|desc`
-      - `county:asc|desc`<br><br>
+  `sort=[alphanumeric]` - Property to sort by, accepting:
 
-   `type|name|city|county|address=[alphanumeric]` - Fuzzy match
+  - `RT90x:asc|desc`
+  - `RT90y:asc|desc`
+  - `address:asc|desc`
+  - `city:asc|desc`
+  - `county:asc|desc`<br><br>
 
-   `search=[alphanumeric]` - Fuzzy search in several fields
+  `type|name|city|county|address=[alphanumeric]` - Fuzzy match
 
+  `search=[alphanumeric]` - Fuzzy search in several fields
 
 * **Response headers:**
 
-   `X-Total-Count=[number]` - Total count of stores based on filtering used for pagination
+  `X-Total-Count=[number]` - Total count of stores based on filtering used for pagination
 
+- **Success Response:**
 
-* **Success Response:**
-
-  * **Code:** 200 <br />
+  - **Code:** 200 <br />
     **Content:** `[{ adress_1: 'Kungsholmstorg 11 A' ... }]` or `[]`
-
 
 * **Error Response:**
 
-  * **Code:** 500 Internal Server Error <br />
+  - **Code:** 500 Internal Server Error <br />
     **Content:** `{ error : "Ouch, an ugly error has occured!" }`
 
+## **Store**
 
-**Store**
-----
 ```http
 GET /stores/:nr
 Host: bolaget.io
 ```
 
-* **Success Response:**
+- **Success Response:**
 
-  * **Code:** 200 <br />
+  - **Code:** 200 <br />
     **Content:** `{ address: "Vasagatan 25", ... }`
-
 
 * **Error Response:**
 
-  * **Code:** 500 INTERNAL SERVER ERROR <br />
+  - **Code:** 500 INTERNAL SERVER ERROR <br />
     **Content:** `{ error : "Ouch, an ugly error has occured!" }`
 
   OR
 
-  * **Code:** 404 NOT FOUND <br />
+  - **Code:** 404 NOT FOUND <br />
     **Content:** `{ error : "Move along, nothing to see here!" }`
 
+## **Development environment**
 
-**Development environment**
-----
 #### Kubernetes
+
 You need a local Kubernetes cluster (minikube, docker-for-mac etc.) with `helm` installed.
 
 Build:
+
 ```bash
 make build
 ```
 
 Install:
+
 ```bash
 helm install \
   -f chart/values.yaml \
@@ -208,22 +198,23 @@ helm install \
   --name bolagetio \
   ./chart
 ```
- 
- #### Docker Compose
+
+#### Docker Compose
+
 Using Docker and Docker Compose (https://www.docker.com/)
- 
- **Build**
- 
- - ```docker-compose build```
- 
- **Start**
- 
- - ```docker-compose up web```
- 
- **Start worker**
- 
- - ```docker-compose run --rm web npm run dev:worker```
- 
- **Run tests**
- 
- - ```docker-compose run --rm web npm test```
+
+**Build**
+
+- `docker-compose build`
+
+**Start**
+
+- `docker-compose up web`
+
+**Start worker**
+
+- `docker-compose run --rm web npm run dev:worker`
+
+**Run tests**
+
+- `docker-compose run --rm web npm test`

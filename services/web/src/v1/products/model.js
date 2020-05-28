@@ -35,9 +35,11 @@ export default class Model extends Elastic {
       PROVADARGANG: { value: 'year_tested', transform: toNumber },
       ALKOHOLHALT: { value: 'alcohol' },
       SORTIMENT: { value: 'assortment' },
+      SORTIMENTTEXT: { value: 'assortment_text' },
       EKOLOGISK: { value: 'ecological', transform: numberToBool },
       ETISKT: { value: 'ethical', transform: numberToBool },
-      KOSCHER: { value: 'koscher', transform: numberToBool }
+      KOSCHER: { value: 'koscher', transform: numberToBool },
+      RAVARORBESKRIVNING: { value: 'commodities' }
     }
   }
 
@@ -83,9 +85,11 @@ export default class Model extends Elastic {
         year_tested: { type: 'short', index: true },
         alcohol: { type: 'keyword', index: true },
         assortment: { type: 'text', index: true, analyzer: 'swedish' },
+        assortment_text: { type: 'text', index: true, analyzer: 'swedish' },
         ecological: { type: 'boolean', index: true },
         ethical: { type: 'boolean', index: true },
-        koscher: { type: 'boolean', index: true }
+        koscher: { type: 'boolean', index: true },
+        commodities: { type: 'text', index: true, analyzer: 'swedish' }
       }
     }
   }

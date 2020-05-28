@@ -2,12 +2,14 @@ import Model from './model'
 import Request from '../../lib/request'
 
 export default class Task {
-  async fetch () {
-    const req = new Request('https://www.systembolaget.se/api/assortment/stores/xml')
+  async fetch() {
+    const req = new Request(
+      'https://www.systembolaget.se/api/assortment/stores/xml',
+    )
     return req.fetch()
   }
 
-  async index (data) {
+  async index(data) {
     const model = new Model(data)
     const indexes = await model.getIndexes()
 

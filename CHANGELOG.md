@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.8.15] - 2020-05-28
+
+### Added
+
+- Adding new test for a product
+- Two new properties on a product
+  - `commodities`
+  - `assortment_text`
+
 ## [1.8.14] - 2020-05-28
 
 ### Changed

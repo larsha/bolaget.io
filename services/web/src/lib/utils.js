@@ -1,4 +1,6 @@
-export function toNumber (value) {
+import crypto from 'crypto'
+
+export function toNumber(value) {
   const parsed = parseInt(value, 10)
   if (isNaN(parsed)) {
     return null
@@ -7,25 +9,27 @@ export function toNumber (value) {
   return parsed
 }
 
-export function randomString () {
-  return Math.random().toString(36).substring(2, 15)
+export function randomString() {
+  return crypto.randomBytes(32).toString('hex')
 }
 
-export function stringToBool (str) {
+export function stringToBool(str) {
   return str === 'true'
 }
 
-export function capitalize (str) {
+export function capitalize(str) {
   const string = str.trim()
 
-  return string ? `${string[0].toUpperCase()}${string.slice(1).toLowerCase()}` : ''
+  return string
+    ? `${string[0].toUpperCase()}${string.slice(1).toLowerCase()}`
+    : ''
 }
 
-export function notEmpty (str) {
+export function notEmpty(str) {
   return Boolean(str)
 }
 
-export function numberToBool (value) {
+export function numberToBool(value) {
   const parsed = parseInt(value, 0)
   if (isNaN(parsed)) {
     return null
@@ -34,26 +38,26 @@ export function numberToBool (value) {
   return !!parsed
 }
 
-export function listToArray (list) {
+export function listToArray(list) {
   return list.split(',')
 }
 
-export async function sleep (sec = 10) {
+export async function sleep(sec = 10) {
   return new Promise((resolve, reject) => setTimeout(resolve, sec * 1000))
 }
 
-export function fuzzyMatch (prop, query) {
+export function fuzzyMatch(prop, query) {
   const match = {
     [prop]: {
       query,
-      fuzziness: 'AUTO'
-    }
+      fuzziness: 'AUTO',
+    },
   }
 
   return { match }
 }
 
-export function rangeMatch (prop, from, to) {
+export function rangeMatch(prop, from, to) {
   const match = { range: { [prop]: {} } }
 
   if (from) {
