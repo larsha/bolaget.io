@@ -55,9 +55,9 @@ Host: bolaget.io
 
   `volume_to=[number]`
 
-  `assortment=[alphanumeric]` - BS = Reservation assortment, TSE = Temporary assortment, FS = Regular assortment and FSN = Regular assortment (new product)
+  `assortment=[alphanumeric]` - BS = Reservation assortment, TSE = Temporary assortment, FS = Regular assortment and FSN = Regular assortment (new product), TSLS = Locally produced
 
-  `assortment_text=[alphanumeric]` - Ordervaror = BS, Fast sortiment = FS, Tillfälligt sortiment = TSE, Fast sortiment = FS/FSE
+  `assortment_text=[alphanumeric]` - Ordervaror = BS, Fast sortiment = FS, Tillfälligt sortiment = TSE, Fast sortiment = FS/FSE, Lokalt & Småskaligt = TSLS
 
   `sort=[alphanumeric]` - Property to sort by, accepting:
 
