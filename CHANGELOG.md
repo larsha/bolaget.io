@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.8.16] - 2020-06-05
+
+### Changed
+
+- Bumping Node.js to `14.4.0` (https://nodejs.org/en/blog/vulnerability/june-2020-security-releases/)
+
 ## [1.8.15] - 2020-05-28
 
 ### Added
