@@ -43,7 +43,7 @@
     "http-shutdown": "1.2.2",
     "koa": "2.12.0",
     "koa-logger": "3.2.1",
-    "koa-router": "8.0.8",
+    "koa-router": "9.4.0",
     "koa-views": "6.2.3",
     "winston": "3.2.1",
     "xml2js": "0.4.23"
