@@ -1,6 +1,6 @@
 {
   "name": "bolaget.io",
-  "version": "1.8.16",
+  "version": "1.8.17",
   "description": "RESTful(ish) JSON API for Swedish alcohol monopoly, Systembolaget",
   "main": "src/web.js",
   "scripts": {
@@ -25,27 +25,27 @@
     ]
   },
   "devDependencies": {
-    "@babel/cli": "7.10.1",
-    "@babel/core": "7.10.1",
-    "@babel/node": "7.10.1",
-    "@babel/plugin-proposal-optional-chaining": "7.10.1",
-    "@babel/preset-env": "7.10.1",
-    "babel-jest": "26.0.1",
-    "jest": "26.0.1",
-    "nock": "12.0.3",
+    "@babel/cli": "7.11.6",
+    "@babel/core": "7.11.6",
+    "@babel/node": "7.10.5",
+    "@babel/plugin-proposal-optional-chaining": "7.11.0",
+    "@babel/preset-env": "7.11.5",
+    "babel-jest": "26.3.0",
+    "jest": "26.4.2",
+    "nock": "13.0.4",
     "nodemon": "2.0.4",
-    "prettier": "2.0.5"
+    "prettier": "2.1.2"
   },
   "dependencies": {
     "@elastic/elasticsearch": "7.5.1",
     "dotenv": "8.2.0",
     "handlebars": "4.7.6",
     "http-shutdown": "1.2.2",
-    "koa": "2.12.0",
+    "koa": "2.13.0",
     "koa-logger": "3.2.1",
-    "koa-router": "8.0.8",
-    "koa-views": "6.2.3",
-    "winston": "3.2.1",
+    "koa-router": "9.4.0",
+    "koa-views": "6.3.0",
+    "winston": "3.3.3",
     "xml2js": "0.4.23"
   }
 }
