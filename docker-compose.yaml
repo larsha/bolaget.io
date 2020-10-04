@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 volumes:
   node_modules:
 services:
@@ -23,7 +23,8 @@ services:
     depends_on:
       - elastic
   elastic:
-    image: eu.gcr.io/brynn-145714/bolagetio/elasticsearch-oss:7.5.1
+    build:
+      context: services/elasticsearch
     environment:
       - discovery.type=single-node
       - ES_JAVA_OPTS=-Xms512m -Xmx512m

@@ -1,6 +1,0 @@
-# appVersion is set by release tool
-appVersion:
-apiVersion: v1
-description: A Helm chart for bolaget.io
-name: chart
-version: 1.7.0

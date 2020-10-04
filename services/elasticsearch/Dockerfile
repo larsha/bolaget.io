@@ -1,4 +1,3 @@
-ARG elasticsearch_version
-FROM docker.elastic.co/elasticsearch/elasticsearch-oss:${elasticsearch_version}
+FROM elasticsearch:7.5.1
 
 RUN bin/elasticsearch-plugin install --batch analysis-icu

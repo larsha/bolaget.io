@@ -1,0 +1,6 @@
+version: "3"
+volumes:
+  node_modules:
+services:
+  web:
+    command: bash -c "sleep 10; npm test"

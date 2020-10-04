@@ -1,9 +1,0 @@
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: vault-agent-config
-data:
-  vault-agent-config.hcl: |-
-{{ .Files.Get "vault-agent-config.hcl" | indent 4}}
-  consul-template-config.hcl: |-
-{{ .Files.Get "consul-template-config.hcl" | indent 4}}

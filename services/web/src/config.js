@@ -1,21 +1,13 @@
 import dotenv from 'dotenv'
-import logger from './lib/logger'
 
-const { parsed, error } = dotenv.config()
-
-if (error && process.env.NODE_ENV === 'production') {
-  const error = 'Error loading dotenv'
-  logger.error(error)
-  throw new Error(error)
-}
+dotenv.config()
 
 export default {
-  ...parsed || {},
   NODE_ENV: process.env.NODE_ENV,
   ELASTIC_HOST: process.env.ELASTIC_HOST,
   ELASTIC_INDEX_SHARDS: process.env.ELASTIC_INDEX_SHARDS,
   ELASTIC_INDEX_REPLICAS: process.env.ELASTIC_INDEX_REPLICAS,
   ELASTIC_REQUEST_TIMEOUT: process.env.ELASTIC_REQUEST_TIMEOUT,
   PORT: process.env.PORT,
-  SYSTEM_PORT: process.env.SYSTEM_PORT
+  SYSTEM_PORT: process.env.SYSTEM_PORT,
 }
