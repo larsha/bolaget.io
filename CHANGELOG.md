@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - Bumping deps
-- Bumping Node.js to `14.13.0`
+- Bumping Node.js to `14.12.0`
 
 ## [1.8.17] - 2020-09-17
 
