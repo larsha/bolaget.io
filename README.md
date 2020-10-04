@@ -1,6 +1,6 @@
 # bolaget.io (https://bolaget.io)
 
-[![CI Actions Status](https://github.com/larsha/bolaget.io/workflows/ci/badge.svg)](https://github.com/{userName}/{repoName}/actions)
+[![CI Actions Status](https://github.com/larsha/bolaget.io/workflows/ci/badge.svg)](https://github.com/larsha/bolaget.io/actions?query=branch%3Amaster+)
 
 This API has nothing to do with Systembolaget, this app consumes a large XML API from Systembolaget and transforms it into a REST JSON API. More info can be found here: http://www.systembolaget.se/api
 
