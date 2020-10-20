@@ -1,5 +1,12 @@
 # bolaget.io (https://bolaget.io)
 
+## Please read this
+
+Systembolaget will remove the information about all the products from their API starting 1st of November. This means that bolaget.io no longer can fetch new product updates and will probably be deprecated and later removed completely.
+https://api-portal.systembolaget.se/api-update-blog/changes-in-the-api-portal
+
+---
+
 [![CI Actions Status](https://github.com/larsha/bolaget.io/workflows/ci/badge.svg)](https://github.com/larsha/bolaget.io/actions?query=branch%3Amaster+)
 
 This API has nothing to do with Systembolaget, this app consumes a large XML API from Systembolaget and transforms it into a REST JSON API. More info can be found here: http://www.systembolaget.se/api
