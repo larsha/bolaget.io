@@ -2,7 +2,7 @@
 
 ## Please read this
 
-Systembolaget will remove the information about all the products from their API starting 1st of November. This means that bolaget.io no longer can fetch new product updates and will probably be deprecated and later removed completely.
+Systembolaget will remove the information about all the products from their API starting 1st of November. They have also removed the API we used for bolaget.io. This means that bolaget.io no longer can fetch new product updates and is deprecated and now also removed.
 https://api-portal.systembolaget.se/api-update-blog/changes-in-the-api-portal
 
 ---
